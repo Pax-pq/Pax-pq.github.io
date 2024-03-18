@@ -24,7 +24,7 @@
 
   
 
-  <title>test | Hexo</title>
+  <title>Linux 入门 | Hexo</title>
 
   
 
@@ -103,15 +103,15 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">test</h1>
+          <h1 class="title-wrap">Linux 入门</h1>
           <h2 class="title-sub-wrap">
             <strong>steve-pq</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-03-18T10:33:02.000Z" itemprop="datePublished">2024-03-18</time>
+            <time  class="article-date" datetime="2024-03-18T15:04:13.000Z" itemprop="datePublished">2024-03-18</time>
           </h2>
           
           
-            <h2 id="/2024/03/18/pqpqp/" class="title-sub-wrap leancloud_visitors" data-flag-title="test">
+            <h2 id="/2024/03/18/Linux-%E5%85%A5%E9%97%A8/" class="title-sub-wrap leancloud_visitors" data-flag-title="Linux 入门">
               <em>文章访问量</em>
               <i class="leancloud-visitors-count"></i>
             </h2>
@@ -121,7 +121,7 @@
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/aaa/">🏷️ aaa</a></li>
+    <li><a href="/tags/%E5%85%A5%E9%97%A8/">🏷️ 入门</a></li>
   
 </ul>
         </div>
@@ -145,7 +145,137 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <div class="aplayer-box" data-url='https://qiniu.sukoshi.xyz/public/music/鹿乃 - アイロニ.mp3' data-name='アイロニ' data-artist='鹿乃' data-cover='https://qiniu.sukoshi.xyz/public/music/鹿乃 - アイロニ.jpg' data-lrc='https://qiniu.sukoshi.xyz/public/music/鹿乃 - アイロニ.lrc' data-lrcType='3' ></div>
+        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>总觉得学的不扎实，认真学一次。</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>概述：</p>
+<blockquote>
+<p>Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。</p>
+</blockquote>
+<p>系统启动进程：</p>
+<ul>
+<li>内核的引导。</li>
+<li>运行 init。</li>
+<li>系统初始化。</li>
+<li>建立终端 。</li>
+<li>用户登录系统。</li>
+</ul>
+<p>目录结构：</p>
+<p>由根目录出发的树状目录结构。</p>
+<p>查阅：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-system-contents.html">https://www.runoob.com/linux/linux-system-contents.html</a></p>
+<hr>
+<h2 id="目录与文件管理"><a href="#目录与文件管理" class="headerlink" title="目录与文件管理"></a>目录与文件管理</h2><h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><blockquote>
+<ul>
+<li><p><strong>绝对路径：</strong><br>路径的写法，由根目录 <strong>&#x2F;</strong> 写起，例如： &#x2F;usr&#x2F;share&#x2F;doc 这个目录。</p>
+</li>
+<li><p><strong>相对路径：</strong><br>路径的写法，不是由 <strong>&#x2F;</strong> 写起，例如由 &#x2F;usr&#x2F;share&#x2F;doc 要到 &#x2F;usr&#x2F;share&#x2F;man 底下时，可以写成： <strong>cd ..&#x2F;man</strong> 这就是相对路径的写法。</p>
+</li>
+</ul>
+</blockquote>
+<p>很好理解，简单来说就是开头目录是谁而已。</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="ls-列出目录"><a href="#ls-列出目录" class="headerlink" title="ls(列出目录)"></a><strong>ls</strong>(列出目录)</h4><p>参数：</p>
+<ul>
+<li>-a ：全部的文件，连同隐藏文件( 开头为 . 的文件) 一起列出来(常用)</li>
+<li>-d ：仅列出目录本身，而不是列出目录内的文件数据(常用)</li>
+<li>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</li>
+</ul>
+<h4 id="cd-切换目录"><a href="#cd-切换目录" class="headerlink" title="cd(切换目录)"></a><strong>cd</strong>(切换目录)</h4><h4 id="pwd-显示当前目录"><a href="#pwd-显示当前目录" class="headerlink" title="pwd(显示当前目录)"></a><strong>pwd</strong>(显示当前目录)</h4><p>参数：</p>
+<ul>
+<li>-P ：显示出确实的路径，而非使用链接 (link) 路径。</li>
+</ul>
+<blockquote>
+<p>实例显示出实际的工作目录，而非链接档本身的目录名而已。</p>
+</blockquote>
+<h4 id="mkdir-创建新目录"><a href="#mkdir-创建新目录" class="headerlink" title="mkdir (创建新目录)"></a><strong>mkdir</strong> (创建新目录)</h4><p>参数：</p>
+<ul>
+<li>-m ：直接配置文件的权限</li>
+<li>-p ：将所需要的目录(包含上一级目录)递归创建起来</li>
+</ul>
+<h4 id="rmdir-删除空的目录"><a href="#rmdir-删除空的目录" class="headerlink" title="rmdir(删除空的目录)"></a><strong>rmdir</strong>(删除空的目录)</h4><p>参数：</p>
+<ul>
+<li>-p ：从该目录起，一次删除多级空目录</li>
+</ul>
+<p><strong>cp</strong>(复制文件或目录)</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -p from to</span><br></pre></td></tr></table></figure>
+
+<h4 id="rm-移除文件或目录"><a href="#rm-移除文件或目录" class="headerlink" title="rm(移除文件或目录)"></a><strong>rm</strong>(移除文件或目录)</h4><p>参数：</p>
+<ul>
+<li>-f ：就是 force 的意思，忽略不存在的文件，不会出现警告信息；</li>
+<li>-i ：互动模式，在删除前会询问使用者是否动作</li>
+<li>-r ：递归删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
+</ul>
+<h4 id="mv-移动文件与目录，或修改名称"><a href="#mv-移动文件与目录，或修改名称" class="headerlink" title="mv (移动文件与目录，或修改名称)"></a><strong>mv</strong> (移动文件与目录，或修改名称)</h4><p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -p from to</span><br></pre></td></tr></table></figure>
+
+<p>选项与参数：</p>
+<ul>
+<li>-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
+<li>-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！</li>
+<li>-u ：若目标文件已经存在，且 source 比较新，才会升级 (update)</li>
+</ul>
+<h4 id="文件查看"><a href="#文件查看" class="headerlink" title="文件查看"></a>文件查看</h4><ul>
+<li>cat 由第一行开始显示文件内容</li>
+<li>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</li>
+<li>nl  显示的时候，顺道输出行号！</li>
+<li>more 一页一页的显示文件内容</li>
+<li>less 与 more 类似，但是比 more 更好的是，他可以往前翻页！</li>
+<li>head 只看头几行</li>
+<li>tail 只看尾巴几行</li>
+</ul>
+<h2 id="用户与用户组管理"><a href="#用户与用户组管理" class="headerlink" title="用户与用户组管理"></a>用户与用户组管理</h2><h3 id="创建账号"><a href="#创建账号" class="headerlink" title="创建账号"></a>创建账号</h3><p>语法：useradd -p username</p>
+<p>允许多个参数并列</p>
+<p>参数：</p>
+<ul>
+<li>-c comment 指定一段注释性描述。</li>
+<li>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</li>
+<li>-g 用户组 指定用户所属的用户组。</li>
+<li>-G 用户组，用户组 指定用户所属的附加组。</li>
+<li>-s Shell文件 指定用户的登录Shell。</li>
+<li>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</li>
+</ul>
+<p>例子：</p>
+<p>useradd –d  &#x2F;home&#x2F;sam -m sam</p>
+<p>useradd -s &#x2F;bin&#x2F;sh -g group –G adm,root gem</p>
+<h3 id="删除账号"><a href="#删除账号" class="headerlink" title="删除账号"></a>删除账号</h3><p>语法：userdel -p username</p>
+<blockquote>
+<p>常用的选项(参数)是 <strong>-r</strong>，它的作用是把用户的主目录一起删除。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># userdel -r sam</span><br></pre></td></tr></table></figure>
+
+<p>此命令删除用户sam在系统文件中（主要是&#x2F;etc&#x2F;passwd, &#x2F;etc&#x2F;shadow, &#x2F;etc&#x2F;group等）的记录，同时删除用户的主目录。</p>
+</blockquote>
+<h3 id="修改账号"><a href="#修改账号" class="headerlink" title="修改账号"></a>修改账号</h3><p>语法：usermod -p username</p>
+<p>参数如创建账号所写</p>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h4 id="基础-1"><a href="#基础-1" class="headerlink" title="基础"></a>基础</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><blockquote>
+<p>Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。</p>
+<p>Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。</p>
+<p>Ken Thompson 的 sh 是第一种 Unix Shell，Windows Explorer 是一个典型的图形界面 Shell。</p>
+</blockquote>
+<h5 id="shell环境"><a href="#shell环境" class="headerlink" title="shell环境"></a>shell环境</h5><blockquote>
+<p>Shell 编程跟 JavaScript、php 编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。</p>
+<p>在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 <strong>#!&#x2F;bin&#x2F;sh</strong>，它同样也可以改为 <strong>#!&#x2F;bin&#x2F;bash</strong>。</p>
+<p><strong>#!</strong> 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。</p>
+</blockquote>
+<h5 id="运行shell脚本"><a href="#运行shell脚本" class="headerlink" title="运行shell脚本"></a>运行shell脚本</h5><p>第一个方法：<strong>作为可执行程序</strong></p>
+<p>第二个方法：<strong>作为解释器参数</strong></p>
+<p>这种运行方式是，直接运行解释器，其参数就是 shell 脚本的文件名，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh test.sh</span><br><span class="line">/bin/php test.php</span><br></pre></td></tr></table></figure>
+
+<h4 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h4><p>1.定义变量不需要符号，变量赋值时等号两边没有空格，剩下的与C语言类似，如下：</p>
+<ul>
+<li><strong>只包含字母、数字和下划线：</strong> 变量名可以包含字母（大小写敏感）、数字和下划线 **_**，不能包含其他特殊字符。</li>
+<li><strong>不能以数字开头：</strong> 变量名不能以数字开头，但可以包含数字。</li>
+<li><strong>避免使用 Shell 关键字：</strong> 不要使用Shell的关键字（例如 if、then、else、fi、for、while 等）作为变量名，以免引起混淆。</li>
+<li><strong>使用大写字母表示常量：</strong> 习惯上，常量的变量名通常使用大写字母，例如 <strong>PI&#x3D;3.14</strong>。</li>
+<li><strong>避免使用特殊符号：</strong> 尽量避免在变量名中使用特殊符号，因为它们可能与 Shell 的语法产生冲突。</li>
+<li><strong>避免使用空格：</strong> 变量名中不应该包含空格，因为空格通常用于分隔命令和参数。</li>
+</ul>
+<p>2.使用已定义变量时前面加一个$，最好在变量名外围加一个花括号，如：${name}</p>
+<p>3.只读变量：使用 readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
+<p>4.删除变量：</p>
+<p>使用 unset 命令可以删除变量。语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset variable_name</span><br></pre></td></tr></table></figure>
+
+<p>变量被删除后不能再次使用。unset 命令不能删除只读变量。</p>
 
       </section>
 
@@ -159,8 +289,8 @@
     
     <div class="card-text">
       
-        <a href="/2024/03/18/hhh/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">hhh</h2>
+        <a href="/2024/03/18/PHP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">PHP 反序列化</h2>
         </a>
       
       <div class="card-text--row">Older</div>
@@ -202,7 +332,7 @@
         <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
 </svg>
-        <span>2</span>
+        <span>11</span>
       </div>
       <div class="count-box--item">
         <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +344,7 @@
         <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
 </svg>
-        1
+        2
       </div>
     </div>
   </div>
@@ -229,7 +359,7 @@
     <span>TOC</span>
   </div>
   <div class="widget-body">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">目录与文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84"><span class="toc-number">2.1.</span> <span class="toc-text">路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">用户与用户组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%B4%A6%E5%8F%B7"><span class="toc-number">3.1.</span> <span class="toc-text">创建账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%B4%A6%E5%8F%B7"><span class="toc-number">3.2.</span> <span class="toc-text">删除账号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%B4%A6%E5%8F%B7"><span class="toc-number">3.3.</span> <span class="toc-text">修改账号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">4.</span> <span class="toc-text">vim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">5.</span> <span class="toc-text">Shell</span></a></li></ol>
   </div>
 </section>
 
@@ -271,7 +401,7 @@
   </div>
   <div class="widget-body">
     <div class="tags-cloud">
-      <a href="/tags/aaa/" style="font-size: 10px;" class="tags-cloud-0">aaa</a>
+      <a href="/tags/aaa/" style="font-size: 10px;" class="tags-cloud-0">aaa</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;" class="tags-cloud-10">入门</a>
     </div>
   </div>
 </section>
@@ -334,34 +464,6 @@
 
   
   <!-- aplayer -->
-
-
-  <!-- aplayer 音频 start -->
-  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
-  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-  <script type="text/javascript">
-    const aplayer = document.querySelectorAll(".aplayer-box");
-    aplayer && initaplayer(aplayer);
-    function initaplayer(els) {
-      let elsArr = Array.from(els);
-      elsArr.forEach(el => {
-        let params = {
-          container: el,
-          audio: { ...el.dataset },
-          theme: "#b7daff",
-          autoplay: false,
-          loop: false,
-          mutex: true,
-        }
-        if (el.dataset.lrc) {
-          params['lrcType'] = 3
-        }
-        new APlayer(params);
-      });
-    }
-  </script>
-  <!-- aplayer 音频 end -->
-  
 
 
 <!-- dplayer -->

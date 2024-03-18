@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.1.1">
+
+  
+    <meta name="description" content="hello pq">
+  
+
+  
+
+  
+    <meta name="author" content="steve-pq">
+  
+
+  
+
+  
+
+  <title>file upload | Hexo</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
+  
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(/big.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+          <li class="navbar-list-item"><a href="/poem">诗集</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">file upload</h1>
+          <h2 class="title-sub-wrap">
+            <strong>steve-pq</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-03-18T15:03:17.000Z" itemprop="datePublished">2024-03-18</time>
+          </h2>
+          
+          
+            <h2 id="/2024/03/18/file-upload/" class="title-sub-wrap leancloud_visitors" data-flag-title="file upload">
+              <em>文章访问量</em>
+              <i class="leancloud-visitors-count"></i>
+            </h2>
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/%E5%85%A5%E9%97%A8/">🏷️ 入门</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>推荐文章：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1938541">超详细文件上传漏洞总结分析-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>我只能浅显地说：在要上传的文件里构造语句并按照特定的方式进行上传，以达到攻击者的目的。</p>
+<h2 id="限制措施及绕过"><a href="#限制措施及绕过" class="headerlink" title="限制措施及绕过"></a>限制措施及绕过</h2><h3 id="前端检测"><a href="#前端检测" class="headerlink" title="前端检测"></a>前端检测</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>前端检测主要是通过JavaScript语句。</p>
+<p>附：如果检测失败则不会发出请求，也就是不会发包。</p>
+<h4 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h4><blockquote>
+<p>前端验证通过以后，表单成功提交后会通过浏览器发出─条网络请求，但是如果前端验证不成功，则不会发出这项网络请求;可以在浏览器的网络元素中查看是否发出了网络请求。</p>
+</blockquote>
+<h4 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h4><h5 id="方法一：改变前端"><a href="#方法一：改变前端" class="headerlink" title="方法一：改变前端"></a>方法一：改变前端</h5><p>F12修改source的JavaScript代码，或者直接禁用JavaScript</p>
+<h5 id="方法二：骗过前端"><a href="#方法二：骗过前端" class="headerlink" title="方法二：骗过前端"></a>方法二：骗过前端</h5><p>文件名是name.png，在bp抓包后改成name.php</p>
+<p>须知：只有前端通过后才能发包，bp这时才能抓包</p>
+<h3 id="MIME绕过"><a href="#MIME绕过" class="headerlink" title="MIME绕过"></a>MIME绕过</h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><blockquote>
+<p><code>MIME(Multipurpose Internet Mail Extensions)</code>多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+</blockquote>
+<h5 id="常见的MIME类型"><a href="#常见的MIME类型" class="headerlink" title="常见的MIME类型"></a>常见的MIME类型</h5><blockquote>
+<p><code>text/plain</code> （纯文本）  <code>text/html</code> （HTML文档）  <code>text/javascript</code> （js代码）  <code>application/xhtml+xml</code> （XHTML文档）  <code>image/gif</code> （GIF图像）  <code>image/jpeg</code> （JPEG图像）  <code>image/png</code> （PNG图像）  <code>video/mpeg</code> （MPEG动画）  <code>application/octet-stream</code> （二进制数据）  <code>application/pdf</code> （PDF文档）</p>
+</blockquote>
+<h5 id="检测方式"><a href="#检测方式" class="headerlink" title="检测方式"></a>检测方式</h5><blockquote>
+<p>         在文件上传过程中，服务端会针对我们的上传的文件生成一个数组，这个数组其中有一项就是这个文件的类型<code>file_type</code>；服务端对文件进行检测时，就是通过检测脚本中的黑白名单和这个数组中的<code>file_type</code>进行对比，如果符合要求就允许上传这个文件。</p>
+</blockquote>
+<h4 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h4><p>传<code>name.php</code>，bp抓包直接改成<code>image/png</code>等等</p>
+<h3 id="htaccess文件解析漏洞"><a href="#htaccess文件解析漏洞" class="headerlink" title=".htaccess文件解析漏洞"></a><code>.htaccess</code>文件解析漏洞</h3><h4 id="基础-1"><a href="#基础-1" class="headerlink" title="基础"></a>基础</h4><h5 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h5><blockquote>
+<p><code>.htaccess文件(或者&quot;分布式配置文件&quot;)</code> ,全称是<code>Hypertext Access(超文本入口)</code>。提供了针对目录改变配置的方法，即，在一个特定的文档目录中放置一个包含一个或多个指令的文件，以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的AllowOverride指令来设置。</p>
+</blockquote>
+<h5 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h5><blockquote>
+<p>web具体应用没有禁止.htaccess文件的上传，同时web服务器提供商允许用户上传自定义的<code>.htaccess文件</code></p>
+</blockquote>
+<h5 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h5><blockquote>
+<p>上传覆盖<code>.htaccess文件</code>，重写<code>解析规则</code>，将上传的带有脚本马的图片以脚本方式解析。</p>
+</blockquote>
+<h4 id="绕过-2"><a href="#绕过-2" class="headerlink" title="绕过"></a>绕过</h4><p>第一步：</p>
+<p>先命名成a.htaccess，bp抓包改成<code>.htaccess</code>即可，内容为：</p>
+<p><code>&lt;FilesMatch &quot;js&quot;&gt;</code><br> <code>SetHandler application/x-httpd-php</code><br><code>&lt;/FilesMatch&gt;</code></p>
+<p>再写个木马，改名为name.js</p>
+<p>此时js文件会按照php文件被解析，也就是<code>name.js</code>被当成<code>php</code>文件执行，然后开蚁剑。</p>
+<p>注意点：</p>
+<p>.htaccess是全名，但不能直接在Windows命名，在bp上改</p>
+<p>补录：<a target="_blank" rel="noopener" href="https://we11s.github.io/posts/154257042/">https://we11s.github.io/posts/154257042/</a></p>
+<h4 id="htaccess使用模板"><a href="#htaccess使用模板" class="headerlink" title=".htaccess使用模板"></a><code>.htaccess</code>使用模板</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#对于php</span><br><span class="line">AddType application/x-httpd-php .html  #将html文件作为php文件进行解析</span><br><span class="line">#对于python</span><br><span class="line">AddHandler cgi-script .py #将html文件作为php文件进行解析</span><br><span class="line">Options +ExecCGI  </span><br><span class="line">#对于Perl</span><br><span class="line">AddHandler cgi-script .cgi .pl</span><br><span class="line">Options +ExecCGI</span><br></pre></td></tr></table></figure>
+
+<h3 id="user-ini文件包含漏洞"><a href="#user-ini文件包含漏洞" class="headerlink" title=".user.ini文件包含漏洞"></a>.user.ini文件包含漏洞</h3><h4 id="基础-2"><a href="#基础-2" class="headerlink" title="基础"></a>基础</h4><blockquote>
+<p>.user.ini实际上就是一个可以由用户“自定义”的php.ini，我们可以自定义除了PHP_INI_SYSTEM以外的模式，在执行php代码之前，系统会对.user.ini先做一个执行，然后才执行其他的php文件。</p>
+<p>我们这边利用.user,ini先执行auto_prepend_file函数，auto_prepend_file表示在php程序加载第一个php代码前加载的php文件，也就是先加载了a.jpg里面的文件，即一句话木马。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hxhxhxhxx/article/details/107165508">https://blog.csdn.net/hxhxhxhxx/article/details/107165508</a></p>
+</blockquote>
+<p>须知：.user.ini配置文件是PHP的，可以在全部环境里生效，而.htaccess配置文件是Apache特有</p>
+<h4 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h4><p>先上传a.user.ini.jpg文件，内容：</p>
+<p><code>GIF89a</code><br><code>//auto_append_file=test1.png</code><br><code>auto_prepend_file=test1.png</code></p>
+<p>第一行绕过文件头检测，第二行可以不写。</p>
+<p>bp抓包改名为<code>.user.ini</code></p>
+<p>再上传<code>test1.png</code>，没必要改名，其内容会被当做PHP文件内容执行。</p>
+<p>这句话：auto_prepend_file表示在php程序加载第一个php代码前加载的php文件</p>
+<p>我们要先找到一个php文件，自己传会被Unicode化，那看看是否有原有的：</p>
+<p><code>url/upload/index.php</code>	蚁剑连</p>
+<h3 id="后端检测-文件头检测漏洞"><a href="#后端检测-文件头检测漏洞" class="headerlink" title="后端检测_文件头检测漏洞"></a>后端检测_文件头检测漏洞</h3><h4 id="基础-3"><a href="#基础-3" class="headerlink" title="基础"></a>基础</h4><h5 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h5><blockquote>
+<p>在每一个文件（包括图片，视频或其他的非ASCII文件）的开头（十六进制表示）实际上都有一片区域来显示这个文件的实际用法，这就是文件头标志。我们可以通过16进制编辑器打开文件，添加服务器允许的文件头以绕过检测。</p>
+</blockquote>
+<h5 id="常见文件头"><a href="#常见文件头" class="headerlink" title="常见文件头"></a>常见文件头</h5><p> GIF：<code>47 49 46 38 39 61</code> png：<code>89 50 4E 47 0D 0A 1A 0A</code> JPG：<code>FF D8 FF E0 00 10 4A 46 49 46</code></p>
+<p>GIF 文件头解码结果：<code>GIF89a</code> PNG 文件头解码结果：<code>\x89PNG\r\n\x1A\n</code> JPG 文件头解码结果：<code>ÿØÿà\x00\x10JFIF</code></p>
+<blockquote>
+<p> 在进行<code>文件头绕过</code>时，我们可以把上面的<code>文件头</code>添加到我们的一句话木马内容最前面，达到绕过文件头检测的目的。</p>
+</blockquote>
+<p>附：最好文件头和代码（木马）之间有个空格</p>
+<h3 id="后端检测-00截断"><a href="#后端检测-00截断" class="headerlink" title="后端检测_00截断"></a>后端检测_00截断</h3><h4 id="基础-4"><a href="#基础-4" class="headerlink" title="基础"></a>基础</h4><blockquote>
+<p>虽然web应用做了校验，但是由于文件上传后的<code>路径用户可以控制</code>，攻击者可以利用手动添加字符串标识符<code>0X00</code>的方式来将后面的拼接的内容<code>进行截断</code>，导致后面的内容无效，而且后面的内容又可以帮助我们绕过黑白名单的检测。</p>
+</blockquote>
+<p>可是0x00跟%00有什么关系呢？</p>
+<p>%00经过URL解码后就是0x00，二者的意思都是空字符，表示一个字符串的结束。我们就可以根据源码利用%00实现.php后缀</p>
+<h4 id="示例：ctfhub"><a href="#示例：ctfhub" class="headerlink" title="示例：ctfhub"></a>示例：ctfhub</h4><h5 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h5><!--
+if (!empty($_POST['submit'])) {
+    $name = basename($_FILES['file']['name']);
+    $info = pathinfo($name);
+    $ext = $info['extension'];
+    $whitelist = array("jpg", "png", "gif");
+    if (in_array($ext, $whitelist)) {
+        $des = $_GET['road'] . "/" . rand(10, 99) . date("YmdHis") . "." . $ext;
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $des)) {
+            echo "<script>alert('上传成功')</script>";
+        } else {
+            echo "<script>alert('上传失败')</script>";
+        }
+    } else {
+        echo "文件类型不匹配";
+    }
+}
+-->
+
+<p>最关键的是这句代码：</p>
+<p><code>$des = $_GET[&#39;road&#39;] . &quot;/&quot; . rand(10, 99) . date(&quot;YmdHis&quot;) . &quot;.&quot; . $ext;</code></p>
+<p>只要在road的值里使用空字符即可，因为GET会编码，所以用%00</p>
+<p>payload：</p>
+<p><code>?road=/var/www/html/upload/test1.php%00</code></p>
+<p>至于下面的文件名，最多判断一下后缀，把后缀补过去也会被%00截断，所以在白名单的范围里里命名即可</p>
+<h3 id="后端检测-后缀名检测漏洞"><a href="#后端检测-后缀名检测漏洞" class="headerlink" title="后端检测_后缀名检测漏洞"></a>后端检测_后缀名检测漏洞</h3><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>通常是针对文件的扩展名后缀进行检测，主要是通过黑白名单进行过滤检测，如果不符全过滤规则则不允许上传。</p>
+</blockquote>
+<h4 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h4><blockquote>
+<p>一般有个专门的 <code>blacklist 文件</code>，里面会包含常见的危险脚本文件。</p>
+</blockquote>
+<h5 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h5><p>有时后端会把敏感字符替换为空，这就可以双写绕过了，比如<code>name.phphpp</code>。</p>
+<h5 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h5><h6 id="htaccess文件解析漏洞-apache解析漏洞"><a href="#htaccess文件解析漏洞-apache解析漏洞" class="headerlink" title=".htaccess文件解析漏洞- apache解析漏洞"></a><code>.htaccess</code>文件解析漏洞- apache解析漏洞</h6><p>利用.htaccess可以使其他类型的文件按照PHP文件来执行</p>
+<p>apache：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/564753382">技术向！Apache解析漏洞 - 知乎 (zhihu.com)</a></p>
+<ol>
+<li>简单来说就是一个配置（AddHandler）：后缀可以是其他的，只要文件名里有<code>.php</code>，就按照PHP文件执行</li>
+<li>使用<code>.php\x0a</code>，具体看上面链接</li>
+</ol>
+<h6 id="IIS7-0-IIS7-5-Nginx的解析漏洞"><a href="#IIS7-0-IIS7-5-Nginx的解析漏洞" class="headerlink" title="IIS7.0 | IIS7.5 | Nginx的解析漏洞"></a>IIS7.0 | IIS7.5 | Nginx的解析漏洞</h6><blockquote>
+<p>Nginx拿到文件路径（更专业的说法是URI）&#x2F;test.jpg&#x2F;test.php后，一看后缀是.php，便认为该文件是php文件，转交给php去处理。php一看&#x2F;test.jpg&#x2F;test.php不存在，便删去最后的&#x2F;test.php，又看&#x2F;test.jpg存在，便把&#x2F;test.jpg当成要执行的文件了，又因为后缀为.jpg，php认为这不是php文件，于是返回Access denied。<br>  这其中涉及到php的一个选项：cgi.fix_pathinfo，该值默认为1，表示开启。开启这一选项PHP可以对文件路径进行修理。<br>  举个例子，当php遇到文件路径&#x2F;1.jpg&#x2F;2.txt&#x2F;3.php时，若&#x2F;1.jpg&#x2F;2.txt&#x2F;3.php不存在，则会去掉最后的&#x2F;3.php，然后判断&#x2F;1.jpg&#x2F;2.txt是否存在，若存在，则把&#x2F;1.jpg&#x2F;2.txt当做文件&#x2F;1.jpg&#x2F;2.txt&#x2F;3.php，若&#x2F;1.jpg&#x2F;2.txt仍不存在，则继续去掉&#x2F;2.txt，以此类推。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45588247/article/details/118889668">https://blog.csdn.net/weixin_45588247/article/details/118889668</a></p>
+</blockquote>
+<p>简单来说，文件我们可以在存在的文件路径后面加一个虚假的&#x2F;name.php，这个存在的文件如果是一个图片马，就可能实现getshell。</p>
+<h6 id="IIS6-0-IIS5-x解析漏洞解析漏洞"><a href="#IIS6-0-IIS5-x解析漏洞解析漏洞" class="headerlink" title="IIS6.0&#x2F;IIS5.x解析漏洞解析漏洞"></a>IIS6.0&#x2F;IIS5.x解析漏洞解析漏洞</h6><blockquote>
+<ul>
+<li>上传文件名：xxx.asp;.jpg</li>
+</ul>
+<p> 服务器默认不解析;号后面的内容，因此xxx.asp;.jpg被当做asp文件解析</p>
+<ul>
+<li>向xxx.asp目录下面上传xxx.jpg</li>
+</ul>
+<p> 服务器会将xxx.asp目录下的文件都当做asp文件解析</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/song123sh/article/details/123513911">文件上传之IIS6.0解析漏洞_iis6解析漏洞利用-CSDN博客</a></p>
+<p>第一种是文件解析漏洞，如果文件名被修改，可以采用第二种：目录解析漏洞。目录解析漏洞不需要实际的后缀，只需要知道文件名即可</p>
+<h5 id="黑名单的漏网之鱼"><a href="#黑名单的漏网之鱼" class="headerlink" title="黑名单的漏网之鱼"></a>黑名单的漏网之鱼</h5><blockquote>
+<p>比如: <code>asa</code>和<code>cer</code>之类 <code>asp:</code> <code>asa</code> <code>cer</code> <code>aspx</code> <code>jsp:</code> <code>jspx</code> <code>jspf</code> <code>php:</code> <code>php</code> <code>php3</code> <code>php4</code> <code>php5</code> <code>phtml</code> <code>pht</code> <code>exe:</code> <code>exee</code> </p>
+</blockquote>
+<h5 id="利用Windows的命名机制"><a href="#利用Windows的命名机制" class="headerlink" title="利用Windows的命名机制"></a>利用Windows的命名机制</h5><blockquote>
+<p><code>shell.php.</code>  <code>shell.php空格</code>  <code>shell.php:1.jpg</code>  <code>shell. php::$DATA</code>  <code>shell.php:1.jpg</code>  在windows中，后缀名后面的点和空格都会被删除掉。</p>
+</blockquote>
+<h4 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h4><blockquote>
+<p>一般有个专门的 <code>whitelist 文件</code>，里面会包含的正常文件。</p>
+</blockquote>
+<p>绕过同黑名单</p>
+<h3 id="后端检测-文件头检测漏洞-1"><a href="#后端检测-文件头检测漏洞-1" class="headerlink" title="后端检测_文件头检测漏洞"></a>后端检测_文件头检测漏洞</h3><h5 id="漏洞原理："><a href="#漏洞原理：" class="headerlink" title="漏洞原理："></a>漏洞原理：</h5><blockquote>
+<p>        一般文件内容验证使用<code>getimagesize函数</code>检测,会判断文件是否是一个有效的文件图片,如果是,则允许上传,否则的话不允许上传。  本实验就是将一句话木马插入到一个[合法]的图片文件当中,然后用webshell管理工具进行远程连接。</p>
+</blockquote>
+<p>指令：<code>copy 1.jpg /b + 2.php /a 3.php</code></p>
+<blockquote>
+<p>&#x2F;b:指定以二进制格式复制、合并文件，用于图像或者声音类文件</p>
+<p>&#x2F;a:指定以ascii格式复制、合并文件用于txt等文本类文件</p>
+</blockquote>
+<blockquote>
+<p><strong>这条命令的意思是：通过<code>copy命令</code>，把<code>a.png</code>图片文件，以二进制文件形式添加到<code>a.php</code>文件中，以<code>ASCII文本文件</code>形式输出为<code>3.php</code>文件。</strong></p>
+</blockquote>
+<p>解析图片马需要将图片马被PHP一下，比如文件包含。</p>
+<blockquote>
+<p>    一般解析图片马需要结合<code>解析漏洞</code>或者<code>文件包含</code>才能解析图片马；</p>
+</blockquote>
+<h3 id="条件竞争漏洞"><a href="#条件竞争漏洞" class="headerlink" title="条件竞争漏洞"></a>条件竞争漏洞</h3><p>我简单称之为：卡空子。当文件的判断需要过多的时间时，可以卡那个时间间隔执行木马。</p>
+<blockquote>
+<p>由于服务器并发处理(同时)多个请求，假如<code>a用户</code>上传了木马文件，由于代码执行需要时间，在此过程中<code>b用户</code>访问了<code>a用户</code>上传的文件，会有以下三种情况： </p>
+<p>1.访问时间点在上传成功之前，没有此文件。 </p>
+<p>2.访问时间点在刚上传成功但还没有进行判断，该文件存在。 </p>
+<p>3.访问时间点在判断之后，文件被删除，没有此文件。</p>
+</blockquote>
+<h3 id="二次渲染漏洞"><a href="#二次渲染漏洞" class="headerlink" title="二次渲染漏洞"></a>二次渲染漏洞</h3><h4 id="二次渲染原理："><a href="#二次渲染原理：" class="headerlink" title="二次渲染原理："></a>二次渲染原理：</h4><blockquote>
+<p>                 在我们上传文件后，网站会对图片进行二次处理（格式、尺寸要求等），服务器会把里面的内容进行替换更新，处理完成后，根据我们原有的图片生成一个新的图片并放到网站对应的标签进行显示。</p>
+</blockquote>
+<h4 id="绕过："><a href="#绕过：" class="headerlink" title="绕过："></a>绕过：</h4><blockquote>
+<p>1、配合文件包含漏洞：  将一句话木马插入到网站二次处理后的图片中，也就是把一句话插入图片在二次渲染后会保留的那部分数据里，确保不会在二次处理时删除掉。这样二次渲染后的图片中就存在了一句话，在配合文件包含漏洞获取webshell。  2、可以配合条件竞争：  这里二次渲染的逻辑存在漏洞，先将文件上传，之后再判断，符合就保存，不符合删除，可利用条件竞争来进行爆破上传</p>
+</blockquote>
+<h4 id="如何判断图片是否进行了二次处理？"><a href="#如何判断图片是否进行了二次处理？" class="headerlink" title="如何判断图片是否进行了二次处理？"></a>如何判断图片是否进行了二次处理？</h4><blockquote>
+<p>     对比要与上传后的图片大小，使用<code>16进制编辑器</code>打开图片查看上传后保留了哪些数据，</p>
+</blockquote>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/03/18/PHP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">PHP 反序列化</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/03/18/PHP-message-board/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">PHP message board</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="/photo.jpg" class="soft-size--round soft-style--box" alt="steve-pq">
+    
+    
+      <h2>steve-pq</h2>
+    
+    
+      <p>蒹葭苍苍，白露为霜</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>11</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        2
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+<section class="widget-toc widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-toc" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M134.50666666 767.46666668H460.8c27.73333333 0 50.24000001 22.50666668 50.24000001 50.23999999v50.13333333c0 27.73333333-22.50666668 50.24000001-50.24000001 50.24000001H134.50666666c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.24000001v-50.13333333c0.10666668-27.73333333 22.50666668-50.24000001 50.24000001-50.24000001zM84.37333332 541.65333333h326.18666669c27.73333333 0 50.24000001 22.39999999 50.23999999 50.13333334v50.24000001c0 27.73333333-22.50666668 50.24000001-50.24000002 50.23999999H84.37333332c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.23999999v-50.24000001c0-27.73333333 22.50666668-50.13333334 50.24000001-50.13333334zM134.50666666 315.83999999H460.8c27.73333333 0 50.24000001 22.50666668 50.24000001 50.24000001v50.24000001c0 27.73333333-22.50666668 50.13333334-50.24000001 50.13333333H134.50666666c-27.73333333 0-50.24000001-22.39999999-50.23999999-50.13333333v-50.24000001c0.10666668-27.84000001 22.50666668-50.24000001 50.24000001-50.23999999zM209.81333332 89.91999999h326.18666671c27.73333333 0 50.24000001 22.39999999 50.23999997 50.13333335v50.23999999c0 27.73333333-22.50666668 50.24000001-50.24000001 50.24000001H209.81333332c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.24000001v-50.24000001c0-27.73333333 22.50666668-50.13333334 50.24000001-50.13333333zM692.05333333 623.36l274.66666669 176.00000002c23.36000001 14.93333333 30.08 45.97333334 15.14666666 69.33333332L954.77333334 910.93333333c-14.93333333 23.25333334-45.97333334 30.08-69.33333335 15.14666667l-274.66666666-176c-23.36000001-14.93333333-30.08-45.97333334-15.14666667-69.33333333l27.09333334-42.24000001c14.93333333-23.36000001 46.08000001-30.08 69.33333333-15.14666666z" fill="currentColor"></path>
+</svg>
+    <span>TOC</span>
+  </div>
+  <div class="widget-body">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E6%8E%AA%E6%96%BD%E5%8F%8A%E7%BB%95%E8%BF%87"><span class="toc-number">2.</span> <span class="toc-text">限制措施及绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%A3%80%E6%B5%8B"><span class="toc-number">2.1.</span> <span class="toc-text">前端检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MIME%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.</span> <span class="toc-text">MIME绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#htaccess%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.3.</span> <span class="toc-text">.htaccess文件解析漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user-ini%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.4.</span> <span class="toc-text">.user.ini文件包含漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%A3%80%E6%B5%8B-%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A3%80%E6%B5%8B%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.5.</span> <span class="toc-text">后端检测_文件头检测漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%A3%80%E6%B5%8B-00%E6%88%AA%E6%96%AD"><span class="toc-number">2.6.</span> <span class="toc-text">后端检测_00截断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%A3%80%E6%B5%8B-%E5%90%8E%E7%BC%80%E5%90%8D%E6%A3%80%E6%B5%8B%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.7.</span> <span class="toc-text">后端检测_后缀名检测漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%A3%80%E6%B5%8B-%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A3%80%E6%B5%8B%E6%BC%8F%E6%B4%9E-1"><span class="toc-number">2.8.</span> <span class="toc-text">后端检测_文件头检测漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.9.</span> <span class="toc-text">条件竞争漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.10.</span> <span class="toc-text">二次渲染漏洞</span></a></li></ol></li></ol>
+  </div>
+</section>
+
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>还在操作ing</p>
+  </div>
+</section>
+
+
+      <section class="widget-categorys widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+    <span>CATEGORYS</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categorys-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/aaa/" style="font-size: 10px;" class="tags-cloud-0">aaa</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;" class="tags-cloud-10">入门</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">steve-pq</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

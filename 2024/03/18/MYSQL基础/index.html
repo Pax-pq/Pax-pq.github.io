@@ -24,7 +24,7 @@
 
   
 
-  <title>hhh | Hexo</title>
+  <title>MYSQL基础 | Hexo</title>
 
   
 
@@ -103,15 +103,15 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">hhh</h1>
+          <h1 class="title-wrap">MYSQL基础</h1>
           <h2 class="title-sub-wrap">
             <strong>steve-pq</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-03-18T05:39:27.000Z" itemprop="datePublished">2024-03-18</time>
+            <time  class="article-date" datetime="2024-03-18T15:01:50.000Z" itemprop="datePublished">2024-03-18</time>
           </h2>
           
           
-            <h2 id="/2024/03/18/hhh/" class="title-sub-wrap leancloud_visitors" data-flag-title="hhh">
+            <h2 id="/2024/03/18/MYSQL%E5%9F%BA%E7%A1%80/" class="title-sub-wrap leancloud_visitors" data-flag-title="MYSQL基础">
               <em>文章访问量</em>
               <i class="leancloud-visitors-count"></i>
             </h2>
@@ -120,6 +120,8 @@
   
 </ul>
           <ul class="wrap-list dark">
+  
+    <li><a href="/tags/%E5%85%A5%E9%97%A8/">🏷️ 入门</a></li>
   
 </ul>
         </div>
@@ -143,7 +145,107 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        
+        <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>要学习，先开机：<code>mysql -u root -r</code></p>
+<p>你还得学会选择数据库：<code>use database_name;</code></p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>每一行(Record)，称为记录</p>
+<p>每一列(Column)，称为字段</p>
+<blockquote>
+<p>字段定义了数据类型（整型、浮点型、字符串、日期等），以及是否允许为<code>NULL</code>。注意<code>NULL</code>表示字段数据不存在。一个整型字段如果为<code>NULL</code>不表示它的值为<code>0</code>，同样的，一个字符串型字段为<code>NULL</code>也不表示它的值为空串<code>&#39;&#39;</code>。</p>
+</blockquote>
+<p>正常，概念不同。另外，字段尽量不要使用NULL，优势：简化查询条件，加快查询速度，也利于应用程序读取数据后无需判断是否为NULL。</p>
+<p>主键是记录的唯一标识。主键是必要的。主键有大概有以下几种：</p>
+<blockquote>
+<ul>
+<li>自增整数主键</li>
+<li>全局唯一GUID类型：使用一种全局唯一的字符串作为主键，类似<code>8f55d96b-8acc-4636-8cb8-76bf8abc2f57</code>。GUID算法通过网卡MAC地址、时间戳和随机数保证任意计算机在任意时间生成的字符串都是不同的，大部分编程语言都内置了GUID算法，可以自己预算出主键。</li>
+</ul>
+</blockquote>
+<p>联合主键允许多个列联合为主键，某一列可以有相同字段，只要所有字段不全部相同即可。</p>
+<p>小结：</p>
+<blockquote>
+<p>主键是关系表中记录的唯一标识。主键的选取非常重要：主键不要带有业务含义，而应该使用BIGINT自增或者GUID类型。主键也不应该允许<code>NULL</code>。</p>
+<p>可以使用多个列作为联合主键，但联合主键并不常用。</p>
+</blockquote>
+<p>外键是多个表之间的键，可以一对一，一对多，多对多</p>
+<p>须知：</p>
+<blockquote>
+<p>外键并不是通过列名实现的，而是通过定义外键约束实现的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE students</span><br><span class="line">ADD CONSTRAINT fk_class_id</span><br><span class="line">FOREIGN KEY (class_id)</span><br><span class="line">REFERENCES classes (id);</span><br></pre></td></tr></table></figure>
+
+<p>其中，外键约束的名称<code>fk_class_id</code>可以任意，<code>FOREIGN KEY (class_id)</code>指定了<code>class_id</code>作为外键，<code>REFERENCES classes (id)</code>指定了这个外键将关联到<code>classes</code>表的<code>id</code>列（即<code>classes</code>表的主键）。</p>
+</blockquote>
+<p>索引可以优化查询。</p>
+<h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><h3 id="添加载体"><a href="#添加载体" class="headerlink" title="添加载体"></a>添加载体</h3><p>建立数据库：</p>
+<p>create database database_name;</p>
+<p>附：配套：<code>use database_name;</code></p>
+<p>建立表：来个例子</p>
+<p>create table test1 (<br>    id int not null auto_increment,<br>     name varchar(100) not null,<br>     age bigint not null,<br>     primary key(id) )<br>    default charset&#x3D;utf8;</p>
+<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><p>语法(允许全新添加)：</p>
+<p><code>insert into table_name (name1, name2, name3) values (value1,value2,value3);</code></p>
+<p>须知：如果值是字符类的，需要加引号。</p>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="查询载体"><a href="#查询载体" class="headerlink" title="查询载体"></a>查询载体</h3><p>查询数据库：</p>
+<p><code>show databases;</code></p>
+<p>查询所有表：</p>
+<p><code>show tables;</code></p>
+<p>查看一个表的结构：</p>
+<p><code>desc table_name;</code></p>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><h4 id="查询逻辑"><a href="#查询逻辑" class="headerlink" title="查询逻辑"></a>查询逻辑</h4><p>语法结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">······</span><br><span class="line">from</span><br><span class="line">······</span><br><span class="line">where</span><br><span class="line">······</span><br><span class="line">group by</span><br><span class="line">······</span><br><span class="line">having</span><br><span class="line">······</span><br><span class="line">order by</span><br><span class="line">······</span><br></pre></td></tr></table></figure>
+
+<p>查询逻辑：</p>
+<ol>
+<li>from 从某张表中查询数据</li>
+<li>where 先经过where条件筛选出有价值的数据</li>
+<li>groub by 对这些有价值的数据进行分组</li>
+<li>having 分组之后可以使用having继续筛选</li>
+<li>select select查询出来</li>
+<li>order by 最后排序输出</li>
+</ol>
+<h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><p><a target="_blank" rel="noopener" href="https://wsygdsgg.github.io/2023/10/28/MySQL/">我的技术与生活——MySQL | 春风少年郎的博客 (wsygdsgg.github.io)</a></p>
+<p>以下只说一些</p>
+<h4 id="1-模糊查询"><a href="#1-模糊查询" class="headerlink" title="1.模糊查询"></a>1.模糊查询</h4><blockquote>
+<p>% 匹配多个字符(以下先代码后解释)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name from name(表名) where name1 like &#x27;%o%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>找到名字里含有%o%的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name from name(表名) where name1 like &#x27;o%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>找到名字里以o开头的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name from name(表名) where name1 like &#x27;%o&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>找到名字里以o结尾的</p>
+<p>_ 匹配单个字符(以下先代码后解释)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from name(表名) where name1 like &#x27;_A%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>找到第二个字母是A的</p>
+<p>如果前面有n个字符，便在A前面输入n个下划线</p>
+<p>转义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from name(表名) where name1 like &#x27;% \ _%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>真实输入中%与\与_之间没有空格，本处为了显示 \ 故做特殊处理</p>
+<p>% 和 \ 有特殊含义，为了正常显示下划线，采用转义方法，该处与C语言类似</p>
+</blockquote>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="删除载体"><a href="#删除载体" class="headerlink" title="删除载体"></a>删除载体</h3><p>删除数据库：</p>
+<p><code>drop database if exists database_name;</code></p>
+<p>简化：<code>drop database database_name</code></p>
+<p>删除表：</p>
+<p><code>drop table if exists table_name;</code></p>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><p>语法：</p>
+<p><code>delete from table_name where ···;</code></p>
+<p>须知：本句的核心是<strong>where</strong>，具有很灵活的特性。</p>
+<h2 id="改变"><a href="#改变" class="headerlink" title="改变"></a>改变</h2><h3 id="改变载体"><a href="#改变载体" class="headerlink" title="改变载体"></a>改变载体</h3><p>只有数据表的操作</p>
+<p>改表名：</p>
+<p><code>alter table table_name rename to table_new_name;</code></p>
+<p>添加一列：</p>
+<p><code>alter table table_name add column_name type(数据类型);</code></p>
+<p>删除一列：</p>
+<p><code>alter table table_name drop column_name;</code></p>
+<p>修改列名称：</p>
+<p><code>alter table table_name change column_name column_new_name type;</code></p>
+<h3 id="改变数据"><a href="#改变数据" class="headerlink" title="改变数据"></a>改变数据</h3><p>语法：</p>
+<p><code>update table_name set name1=value1, name2=value2, name3=value3 where ···;</code></p>
+<p>须知：核心依然在where。</p>
+
       </section>
 
       
@@ -155,8 +257,8 @@
     
     <div class="card-text">
       
-        <a href="/2024/03/18/pqpqp/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">test</h2>
+        <a href="/2024/03/18/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">SQL注入</h2>
         </a>
       
       <div class="card-text--row">Newer</div>
@@ -164,6 +266,20 @@
   </article>
 </div>
           
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/03/18/JavaScipt/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">JavaScipt</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
           
         </nav>
       
@@ -199,7 +315,7 @@
         <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
 </svg>
-        <span>2</span>
+        <span>11</span>
       </div>
       <div class="count-box--item">
         <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -211,13 +327,25 @@
         <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
 </svg>
-        1
+        2
       </div>
     </div>
   </div>
 </section>
 
       
+<section class="widget-toc widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-toc" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M134.50666666 767.46666668H460.8c27.73333333 0 50.24000001 22.50666668 50.24000001 50.23999999v50.13333333c0 27.73333333-22.50666668 50.24000001-50.24000001 50.24000001H134.50666666c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.24000001v-50.13333333c0.10666668-27.73333333 22.50666668-50.24000001 50.24000001-50.24000001zM84.37333332 541.65333333h326.18666669c27.73333333 0 50.24000001 22.39999999 50.23999999 50.13333334v50.24000001c0 27.73333333-22.50666668 50.24000001-50.24000002 50.23999999H84.37333332c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.23999999v-50.24000001c0-27.73333333 22.50666668-50.13333334 50.24000001-50.13333334zM134.50666666 315.83999999H460.8c27.73333333 0 50.24000001 22.50666668 50.24000001 50.24000001v50.24000001c0 27.73333333-22.50666668 50.13333334-50.24000001 50.13333333H134.50666666c-27.73333333 0-50.24000001-22.39999999-50.23999999-50.13333333v-50.24000001c0.10666668-27.84000001 22.50666668-50.24000001 50.24000001-50.23999999zM209.81333332 89.91999999h326.18666671c27.73333333 0 50.24000001 22.39999999 50.23999997 50.13333335v50.23999999c0 27.73333333-22.50666668 50.24000001-50.24000001 50.24000001H209.81333332c-27.73333333 0-50.24000001-22.50666668-50.23999999-50.24000001v-50.24000001c0-27.73333333 22.50666668-50.13333334 50.24000001-50.13333333zM692.05333333 623.36l274.66666669 176.00000002c23.36000001 14.93333333 30.08 45.97333334 15.14666666 69.33333332L954.77333334 910.93333333c-14.93333333 23.25333334-45.97333334 30.08-69.33333335 15.14666667l-274.66666666-176c-23.36000001-14.93333333-30.08-45.97333334-15.14666667-69.33333333l27.09333334-42.24000001c14.93333333-23.36000001 46.08000001-30.08 69.33333333-15.14666666z" fill="currentColor"></path>
+</svg>
+    <span>TOC</span>
+  </div>
+  <div class="widget-body">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0"><span class="toc-number">2.</span> <span class="toc-text">添加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BD%BD%E4%BD%93"><span class="toc-number">2.1.</span> <span class="toc-text">添加载体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.</span> <span class="toc-text">添加数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%BD%BD%E4%BD%93"><span class="toc-number">3.1.</span> <span class="toc-text">查询载体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.</span> <span class="toc-text">查询数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%BB%86%E8%8A%82"><span class="toc-number">3.3.</span> <span class="toc-text">具体细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">4.</span> <span class="toc-text">删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BD%BD%E4%BD%93"><span class="toc-number">4.1.</span> <span class="toc-text">删除载体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">4.2.</span> <span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%8F%98"><span class="toc-number">5.</span> <span class="toc-text">改变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E8%BD%BD%E4%BD%93"><span class="toc-number">5.1.</span> <span class="toc-text">改变载体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE"><span class="toc-number">5.2.</span> <span class="toc-text">改变数据</span></a></li></ol></li></ol>
+  </div>
+</section>
+
 
       
 <section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
@@ -256,7 +384,7 @@
   </div>
   <div class="widget-body">
     <div class="tags-cloud">
-      <a href="/tags/aaa/" style="font-size: 10px;" class="tags-cloud-0">aaa</a>
+      <a href="/tags/aaa/" style="font-size: 10px;" class="tags-cloud-0">aaa</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 20px;" class="tags-cloud-10">入门</a>
     </div>
   </div>
 </section>
