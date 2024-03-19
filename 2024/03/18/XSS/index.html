@@ -50,7 +50,7 @@
 <!-- header container -->
 <header class="header-container post">
   
-    <div class="post-image" style="background-image: url(/big.jpg)"></div>
+    <div class="post-image" style="background-image: url(./photo/77.jpg)"></div>
   
 
   <!-- navbar -->
@@ -110,6 +110,11 @@
             <time  class="article-date" datetime="2024-03-18T15:02:40.000Z" itemprop="datePublished">2024-03-18</time>
           </h2>
           
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2024-03-18T23:38:58.963Z" itemprop="dateUpdated">2024-03-19</time>
+            </h2>
+          
           
             <h2 id="/2024/03/18/XSS/" class="title-sub-wrap leancloud_visitors" data-flag-title="XSS">
               <em>文章访问量</em>
@@ -157,7 +162,7 @@
 
 <h5 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h5><blockquote>
 <p>非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），一般容易出现在搜索页面。反射型XSS大多数是用来盗取用户的Cookie信息。</p>
-<p>一般就是题目给一个<input>标签形成的输入框，然后我们在输入框里输入我们的恶意脚本，需要用户进行触发才能进行攻击，在前端输入恶意脚本，后端接受，然后再在前端显示，这也就是反射型XSS的数据流通。</p>
+<p>一般就是题目给一个<code>&lt;input&gt;</code>标签形成的输入框，然后我们在输入框里输入我们的恶意脚本，需要用户进行触发才能进行攻击，在前端输入恶意脚本，后端接受，然后再在前端显示，这也就是反射型XSS的数据流通。</p>
 </blockquote>
 <p>示例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">   &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">   &lt;button type=<span class="string">&quot;submit&quot;</span>&gt;提交&lt;/button&gt;</span><br><span class="line"> &lt;/form&gt;</span><br><span class="line"> &lt;p&gt;您好，<span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>]; <span class="meta">?&gt;</span>！&lt;/p&gt; </span><br></pre></td></tr></table></figure>
@@ -498,6 +503,8 @@
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
+      <div class="card-cover" background-image-lazy data-img="./photo/9.jpg"></div>
+    
     <div class="card-text">
       
         <a href="/2024/03/18/PHP-message-board/" itemprop="url">
@@ -512,6 +519,8 @@
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+      <div class="card-cover" background-image-lazy data-img="./photo/8.png"></div>
     
     <div class="card-text">
       
