@@ -114,7 +114,7 @@
           
             <h2 class="last-time">
               <span>最后更新于</span>
-              <time  class="article-updated" datetime="2024-03-18T23:41:23.189Z" itemprop="dateUpdated">2024-03-19</time>
+              <time  class="article-updated" datetime="2024-03-24T23:42:38.100Z" itemprop="dateUpdated">2024-03-25</time>
             </h2>
           
           
@@ -283,6 +283,44 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset variable_name</span><br></pre></td></tr></table></figure>
 
 <p>变量被删除后不能再次使用。unset 命令不能删除只读变量。</p>
+<h2 id="proc目录"><a href="#proc目录" class="headerlink" title="&#x2F;proc目录"></a>&#x2F;proc目录</h2><p>推荐文章：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/241148">Proc 目录在 CTF 中的利用-安全客 - 安全资讯平台 (anquanke.com)</a></p>
+<h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>Linux系统上的&#x2F;proc目录是一种文件系统，即proc文件系统。与其它常见的文件系统不同的是，&#x2F;proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，用户可以通过这些文件查看有关系统硬件及当前正在运行进程的信息，甚至可以通过更改其中某些文件来改变内核的运行状态。</p>
+<p>简单来讲，<code>/proc</code> 目录即保存在系统内存中的信息，大多数虚拟文件可以使用文件查看命令如cat、more或者less进行查看，有些文件信息表述的内容可以一目了然，但也有文件的信息却不怎么具有可读性。</p>
+</blockquote>
+<p>&#x2F;proc目录下有数字进程也有字符串，我们一般用<code>1</code>或者<code>self</code></p>
+<p>下面说一下进程下比较重要的目录和文件</p>
+<h3 id="cmdline（文件而非目录）"><a href="#cmdline（文件而非目录）" class="headerlink" title="cmdline（文件而非目录）"></a>cmdline（文件而非目录）</h3><blockquote>
+<p>cmdline 文件存储着启动当前进程的完整命令，但僵尸进程目录中的此文件不包含任何信息。可以通过查看cmdline目录获取启动指定进程的完整命令</p>
+</blockquote>
+<p>example：<code>cat /proc/1/cmdline</code> </p>
+<p>其实通过<code>cat</code>可知cmdline是个文件而不是目录，使用<code>ls</code>并没有效果</p>
+<h3 id="cwd-一个符号链接"><a href="#cwd-一个符号链接" class="headerlink" title="cwd(一个符号链接)"></a>cwd(一个符号链接)</h3><blockquote>
+<p>cwd 文件是一个指向当前进程运行目录的符号链接。可以通过查看cwd文件获取目标指定进程环境的运行目录</p>
+</blockquote>
+<blockquote>
+<p>符号链接是一种特殊类型的文件，它包含了对另一个文件或目录的引用。通过读取<code>/proc/1/cwd</code>可以获取进程ID为1的进程的当前工作目录的路径信息。</p>
+</blockquote>
+<p>example：<code>ls -al /proc/1/cwd</code></p>
+<p>通过cwd返回的是一个字典，具体的还不会说，不过不能用<code>cat</code>，使用<code>ls</code></p>
+<h3 id="exe-一个符号链接"><a href="#exe-一个符号链接" class="headerlink" title="exe(一个符号链接)"></a>exe(一个符号链接)</h3><blockquote>
+<p>exe 是一个指向启动当前进程的可执行文件（完整路径）的符号链接。通过exe文件我们可以获得指定进程的可执行文件的完整路径</p>
+</blockquote>
+<p>example：<code>ls -al /proc/1/exe</code></p>
+<p>可以cat试试，好像跟逆向有关</p>
+<h3 id="environ（文件而非目录）"><a href="#environ（文件而非目录）" class="headerlink" title="environ（文件而非目录）"></a>environ（文件而非目录）</h3><blockquote>
+<p>environ 文件存储着当前进程的环境变量列表，彼此间用空字符（NULL）隔开。变量用大写字母表示，其值用小写字母表示。可以通过查看environ目录来获取指定进程的环境变量信息。常用来读取环境变量中的SECRET_KEY或FLAG。</p>
+</blockquote>
+<p>example：cat &#x2F;proc&#x2F;1&#x2F;environ</p>
+<p>使用<code>cat</code>而非<code>ls</code></p>
+<h3 id="fd（目录而非文件）"><a href="#fd（目录而非文件）" class="headerlink" title="fd（目录而非文件）"></a>fd（目录而非文件）</h3><blockquote>
+<p>fd 是一个目录，里面包含这当前进程打开的每一个文件的文件描述符（file descriptor），这些文件描述符是指向实际文件的一个符号链接，即每个通过这个进程打开的文件都会显示在这里。所以我们可以通过fd目录里的文件获得指定进程打开的每个文件的路径以及文件内容。</p>
+</blockquote>
+<p>example：<code>ls -al /proc/1/fd</code>	</p>
+<p>查看指定进程打开的某个文件的内容：<code>ls -al /proc/1/fd/7</code></p>
+<blockquote>
+<p><strong>这个fd比较重要，因为在 linux 系统中，如果一个程序用open()打开了一个文件但最终没有关闭他，即便从外部（如os.remove(SECRET_FILE)）删除这个文件之后，在 &#x2F;proc 这个进程的 pid 目录下的 fd 文件描述符目录下还是会有这个文件的文件描述符，通过这个文件描述符我们即可得到被删除文件的内容。</strong></p>
+</blockquote>
 
       </section>
 
