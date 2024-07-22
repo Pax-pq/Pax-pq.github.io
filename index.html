@@ -1,0 +1,719 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Paxの庭院</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最困难处最进步">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paxの庭院">
+<meta property="og:url" content="http://pax-pq.github.io/index.html">
+<meta property="og:site_name" content="Paxの庭院">
+<meta property="og:description" content="最困难处最进步">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pax-pq.github.io/img/77.jpg">
+<meta property="article:author" content="Pax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pax-pq.github.io/img/77.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://pax-pq.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.14.0-b3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Pax","link":"链接: ","source":"来源: Paxの庭院","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Paxの庭院',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-22 15:44:08'
+}</script><link rel="stylesheet" href="APlayer.min.css"></head><body><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async=""></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async=""></script><link rel="stylesheet" href="/css/rain-effect.css"><script src="/js/rain-effect.js"></script><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/cursor.css"><link rel="stylesheet" href="/css/loadin.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"><link rel="stylesheet" href="/css/dhl.css"><link rel="stylesheet" href="/css/dark_read.css"><link rel="stylesheet" href="/css/rain-effect.css"><meta name="generator" content="Hexo 7.1.1"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="scarecrow"><div class="scarecrow__hat"><div class="scarecrow__ribbon"></div></div><div class="scarecrow__head"><div class="scarecrow__eye"></div><div class="scarecrow__eye"></div><div class="scarecrow__mouth"></div><div class="scarecrow__pipe"></div></div><div class="scarecrow__body"><div class="scarecrow__glove scarecrow__glove--l"></div><div class="scarecrow__sleeve scarecrow__sleeve--l"></div><div class="scarecrow__bow"></div><div class="scarecrow__shirt"></div><div class="scarecrow__coat"></div><div class="scarecrow__waistcoat"></div><div class="scarecrow__sleeve scarecrow__sleeve--r"></div><div class="scarecrow__glove scarecrow__glove--r"></div><div class="scarecrow__coattails"></div><div class="scarecrow__pants"></div></div><div class="scarecrow__arms"></div><div class="scarecrow__leg">  </div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', () => { preloader.initLoading() }, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', () => { preloader.endLoading() }, 'preloader_end')
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" data-original="/img/77.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-vihara"></i><span> 中庭</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 书院</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-history"></i><span> 溯流</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/poem/"><i class="fa-fw far fa-edit"></i><span> 诗壁</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-user-friends"></i><span> 友座</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清欢</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 光影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 明镜</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/back1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Paxの庭院"><span class="site-name">Paxの庭院</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-vihara"></i><span> 中庭</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 书院</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-history"></i><span> 溯流</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/poem/"><i class="fa-fw far fa-edit"></i><span> 诗壁</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-user-friends"></i><span> 友座</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清欢</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 光影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 明镜</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Paxの庭院</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/22/MySQL%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%B8%8E%E6%8F%90%E6%9D%83/" title="MySQL漏洞利用与提权">MySQL漏洞利用与提权</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-22T03:26:51.000Z" title="发表于 2024-07-22 11:26:51">2024-07-22</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/21/PHP%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%88%A9%E7%94%A8/" title="PHP原生类利用">PHP原生类利用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-21T08:05:40.000Z" title="发表于 2024-07-21 16:05:40">2024-07-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PHP%E6%BC%8F%E6%B4%9E/">PHP漏洞</a></span></div><div class="content">0x01 Error/Exception内置类进行 XSSError 内置类适用环境
+php7版本
+开启报错
+
+
+Error类是php的一个内置类，用于自动自定义一个Error，在php7的环境下可能会造成一个xss漏洞，因为它内置有一个 __toString() 的方法，常用于PHP 反序列化中。如果有个POP链走到一半就走不通了，不如尝试利用这个来做一个xss，其实我看到的还是有好一些cms会选择直接使用 echo &lt;Object&gt; 的写法，当 PHP 对象被当作一个字符串输出或使用时候（如echo的时候）会触发__toString 方法，这是一种挖洞的新思路。
+
+演示测试代码
+&lt;?php
+$a = unserialize($_GET['man']);
+echo $a;
+
+POC
+$a = new Error("&lt;script&gt;alert('xss')&lt;/script&gt;");
+$b = serialize($a);
+echo urlencode($b);
+
+Excepti ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/20/%E5%88%9D%E5%86%99ThinkPHP%E7%95%99%E8%A8%80%E6%9D%BF/" title="初写ThinkPHP留言板">初写ThinkPHP留言板</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-20T02:15:25.000Z" title="发表于 2024-07-20 10:15:25">2024-07-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="content">0x00 前言安全的基础是开发。本次会详细讲解该项目的过程和心路。
+0X01 配置
+本次在windows上安装ThinkPHP8.0稳定版，附上教程：
+
+https://blog.csdn.net/weixin_62797596/article/details/134713455
+
+将.example.env修改成.env，文件内容一并修改。
+
+0x02 思路本项目体量不大，但仍然尝试MVC模型。从控制层入手，具体的业务教给模型层，最后视图层呈现结果。
+
+首先，留言版该实现什么功能呢？
+
+实现注册，登录，留言，注销四个功能。
+
+这些功能该对接哪些控制器呢？
+
+注册，登录，注销都属于用户操作，给UsersController
+看留言与写留言属于留言操作，给MessagesController
+
+每一个表对应一个模型，该怎么制作表和模型层？
+
+本项目需要两个表：
+users
+
+
+
+id
+username
+password
+
+
+
+1
+Pax
+123456
+
+
+messages
+
+
+
+id
+username
+messages
+
+
+
+1
+Pax
+FIag
+
+
+对应的两个模型层：users.php ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/13/AWD%E9%98%B2%E5%BE%A1%E5%AD%A6%E4%B9%A0/" title="AWD防御学习">AWD防御学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-13T14:02:17.000Z" title="发表于 2024-07-13 22:02:17">2024-07-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%87%E6%A1%A3%E6%94%B6%E5%BD%95/">文档收录</a></span></div><div class="content">文档收录之AWDPattackhttps://github.com/swisskyrepo/PayloadsAllTheThings
+黑白名单php白名单
+$input = $_POST['input'];
+
+// 定义输入的白名单正则表达式
+$allowedPattern = '/^[a-zA-Z0-9\s]+$/';
+
+// 使用正则表达式匹配输入
+if (!preg_match($allowedPattern, $input)) {
+    // 输入不符合白名单规则，直接退出或进行其他相应操作
+    return;
+}
+
+// 输入符合白名单规则，继续后续处理
+// ...
+
+黑名单
+$input = $_POST['input']; // 获取输入数据
+$blacklist = ['blacklist', 'word1', 'word2']; // 定义黑名单数组
+
+foreach ($blacklist as $word) { ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/11/CVE-2023-1773/" title="CVE-2023-1773">CVE-2023-1773</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-11T01:45:38.000Z" title="发表于 2024-07-11 09:45:38">2024-07-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span></div><div class="content">代码审计之CVE-2023-1773参考文章：
+
+保姆级教程
+进阶级教程
+
+[TOC]
+0x00 前言通过本次漏洞复现和代码审计，我应该掌握以下能力：
+基础能力：
+
+ 
+怎么高效地查看源码和获取信息.
+
+ 
+如何不断溯源代码以得到目的信息.
+
+ 
+对以面向对象为核心的项目的特点做一个总结.
+
+ 
+怎么触发对应方法？如果在前端可控，又该怎么构造数据包？
+
+ 
+熟悉攻击链，明白攻击链每一环的条件和作用.
+
+ 
+掌握漏洞复现和代码审计的一般流程.
+
+
+进阶能力：
+
+ 
+能独立审计一些简单的漏洞.
+
+ 
+掌握一些代码审计工具并用来解决漏洞.
+
+ 
+高阶目标：掌握项目框架.
+
+
+0x01 漏洞简介
+CVE-2023-1773
+产品：信呼oa
+影响版本：&lt;=2.32
+开源地址：https://github.com/rainrocka/xinhu/commits/master/
+
+0x02 入口分析index.php本次从index.php入手，先放出代码：
+
+对本段代码有以下问题：
+
+各个变量有什么用？
+不认识这些方法.
+这段代码的功能有哪些？
+这段代码哪些地方可以被利用？
+
+我们 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/30/CRLF%E5%85%A5%E9%97%A8/" title="CRLF入门">CRLF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-30T10:42:14.000Z" title="发表于 2024-06-30 18:42:14">2024-06-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CRLF/">CRLF</a></span></div><div class="content">CRLF漏洞入门参考文章：浅入深出谭谈 HTTP 响应拆分（CRLF Injection）攻击（上） - 先知社区 (aliyun.com)
+0x00 前言这段时间有空刷刷BurpSuite的CSRF，有道题需要HTTP头部注入，趁此机会学学。
+另外，对漏洞的利用往往不是单独的，而是多个漏洞相互配合。比如本篇的CRLF可以和SSRF、CSRF配合。
+0x01 CRLF 与 CRLF InjectionCRLF
+CRLF 指的是回车符（CR，ASCII 13，\r，%0d）和换行符（LF，ASCII 10，\n，%0a）的简称（\r\n）。HTTP报文以状态行开始，跟在后面的是HTTP首部（HTTP Header），首部由多个首部字段构成，每行一个首部字段，HTTP首部后是一个空行，然后是报文主体（HTTP Body）。状态行和首部中的每行以CRLF结束，首部与主体之间由一空行分隔。或者理解为首部中每个首部字段以一个CRLF分隔，首部和主体由两个CRLF分隔。
+
+CRLF InjectionHTTP报文的结构以CRLF划分，通过添加CRLF可以制造CRLF Injection，原理如下： ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/27/%E5%AF%B9%E4%BA%8ESQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="对于SQL注入原理的学习">对于SQL注入原理的学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-27T12:20:21.000Z" title="发表于 2024-06-27 20:20:21">2024-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></span></div><div class="content">0x00 前言
+写下本文的直接原因是拜读了庆尘大佬的文章（对SQL注入漏洞原理的思考 (qq.com)，这也是本文的参考文章。推荐大家读读大佬的文章，感受大佬浅显易懂的文笔下的深邃思想。
+0x01 信任输入信任问题安全问题的本质就是信任问题
+例如对一个网站的开发来说
+
+信任普通用户的输入——前台漏洞
+信任管理员用户的输入——后台漏洞
+信任离线升级/在线升级/自动化升级/升级包——供应链攻击
+不信任任何输入——信任代码逻辑——逻辑漏洞
+
+有时候信任是可以被提升的——越权。
+防御核心对应的安全方案有很多，但都可以简化为
+
+输入——检测是否存在风险——输出
+
+黑客往往是从输入入手。所以我们重点关心的问题也就是如何处理信任与输入的关系
+0x02 控制流和数据流
+可以将程序员的代码分割为两个部分
+
+一部分是控制代码走向的控制流代码
+另一部分是用来被展示，被存储，被流转的数据流(包括输入的数据和程序员设定的数据)
+
+
+被，是被动，说明了数据流的数据不应该具有主动性。说实在一点，外来的数据不能影响内部的控制程序。一旦数据流可以入侵到控制流，那么漏洞也随之而生。
+0x03 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/22/%E5%86%8D%E8%A7%81%EF%BC%8C%E9%83%8A%E9%87%8E%E5%B1%B1%EF%BC%81/" title="再见，郊野山！">再见，郊野山！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-22T08:26:58.000Z" title="发表于 2024-06-22 16:26:58">2024-06-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%BC%AB%E6%BC%AB%E9%95%BF%E8%B7%AF/">漫漫长路</a></span></div><div class="content">再见，郊野山！决定​	我想与你告别，于是决定去看望你。
+​	我也怀念你，便在一路上构思着文章。写文章与看望你，慢慢地互成因果。
+​	我知道，你已然住进了我的文章。
+​	
+去途​	这是最后一次旅途了吗，我不确定。
+​	在绝望坡下，思考看望你的意义。任凭思绪飘乱，我渐渐明白了：因为想你，所以去了。
+​	其实人究其一生，都在与内心作答。顺着内心行走，或许就没有多少愧疚的事了。
+​	
+​	顺着科技园的道路直下，四周被绿意吞噬，只剩几座庞然笔直的建筑默立。
+​	建筑并不突兀，而是与绿意交融。有些建筑或许荒废了，藤蔓肆满窗台，似乎要遮盖整个楼层。很难想象有人在这里上班。注视这狂野的绿意，思绪也蔓延到千万年之后，内心浮动着一丝丝悲哀。
+​	有些建筑颇有古意。湖上有一座木廊桥，桥内有一座庙，庙里有一坐人。焚香袅袅，游绕周身，想必他是安宁的。
+
+​	可我却难以安宁······	
+​	
+上山​	到了入口。又好像回到了第一次相逢。当时亦是盛夏，却要晚一点，凉快一点。
+
+​	那时我还没见到你。之后数次我都是独行，你便一直陪伴着我。
+​	第二次之前，怕蛇而不敢来。但我到底克服了恐惧，也因此与你相遇。
+​	
+​	 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/%E5%85%A5%E9%97%A8%E5%AE%89%E5%85%A8%E5%BF%85%E7%9F%A5%E7%9A%84%E5%9F%BA%E7%A1%80%E6%9C%AF%E8%AF%AD/" title="入门安全必知的基础术语">入门安全必知的基础术语</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T13:08:02.000Z" title="发表于 2024-06-21 21:08:02">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">入门web安全必知的术语–基础篇前言诸位安好，我是pax。这是初识安全的第二篇文章，主要介绍一些信息安全新人入门必知的基础术语，方便大家跟上大佬的节奏（pax当年就是听不懂这些术语，好痛苦.jpg）。
+正文以下引用均来自Wiki百科和网络。另外，本文介绍略显粗浅，万不能当做学习，仅供了解。
+概念篇信息安全与网络安全
+信息安全，意为保护信息及信息系统免受未经授权的进入、使用、披露、破坏、修改、检视、记录及销毁。政府、军队、公司、金融机构、医院、私人企业积累大量与雇员、顾客、产品、研究、金融数据有关的机密信息，而绝大部分的信息现在被收集、产生、存储在电子计算机内，并通过网络传送到别的计算机。如果企业的顾客、财政状况、新产品线的机密信息落入竞争对手的掌握，这种安全性的丧失可能会导致经济上的损失、法律诉讼甚至该企业的破产。保护机密的信息是商业上的需求，而在许多情况中也是道德和法律上的需求。
+
+我们专业的方向叫哪个都可以。特别是web安全方向与网络密不可分，不信你可以看看web的中文意思哦。
+CTF
+夺旗（英语：Capture the flag，简称“CTF”）在计算机安全中是一种活动，当中会将 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/CSRF%E5%85%A5%E9%97%A8/" title="CSRF入门">CSRF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T13:05:52.000Z" title="发表于 2024-06-21 21:05:52">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CSRF/">CSRF</a></span></div><div class="content">CSRF入门0x01 基础学习概述Cross-site request forgery 跨站点请求伪造，是一种 Web 安全漏洞，它允许攻击者诱使用户执行他们不打算执行的操作。它允许攻击者部分规避同源策略，该策略旨在防止不同网站相互干扰。
+攻击流程Step1:使用者成功登入A 银行网站的帐户，并且代表使用者身份的cookie 在本地保存下来，所以下次再来A 银行网站时，不用重新登入
+Step2:由于使用者没有登出A 银行网站的帐户，在浏览B 恶意网站时，B 网站有个被设为透明的图片，因为是透明的，所以使用者在画面上看不到，然而该图片包含一段恶意程式码，程式码如下。
+// 備註：CSRF 攻擊手法有很多，此程式碼例子是一種最基本的攻擊方法之一
+&lt;img
+  src="http://a-bank.com/transfer.do?acct=BadGuy&amp;amount=100000 HTTP/1.1"
+  width="0"
+  height="0"
+/&gt;
+
+Step3:使用者虽然将看不到此图片， 但是，浏览器仍会 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/17/%E5%AE%89%E5%85%A8%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E7%89%B9%E8%B4%A8/" title="安全需要什么特质">安全需要什么特质</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-17T08:45:02.000Z" title="发表于 2024-06-17 16:45:02">2024-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​	前言
+​	诸位安好，我是pax。从本文章开始，我们进入了一个新的系列：初识安全。本系列旨在帮助安全小白们轻松高效地入门网络安全。那么现在，开始吧！
+​	学习安全，需要什么样的精神和特质呢？这是很难说的，但又是极为重要的。这是我提问的，却是需要你们作答的。我且抛砖引玉：
+​	兴趣终将蜕变为热爱
+​	往来千古，群星闪烁。成大事者，多始于兴趣，终于热爱。
+​	但是，除却极少数一眼安全的人，大多数童鞋或许和pax一样：初次接触安全，谈不上热爱，只有点点兴趣。
+​	但这足够了，点点兴趣亦可化作两翼热爱，长风破浪，直向南溟。
+​	或许有些聪明的童鞋想到了，这个过程是相当理想的。如何使兴趣汇成热爱，是安全一道避无可避的问题。
+对此，我粗浅地回答：亿点点的坚持和一瞬的花火！
+​	
+​	亿点点的坚持
+​	安全从来就不是简单的专业，而是一生的学习。
+·	在有限的四年，按部就班的学习可不能喂饱安全。它抢走你珍惜的闲暇、充裕的睡眠、偶尔的假期。童鞋，你会因此愤怒吗？可这就是安全。安全职位的缺口很大，但没有一个会留给半吊子。
+​	我常常回想，我或许不是一位大学生，而是一位轻松些许的高中生。可是回望这一年的学 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/16/%E4%B8%80%E4%BD%8D%E9%AA%9A%E5%B9%B4%E7%9A%84%E5%AE%89%E5%85%A8%E4%B9%8B%E8%B7%AF/" title="一位骚年的安全之路">一位骚年的安全之路</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-16T14:16:22.000Z" title="发表于 2024-06-16 22:16:22">2024-06-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​		诸位安好，我是pax。这是安全小窝的第一篇文章，亦是我人生的第一篇公众号。实不相瞒，我思考了好一会，这么一篇极具意义的文章该写点啥嘞？Web知识，安全工具，还是专业普及？我突然拍腿！为什么不写写自己的学习和心路历程呢？ 开干！等等，我好像，似乎，应该，还不会写文章······
+​	
+​		23年的暑假，高考的肃穆被完结的钟声摧碎，盛夏的蝉鸣流淌在云端间隙。一个超常发挥的骚年选择了信息安全专业，命运的齿轮无息间上了润滑油。对于这个全然陌生的专业，骚年又能知道些什么呢？只能把抖音的只言片语堵满即将退化的大脑：
+​		“信息安全是个什么样的专业呢？”
+​		“好像是黑客！等等，什么，我竟然会成为黑客！”
+​		“好像，有点酷嘞！”
+​		“嘿嘿，薪资还不错，就决定是你了”
+​	
+​		胡思乱想，思绪同未来碰撞，隐约闪烁着一位少年的懵懂与期待：你好，未来！
+​		有时候你不得不问候命运，不管是亲切的还是悲切的。信息安全属于计算机大类，而我已经好久没碰过电脑了，就连洛克王国的宠物蛋都安详地瘫了数年，合理估计永远都醒不来了。
+​		有时候你又不得不感谢命运。我遇到了一位极好极好的引路人，我称 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%85%A5%E9%97%A8/" title="文件包含入门">文件包含入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T01:30:45.000Z" title="发表于 2024-05-26 09:30:45">2024-05-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a></span></div><div class="content">文件包含入门参考文章：PHP漏洞全解————10、PHP文件包含漏洞_action=%252e%252e%255c%252e%252e%255c%252e%252e%25-CSDN博客
+0x01 基础知识相关函数必看：https://www.php.net/manual/zh/function.include.php
+
+include， require
+
+基础就不多说了，require报错会终止程序，但是include会继续执行下面代码。
+
+include_once &amp; require_once
+
+包含过的就不会继续包含
+漏洞成因
+具有相关的危险函数
+包含变量可控
+
+0x02 漏洞类型LFI(Local File Inclusion)
+本地文件包含漏洞，顾名思义，指的是能打开并包含本地文件的漏洞。大部分情况下遇到的文件包含漏洞都是LFI。
+
+RFI(Remote File Inclusion)
+远程文件包含漏洞。是指能够包含远程服务器上的文件并执行。由于远程服务器的文件是我们可控的，因此漏洞一旦存在危害性会很大。
+
+RFI对php.ini里的配置有些要求：
+
+allo ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/SSRF%E5%85%A5%E9%97%A8/" title="SSRF入门">SSRF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T01:27:10.000Z" title="发表于 2024-05-26 09:27:10">2024-05-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SSRF/">SSRF</a></span></div><div class="content">SSRF入门0x00 概述SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。
+一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）
+
+0x01 原理SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。
+简单来说：所有目标服务器会从自身发起请求的功能点，且我们可以控制地址的参数，都可能造成SSRF漏洞
+
+0x02 SSRF危害1.内外网的端口和服务扫描
+2.攻击运行在内网或本地的应用程序
+3.对内网web应用进行指纹识别，识别企业内部的资产信息
+4.攻击内网的web应用，主要是使用GET参数就可以实现的攻击（比如Struts2漏洞利用，SQL注入等）
+5.利用file协议读取本地敏感数据文件等
+
+0x03 造成SSRF的函数SSRF涉及到的危险函数主要是网络访问，支持伪协议的网络读取。
+file_get_contents()PHP: file_get_contents ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/18/Gopher%E5%85%A5%E9%97%A8/" title="Gopher入门">Gopher入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-18T07:42:01.000Z" title="发表于 2024-05-18 15:42:01">2024-05-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8D%8F%E8%AE%AE/">协议</a></span></div><div class="content">0x00 闲话em，这估计就是我的风格了。Gopher广泛用于SSRF，不可不认真学。                                                                                                                                           
+参考文章：Gopher协议在SSRF漏洞中的深入研究（附视频讲解） - 知乎 (zhihu.com)                                                                                                                                                                                                                                                                            ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/18/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6/" title="云服务器配置重定向文件">云服务器配置重定向文件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-18T01:51:33.000Z" title="发表于 2024-05-18 09:51:33">2024-05-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%8E%AF%E5%A2%83/">环境</a></span></div><div class="content">0x00 必要性我还是喜欢在Blog唠嗑一下，虽然但是没什么人看。天生愚笨，此事耗时较久。但是安全一路本就是坎坷之途，越是困难越要战胜它。
+附：我好奇问一下读者，作为一名hacker，你能从上面这段话收集多少信息。
+0x01 nginx配置推荐视频：Nginx入门必须懂3大功能配置 - Web服务器/反向代理/负载均衡_哔哩哔哩_bilibili
+一. 基础理解我被一个文件和两个目录困扰
+.../nginx.conf 总配置文件 注意一行代码：
+include .../sites-enabled/*;
+
+.../sites-enabled
+很明显这个目录可以写配置
+../sites-availabled
+这个一般来说就不行了
+https://www.jianshu.com/p/42c4ffd044e6
+看不懂，先这样理解。
+二. 配置代码理解在enabled下创建port_handsome(这只是一个名称.jpg)，代码如下：
+server{
+	listen port;
+	server_name IP;
+	root /var/www/html;
+	inde ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2Docker%E5%8F%8A%E6%90%AD%E5%BB%BA%E5%90%84%E7%B1%BB%E7%8E%AF%E5%A2%83/" title="云服务器部署Docker及搭建各类环境">云服务器部署Docker及搭建各类环境</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-03T11:18:47.000Z" title="发表于 2024-05-03 19:18:47">2024-05-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%8E%AF%E5%A2%83/">环境</a></span></div><div class="content">0x00 Why为什么要搞服务器，为什么要学Docker，为什么要自己搭建靶场？这些都是基本功，逃避是没有用的。
+0x01 买服务器我买的是阿里云的服务器，贴个官网链接：阿里云-计算，为了无法计算的价值 (aliyun.com)
+0x02 部署Docker推荐教程：最详细的ubuntu 安装 docker教程 - 知乎 (zhihu.com)
+一. 卸载Ubuntu自带的Docker以下操作最好用管理员
+
+注：docker的旧版本不一定被称为docker，http://docker.io 或 docker-engine也有可能，所以我们卸载的命令为：
+
+$ apt-get remove docker docker-engine docker.io containerd runc
+
+如果报错也正常，有些Ubuntu没有Docker，直接下一步。
+二. 安装Docker及相关配置· 更新软件包和已安装的软件的版本：
+apt update
+apt upgrade
+
+· 安装Docker依赖：
+
+Docker在Ubuntu上依赖一些软件包。执行以下命令来安装这些依赖:
+
+apt-get ins ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/Linux-%E5%85%A5%E9%97%A8/" title="Linux 入门">Linux 入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:04:13.000Z" title="发表于 2024-03-18 23:04:13">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Linux总觉得学的不扎实，认真学一次。
+mongodb+srv://2472373483:@pax-blog.fu8mfyq.mongodb.net/?retryWrites=true&amp;w=majority&amp;appName=pax-blog
+基础概述：
+
+Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。
+
+系统启动进程：
+
+内核的引导。
+运行 init。
+系统初始化。
+建立终端 。
+用户登录系统。
+
+目录结构：
+由根目录出发的树状目录结构。
+查阅：https://www.runoob.com/linux/linux-system-contents.html
+
+目录与文件管理路径
+
+绝对路径：路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。
+
+相对路径：路径的写法，不是由 / 写起，例如由 /usr/sha ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" data-original="/img/77.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Pax</div><div class="author-info__description">最困难处最进步</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CRLF/"><span class="card-category-list-name">CRLF</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CSRF/"><span class="card-category-list-name">CSRF</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HTTP/"><span class="card-category-list-name">HTTP</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/PHP%E6%BC%8F%E6%B4%9E/"><span class="card-category-list-name">PHP漏洞</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL%E6%B3%A8%E5%85%A5/"><span class="card-category-list-name">SQL注入</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SSRF/"><span class="card-category-list-name">SSRF</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/XSS/"><span class="card-category-list-name">XSS</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CVE/" style="font-size: 1.1em; color: #999">CVE</a> <a href="/tags/%E7%9F%A5%E8%AF%86/" style="font-size: 1.1em; color: #999">知识</a> <a href="/tags/ThinkPHP/" style="font-size: 1.1em; color: #999">ThinkPHP</a> <a href="/tags/%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%88%A9%E7%94%A8/" style="font-size: 1.1em; color: #999">原生类利用</a> <a href="/tags/AWD%E9%98%B2%E5%BE%A1/" style="font-size: 1.1em; color: #999">AWD防御</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 1.3em; color: #99a1ac">感悟</a> <a href="/tags/%E5%8E%9F%E7%90%86/" style="font-size: 1.1em; color: #999">原理</a> <a href="/tags/%E5%85%A5%E9%97%A8/" style="font-size: 1.5em; color: #99a9bf">入门</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">学习</a></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2020 - 2024 By Pax</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="/js/tw_cn.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.0.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, ))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+btf.addGlobalFn('pjaxSend', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["莫问相思深不深，秋窗冽雨落花魂。"])
+  } else {
+    document.getElementById("subtitle").textContent = "莫问相思深不深，秋窗冽雨落花魂。"
+  }
+}
+typedJSFn.run(subtitleType)</script><script>(() => {
+  const runMermaid = (ele) => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from(ele).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+    
+    codeMermaidEle.forEach(ele => {
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.innerHTML = `<pre class="mermaid-src" hidden>${ele.textContent}</pre>`
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+  
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="" src="https://cdn.jsdelivr.net/gh/CodeByZach/pace/pace.min.js"></script><script src="/js/rain-effect.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const loadMeting = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'loadMeting')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.14.0-b3"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>
