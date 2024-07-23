@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Navicat远程连接MySQL</title>
+      <link href="/2024/07/22/Navicat%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5MySQL/"/>
+      <url>/2024/07/22/Navicat%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5MySQL/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><p><em><strong>该过程比较复杂，我一点一点说</strong></em></p><h1 id="0x01-云服务器下载MySQL"><a href="#0x01-云服务器下载MySQL" class="headerlink" title="0x01 云服务器下载MySQL"></a>0x01 云服务器下载MySQL</h1><p>推荐文章：<a href="https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk">https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk</a></p><p>一. 安装<code>apache</code>&#x2F;<code>nginx</code>和<code>PHP</code></p><p>这一点无需多说，基本常识。</p><p>二. 安装<code>MySQL</code></p><ol><li>安装</li></ol><pre><code class="highlight undefined">sudo apt -y install mysql-server</code></pre><ol start="2"><li>验证</li></ol><pre><code class="highlight undefined">sudo mysql -V</code></pre><ol start="3"><li>启动</li></ol><pre><code class="highlight sql">sudo systemctl <span class="keyword">start</span> mysql</code></pre><hr><h1 id="0x02-MySQL改密码"><a href="#0x02-MySQL改密码" class="headerlink" title="0x02 MySQL改密码"></a>0x02 MySQL改密码</h1><p>推荐文章：<a href="https://www.cnblogs.com/chloneda/p/12449819.html">https://www.cnblogs.com/chloneda/p/12449819.html</a></p><p>因为<code>MySQL&gt;8.0</code>改密码不同，所以觉得有必要写下<code>MySQL&gt;8.0</code>的改密码操作。</p><p>大体思路：</p><ol><li>以 <code>root</code> 用户登录<code>MySQL</code>。</li><li>进入<code>MySQL</code>系统自带数据库： <strong><code>mysql</code></strong> 数据库中。</li><li>执行更改密码语句。</li><li>退出<code>MySQL</code>后，使用新的密码重新登陆。</li></ol><p>选择数据库</p><pre><code class="highlight mysql">mysql&gt; use mysql;</code></pre><p>改密码</p><pre><code class="highlight mysql">mysql&gt; ALTER USER &#x27;用户名&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;新密码&#x27;;</code></pre><p>刷新MySQL的系统权限相关表</p><pre><code class="highlight mysql">mysql&gt; flush privileges;</code></pre><hr><h1 id="0x03-Navicat连接MySQL"><a href="#0x03-Navicat连接MySQL" class="headerlink" title="0x03 Navicat连接MySQL"></a>0x03 Navicat连接MySQL</h1><p><em>这个事情比较棘手，是我写这篇文章的重要目的。</em></p><p>推荐文章：<a href="https://www.cnblogs.com/chloneda/p/12449819.html">MySQL 8.0修改密码 - Chloneda - 博客园 (cnblogs.com)</a></p><p>最好创建一个远程用户（我尝试root连接无果）</p><pre><code class="highlight mysql">use mysql;grant all privileges on *.* to Pax@&quot;xxx.xxx.xxx.xxx&quot; identified by &quot;密码&quot;;flush privileges;</code></pre><p>如果还不行的话看看推荐文章。</p><hr><h1 id="0x04-结语"><a href="#0x04-结语" class="headerlink" title="0x04 结语"></a>0x04 结语</h1><p>一套流程下来虽然较为麻烦，但是也在潜移默化中提高了自己的能力。少求人，多砺己！</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySQL漏洞利用与提权</title>
       <link href="/2024/07/22/MySQL%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%B8%8E%E6%8F%90%E6%9D%83/"/>
       <url>/2024/07/22/MySQL%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%B8%8E%E6%8F%90%E6%9D%83/</url>
