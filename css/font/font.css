@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'baige';
+    font-display: swap;
+    src: url('./baige.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'ye';
+    font-display: swap;
+    src: url('ye.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'yz';
+    font-display: swap;
+    src: url('yzq.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'qc';
+    font-display: swap;
+    src: url('qc.ttf') format('truetype');
+}
