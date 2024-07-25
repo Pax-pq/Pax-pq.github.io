@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>命令注入入门</title>
+      <link href="/2024/07/25/%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8/"/>
+      <url>/2024/07/25/%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>隔了这么久才写这一篇，其实还是比较惭愧的。本篇文章会尽量写的成体系，但是重点在于绕过。</p><h1 id="0x01-基础概念"><a href="#0x01-基础概念" class="headerlink" title="0x01 基础概念"></a>0x01 基础概念</h1><p>命令注入，一般是Linux命令注入，本文也以Linux命令注入为主。</p><h2 id="符号概念"><a href="#符号概念" class="headerlink" title="符号概念"></a>符号概念</h2><h3 id="管道符号"><a href="#管道符号" class="headerlink" title="| (管道符号)"></a>| (管道符号)</h3><blockquote><p>用于将一个命令的输出作为另一个命令的输入</p></blockquote><pre><code class="highlight bash">comand1 | comand2<span class="built_in">cat</span> pax.txt | <span class="built_in">base64</span></code></pre><h3 id="and符"><a href="#and符" class="headerlink" title="&amp; (and符)"></a>&amp; (and符)</h3><blockquote><p>用于将多个命令组合在一起使它们可以同时执行而不需要等待前一个命令的完成</p></blockquote><pre><code class="highlight bash">command1 &amp; command2</code></pre><h3 id="逻辑与"><a href="#逻辑与" class="headerlink" title="&amp;&amp; (逻辑与)"></a>&amp;&amp; (逻辑与)</h3><blockquote><p>用于在命令行中执行多个命令并且只有前一个命令成功执行(返回退出码为0)时才会执行下一个命令</p></blockquote><pre><code class="highlight bash">command1 &amp;&amp; command2 [&amp;&amp; command3 ...]</code></pre><h3 id="逻辑或"><a href="#逻辑或" class="headerlink" title="||(逻辑或)"></a>||(逻辑或)</h3><blockquote><p>用于在命令行中执行多个命令并且只有前一个命令执行失败(返回退出码非零)时才会执行下一个命令</p></blockquote><pre><code class="highlight bash">command1 || command2 [|| command3 ...]</code></pre><h3 id="分号"><a href="#分号" class="headerlink" title=";(分号)"></a>;(分号)</h3><blockquote><p>用于分隔多个命令，使它们按顺序依次执行，无论前一个命令是否成功执行，分号后面的命令都会被执行</p></blockquote><pre><code class="highlight bash">command1 ; command2  [; command3 ...]</code></pre><h3 id="反引号-与"><a href="#反引号-与" class="headerlink" title="&#96;&#96;(反引号)与$()"></a>&#96;&#96;(反引号)与$()</h3><blockquote><p>用于执行命令并将命令的输出结果嵌入到另一个命令或上下文中</p></blockquote><pre><code class="highlight bash">command1 \`command2\`<span class="built_in">ls</span> \`<span class="built_in">echo</span> /etc\`</code></pre><pre><code class="highlight bash">command1 \$(command2)</code></pre><h3 id="和"><a href="#和" class="headerlink" title="()和{}"></a>()和{}</h3><h4 id="括号"><a href="#括号" class="headerlink" title="括号()"></a>括号()</h4><ul><li>命令分组：括号中的命令会作为一个独立的子进程在一个子shell 中执行</li><li>变量赋值：可以将括号中的命令的输出结果赋值给变量</li></ul><pre><code class="highlight bash">(command1; command2)</code></pre><p>将这两个命令放置在括号()中，它们会作为一个独立的子进程在一个子shell中执行</p><h4 id="花括号"><a href="#花括号" class="headerlink" title="花括号{}"></a>花括号{}</h4><p>花括号中可以包含一个或多个值并以逗号分隔，在命令行中花括号会展开成多个值用于生成多个命令或参数的组合</p><p>exp1:</p><pre><code class="highlight bash"><span class="built_in">echo</span> &#123;1..5&#125;</code></pre><p>当执行命令时花括号会展开成多个值，即1 2 3 4 5并作为参数传递给echo命令</p><p>exp2:</p><pre><code class="highlight bash"><span class="built_in">cp</span> file&#123;.txt,.bak&#125;</code></pre><p>当执行命令时花括号会展开成两个值，即<code>file.txt</code>和<code>file.bak</code>并作为参数传递给cp命令。但是这两个文件必须存在，不然会报错。</p><h2 id="文件描述"><a href="#文件描述" class="headerlink" title="文件描述"></a>文件描述</h2><blockquote><p>在Linux中文件描述符(File Descriptor)是用于标识和访问打开文件或输入&#x2F;输出设备的整数值，每个打开的文件或设备都会被分配一个唯一的文件描述符，Linux 中的文件描述符使用非负整数值</p></blockquote><p>了解下面三个：</p><ul><li>标准输入(stdin)：文件描述符为0，通常关联着终端键盘输入</li><li>标准输出(stdout)：文件描述符为1，通常关联着终端屏幕输出</li><li>标准错误(stderr)：文件描述符为2，通常关联着终端屏幕输出</li></ul><p>另外，平时使用的”&lt;”和”&gt;”相当于使用”0&lt;”和”1&gt;”</p><p>常见示例：</p><pre><code class="highlight bash">cmd &gt; file          将输出重定向到filecmd &lt; file          将输入重定向到filecmd &gt;&gt; file         将输出以追加的方式重定向到filecmd &lt;&lt; <span class="string">file         将文本内容作为输入</span><span class="string">cmd &lt;&gt; file</span>         以读写模式把文件file重定向到输入cmd &gt;| file         将命令的标准输出强制覆盖写入到文件中，即使文件已经存在并且具有写保护: &gt; filename        将文件filename截断为0长度，如果文件不存在, 那么就创建一个0长度的文件cmd &gt;&amp;n             将命令的标准输出和标准错误输出都重定向到文件描述符ncmd m&gt;&amp;n            将一个文件描述符m重定向到另一个文件描述符ncmd &gt;&amp;-             关闭标准输出cmd &lt;&amp;n             输入来自文件描述符n* cmd m&lt;&amp;n  m来自文件描述各个ncmd &lt;&amp;-             关闭命令的标准输入文件描述符cmd &lt;&amp;n-            将命令的标准输入重定向自文件描述符n并关闭该文件描述符cmd &gt;&amp;n-            将命令的标准输出和标准错误输出都重定向到文件描述符n并关闭该文件描述符</code></pre><p>本文就不说正则了。</p><h1 id="0x02-注入类型"><a href="#0x02-注入类型" class="headerlink" title="0x02 注入类型"></a>0x02 注入类型</h1><p><em>根据有无回显可以分为常规注入和盲注。</em></p><h2 id="常规注入"><a href="#常规注入" class="headerlink" title="常规注入"></a>常规注入</h2><p>这里不细说，注意一下ping测试、Trace测试等功能或者与IP地址有关的参数。</p><h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p>盲注的结果不会回显，对此我们需要先判断盲注是否存在，再想办法得到盲注的结果。</p><h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><p>可以通过<strong>时间延迟</strong>判断盲注是否存在。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 命令注入 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 入门 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浅析各类型XSS原理</title>
       <link href="/2024/07/24/%E6%B5%85%E6%9E%90%E5%90%84%E7%B1%BB%E5%9E%8BXSS%E5%8E%9F%E7%90%86/"/>
       <url>/2024/07/24/%E6%B5%85%E6%9E%90%E5%90%84%E7%B1%BB%E5%9E%8BXSS%E5%8E%9F%E7%90%86/</url>
