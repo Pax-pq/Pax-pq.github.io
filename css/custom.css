@@ -28,6 +28,7 @@ body {
 }
 
 .buttons .icon {
+    position: relative;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -78,7 +79,7 @@ body {
 }
 
 .buttons .icon:hover .bubble {
-    top: -15px;
+    top: -50px;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -170,8 +171,18 @@ body {
 
 [data-theme="light"] #footer {
     padding-top: 15px;
-    background: linear-gradient(to bottom, rgba(0, 77, 77, 0) 0%, rgba(0, 77, 77, 0.4) 18%, #004d4d 97%);
+    background: linear-gradient(
+        to bottom,
+        rgba(175, 238, 238, 0.3) 0%,   /* 天空蓝色调 */
+        rgba(144, 238, 144, 0.3) 50%,  /* 淡绿色调 */
+        rgba(211, 211, 211, 0.3) 100%  /* 淡灰色调 */
+    );
+    background-blend-mode: multiply; /* 混合模式 */
+    background-image: url('http://pax-pq.github.io/img/smh.png'); /* 添加纹理图片 */
+    background-size: cover; /* 覆盖整个背景 */
+    background-repeat: no-repeat; /* 防止图片重复 */
 }
+
 
 
 
@@ -223,7 +234,14 @@ body {
     line-height: .8rem;
     margin: .38rem 0;
     color: var(--Jay-fontcolor);
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+    transition: text-shadow 0.3s ease;
     /*margin-right: auto*/
+}
+
+#Hsu-foot .footer-item:hover {
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    color: var(--Jay-fontcolor);
 }
 
 /* 徽章 */
