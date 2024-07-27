@@ -171,17 +171,27 @@ body {
 
 [data-theme="light"] #footer {
     padding-top: 15px;
-    background: linear-gradient(
-        to bottom,
-        rgba(175, 238, 238, 0.3) 0%,   /* 天空蓝色调 */
-        rgba(144, 238, 144, 0.3) 50%,  /* 淡绿色调 */
-        rgba(211, 211, 211, 0.3) 100%  /* 淡灰色调 */
-    );
-    background-blend-mode: multiply; /* 混合模式 */
-    background-image: url('http://pax-pq.github.io/img/smh.png'); /* 添加纹理图片 */
-    background-size: cover; /* 覆盖整个背景 */
-    background-repeat: no-repeat; /* 防止图片重复 */
+    background: 
+        /* 背景图片 */
+        url('http://pax-pq.github.io/img/smh.png'), 
+
+        /* 渐变背景 */
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.2) 0%,   /* 从顶部开始，20%透明 */
+            rgba(255, 255, 255, 0.5) 60%,  /* 渐变到60%透明度 */
+            rgba(255, 255, 255, 0.8) 100%  /* 从底部开始，80%透明 */
+        );
+    background-size: cover; /* 确保背景图片覆盖整个区域 */
+    background-position: center; /* 背景图片居中 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
+    background-blend-mode: overlay; /* 背景混合模式 */
+    background-attachment: fixed; /* 固定背景 */
 }
+
+
+
+
 
 
 
