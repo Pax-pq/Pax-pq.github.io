@@ -172,23 +172,17 @@ body {
 [data-theme="light"] #footer {
     padding-top: 15px;
     background: 
-        /* 背景图片 */
-        url('http://pax-pq.github.io/img/smh.png'), 
-
         /* 渐变背景 */
         linear-gradient(
             to bottom,
-            rgba(255, 255, 255, 0) 0%,   /* 从顶部开始，20%透明 */
-            rgba(255, 255, 255, 0) 30%,  
-            rgba(255, 255, 255, 0.2) 60%,
-            rgba(255, 255, 255, 0.4) 100%  /* 从底部开始，80%透明 */
-        );
-    background-size: cover; /* 确保背景图片覆盖整个区域 */
-    background-position: center -150%; /* 背景图片 */
-    background-repeat: no-repeat; /* 防止背景图片重复 */
-    background-blend-mode: overlay; /* 背景混合模式 */
-    background-attachment: fixed; /* 固定背景 */
+            rgba(0, 255, 255, 0) 0%,      /* 从顶部开始，完全透明 */
+            rgba(0, 255, 255, 0.3) 30%,     /* 30%处保持完全透明 */
+            rgba(0, 255, 255, 0.6) 60%,   /* 60%处20%透明 */
+            rgba(0, 255, 255, 1) 100%   /* 底部40%透明 */
+        )
+
 }
+
 
 
 
@@ -242,18 +236,18 @@ body {
 
 #Hsu-foot .footer-item {
     font-size: 1rem;
-    line-height: .8rem;
-    margin: .38rem 0;
+    line-height: 0.8rem;
+    margin: 0.38rem 0;
     color: var(--Jay-fontcolor);
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
     transition: text-shadow 0.3s ease;
-    /*margin-right: auto*/
 }
 
 #Hsu-foot .footer-item:hover {
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
     color: var(--Jay-fontcolor);
 }
+
 
 /* 徽章 */
 
