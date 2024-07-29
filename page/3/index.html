@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>山 ·	水</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最困难处最进步">
+<meta property="og:type" content="website">
+<meta property="og:title" content="山 ·	水">
+<meta property="og:url" content="http://pax-pq.github.io/page/3/index.html">
+<meta property="og:site_name" content="山 ·	水">
+<meta property="og:description" content="最困难处最进步">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pax-pq.github.io/img/smh.png">
+<meta property="article:author" content="Pax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pax-pq.github.io/img/smh.png"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://pax-pq.github.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.14.0-b3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Pax","link":"链接: ","source":"来源: 山 ·\t水","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '山 ·	水',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-29 20:44:59'
+}</script><link rel="stylesheet" href="APlayer.min.css"></head><body><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async=""></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async=""></script><link rel="stylesheet" href="/css/rain-effect.css"><script src="/js/rain-effect.js"></script><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/cursor.css"><link rel="stylesheet" href="/css/loadin.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"><link rel="stylesheet" href="/css/dhl.css"><link rel="stylesheet" href="/css/dark_read.css"><link rel="stylesheet" href="/css/rain-effect.css"><link rel="stylesheet" href="/css/font/font.css"><link rel="stylesheet" href="/css/menu.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.1.1"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="scarecrow"><div class="scarecrow__hat"><div class="scarecrow__ribbon"></div></div><div class="scarecrow__head"><div class="scarecrow__eye"></div><div class="scarecrow__eye"></div><div class="scarecrow__mouth"></div><div class="scarecrow__pipe"></div></div><div class="scarecrow__body"><div class="scarecrow__glove scarecrow__glove--l"></div><div class="scarecrow__sleeve scarecrow__sleeve--l"></div><div class="scarecrow__bow"></div><div class="scarecrow__shirt"></div><div class="scarecrow__coat"></div><div class="scarecrow__waistcoat"></div><div class="scarecrow__sleeve scarecrow__sleeve--r"></div><div class="scarecrow__glove scarecrow__glove--r"></div><div class="scarecrow__coattails"></div><div class="scarecrow__pants"></div></div><div class="scarecrow__arms"></div><div class="scarecrow__leg">  </div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', () => { preloader.initLoading() }, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', () => { preloader.endLoading() }, 'preloader_end')
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/smh.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-solid fa-bars"></i><span> 收录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/AWDP/"><i class="fa-fw fas fa-book"></i><span> AWDP</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 书院</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-history"></i><span> 溯流</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-edit"></i><span> 日学</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2024/"><i class="fa-fw fas fa-calendar"></i><span> 2024</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-vihara"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-user-friends"></i><span> 友座</span></a></div><div class="menus_item"><a class="site-page" href="/poem/"><i class="fa-fw far fa-edit"></i><span> 诗壁</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-free-code-camp"></i><span> 清欢</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 光影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 明镜</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/page_img29.png')"><nav id="nav"><span id="blog-info"><a href="/" title="山 ·	水"><span class="site-name">山 ·	水</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-solid fa-bars"></i><span> 收录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/AWDP/"><i class="fa-fw fas fa-book"></i><span> AWDP</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 书院</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-history"></i><span> 溯流</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-edit"></i><span> 日学</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2024/"><i class="fa-fw fas fa-calendar"></i><span> 2024</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-vihara"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-user-friends"></i><span> 友座</span></a></div><div class="menus_item"><a class="site-page" href="/poem/"><i class="fa-fw far fa-edit"></i><span> 诗壁</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-free-code-camp"></i><span> 清欢</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 光影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 明镜</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">山 ·	水</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/03/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2Docker%E5%8F%8A%E6%90%AD%E5%BB%BA%E5%90%84%E7%B1%BB%E7%8E%AF%E5%A2%83/" title="云服务器部署Docker及搭建各类环境">云服务器部署Docker及搭建各类环境</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-03T11:18:47.000Z" title="发表于 2024-05-03 19:18:47">2024-05-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%8E%AF%E5%A2%83/">环境</a></span></div><div class="content">0x00 Why为什么要搞服务器，为什么要学Docker，为什么要自己搭建靶场？这些都是基本功，逃避是没有用的。
+0x01 买服务器我买的是阿里云的服务器，贴个官网链接：阿里云-计算，为了无法计算的价值 (aliyun.com)
+0x02 部署Docker推荐教程：最详细的ubuntu 安装 docker教程 - 知乎 (zhihu.com)
+一. 卸载Ubuntu自带的Docker以下操作最好用管理员
+
+注：docker的旧版本不一定被称为docker，http://docker.io 或 docker-engine也有可能，所以我们卸载的命令为：
+
+$ apt-get remove docker docker-engine docker.io containerd runc
+
+如果报错也正常，有些Ubuntu没有Docker，直接下一步。
+二. 安装Docker及相关配置· 更新软件包和已安装的软件的版本：
+apt update
+apt upgrade
+
+· 安装Docker依赖：
+
+Docker在Ubuntu上依赖一些软件包。执行以下命令来安装这些依赖:
+
+apt-get ins ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/Linux-%E5%85%A5%E9%97%A8/" title="Linux 入门">Linux 入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:04:13.000Z" title="发表于 2024-03-18 23:04:13">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Linux总觉得学的不扎实，认真学一次。
+mongodb+srv://2472373483:@pax-blog.fu8mfyq.mongodb.net/?retryWrites=true&amp;w=majority&amp;appName=pax-blog
+基础概述：
+
+Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。
+
+系统启动进程：
+
+内核的引导。
+运行 init。
+系统初始化。
+建立终端 。
+用户登录系统。
+
+目录结构：
+由根目录出发的树状目录结构。
+查阅：https://www.runoob.com/linux/linux-system-contents.html
+
+目录与文件管理路径
+
+绝对路径：路径的写法，由根目录 / 写起，例如： /usr/share/doc 这个目录。
+
+相对路径：路径的写法，不是由 / 写起，例如由 /usr/sha ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/PHP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" title="PHP 反序列化入门">PHP 反序列化入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:03:52.000Z" title="发表于 2024-03-18 23:03:52">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">反序列化</a></span></div><div class="content">PHP反序列化入门基础概念序列化:将变量转换为可保存或传输的字符串的过程；
+反序列化:在适当的时候把这个字符串再转化成原来的变量使用。
+优点:这两个过程结合起来，可以轻松地存储和传输数据，使程序更具维护性。
+
+举个栗子：将木桌拆分成木块，是为序列化；将木块重组成木桌，是为反序列化。
+PHP序列化的字母标识：
+a - array
+b - boolean
+d - double
+i - integer
+o - common object
+r - reference
+s - string
+C - custom object
+O - class
+N - null
+R - pointer reference
+U - unicode string
+N - NULL
+
+解释：
+
+a - 数组（array）： 通常指存储相同类型元素的数据结构，这些元素在内存中是连续存储的。数组具有索引，可以有效地访问元素。
+b - 布尔（boolean）： 布尔是一种数据类型，只能取两个值，通常为true（真）或false（假）。它通常用于条件表达式。
+d - 双精度浮点数（double）： Double是一种用于表示 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%85%A5%E9%97%A8/" title="文件上传入门">文件上传入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:03:17.000Z" title="发表于 2024-03-18 23:03:17">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a></span></div><div class="content">文件上传入门推荐文章：超详细文件上传漏洞总结分析-腾讯云开发者社区-腾讯云 (tencent.com)
+原理我只能浅显地说：在要上传的文件里构造语句并按照特定的方式进行上传，以达到攻击者的目的。
+限制措施及绕过前端检测原理前端检测主要是通过JavaScript语句。
+附：如果检测失败则不会发出请求，也就是不会发包。
+判断
+前端验证通过以后，表单成功提交后会通过浏览器发出─条网络请求，但是如果前端验证不成功，则不会发出这项网络请求;可以在浏览器的网络元素中查看是否发出了网络请求。
+
+绕过方法一：改变前端F12修改source的JavaScript代码，或者直接禁用JavaScript
+方法二：骗过前端文件名是name.png，在bp抓包后改成name.php
+须知：只有前端通过后才能发包，bp这时才能抓包
+MIME绕过基础概念
+MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。
+
+常见的MIME类型
+text/ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/PHP-message-board/" title="PHP message board">PHP message board</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:02:56.000Z" title="发表于 2024-03-18 23:02:56">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="content">PHP留言板一.数据库启动(bd.php)代码&lt;?php
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'ROIS_PHP';
+
+$conn = new mysqli($host,$username,$password,$database);
+if($conn-&gt;connect_error) {
+    die('Connection failed：'. $conn-&gt;connect_error);
+}
+?&gt;
+
+学习四个配置没啥说的
+创建$conn对象实现MySQL数据库操作：new mysqli()
+connect_error是$conn的一个属性
+二.注册账户(register.php)代码&lt;?php
+session_start();
+require_once 'db.php';
+
+if($_SERVER['REQ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/XSS%E5%85%A5%E9%97%A8/" title="XSS入门">XSS入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:02:40.000Z" title="发表于 2024-03-18 23:02:40">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/XSS/">XSS</a></span></div><div class="content">XSS入门学习推荐文章：对于XSS跨站脚本攻击的学习 - 先知社区 (aliyun.com)
+原理文章：https://xz.aliyun.com/t/12890?time__1311=mqmhq%2BxjhiGKDsD7GY0%3DbDtRhbpWiYeD&amp;alichlgref=https%3A%2F%2Fwww.google.com.hk%2F
+概述概念跨站脚本攻击（Cross-Site Scripting，XSS）是一种常见的Web安全漏洞，攻击者通过在受害者的浏览器中注入恶意脚本来执行恶意行为。这种攻击通常利用Web应用程序没有对用户输入的数据进行足够的过滤和验证。
+
+攻击原理XSS跨站脚本攻击的原理是利用Web应用程序对用户输入数据的不足过滤和验证，将恶意脚本注入到受害者的浏览器中，使其在浏览器中执行。
+攻击者通常会将恶意脚本嵌入到Web页面中的某个位置，比如输入框、评论框、搜索框等等，然后诱使用户访问这个被注入了恶意脚本的页面。当用户访问页面时，恶意脚本就会在用户的浏览器中被执行，从而执行攻击者预先设定好的恶意行为，比如窃取用户的Cookie信息、伪造用户的网站行为 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/PHP%E5%85%A5%E9%97%A8/" title="PHP入门">PHP入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:02:32.000Z" title="发表于 2024-03-18 23:02:32">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a></span></div><div class="content">PHP入门基础教程基础教程以后再补，先上高级教程。
+超级全局变量高级教程基础高维数组给代码，慢慢悟
+&lt;?php
+
+$men = array(
+    array('abc','bcd'),
+    array('bnc','acc')
+);
+print_r($men);
+
+$women = array(
+    'pq'=&gt;array(
+        'pp'=&gt;array('abc','bcd')
+    ),
+    'xq'=&gt;array(
+        'pp'=&gt;array('abc','bcd')
+    )
+);
+print_r($women);
+
+date函数例子：date(‘?,?,?’)，?是规定的字符。其间的逗号是连接符，可以用其他的符号代替。
+文件包含要求：主文件的后缀必须是.php，也就是主 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8/" title="SQL注入入门">SQL注入入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:02:11.000Z" title="发表于 2024-03-18 23:02:11">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></span></div><div class="content">SQL注入入门基本知识判断字符型或者数字型注入字符型：
+/?id= 1’ and ‘1’=‘1 正确
+/?id= 1’ and ‘1’=‘2’ 语义错误（非语法错误）
+数字型：
+/?id= 1 and 1=1 正确
+/?id= 1 and 1= 2 语义错误（非语法错误）
+记忆核心数据库：information_schema
+其中的表：schema, tables, columns
+其中的列：
+schema：schemata
+tables：table_schema
+columns：table_name
+报错注入函数
+*updatexml()函数的使用：更新xml文档的函数，返回替换的XML片段*
+*语法：updatexml（xml_documat，XPath_string，new_value）*
+参数：1xml_documat：是STRING格式，为XML文档对象的名称，这一项可以输入一个十六进制的字符，比如0x26（&amp;）。
+2XPath_string：是XP ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/MYSQL%E5%85%A5%E9%97%A8/" title="MYSQL入门">MYSQL入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:01:50.000Z" title="发表于 2024-03-18 23:01:50">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a></span></div><div class="content">MySQL入门要学习，先开机：mysql -u root -r
+你还得学会选择数据库：use database_name;
+基础每一行(Record)，称为记录
+每一列(Column)，称为字段
+
+字段定义了数据类型（整型、浮点型、字符串、日期等），以及是否允许为NULL。注意NULL表示字段数据不存在。一个整型字段如果为NULL不表示它的值为0，同样的，一个字符串型字段为NULL也不表示它的值为空串''。
+
+正常，概念不同。另外，字段尽量不要使用NULL，优势：简化查询条件，加快查询速度，也利于应用程序读取数据后无需判断是否为NULL。
+主键是记录的唯一标识。主键是必要的。主键有大概有以下几种：
+
+
+自增整数主键
+全局唯一GUID类型：使用一种全局唯一的字符串作为主键，类似8f55d96b-8acc-4636-8cb8-76bf8abc2f57。GUID算法通过网卡MAC地址、时间戳和随机数保证任意计算机在任意时间生成的字符串都是不同的，大部分编程语言都内置了GUID算法，可以自己预算出主键。
+
+
+联合主键允许多个列联合为主键，某一列可以有相同字段，只要所有字段不全部 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/18/JavaScipt%E5%85%A5%E9%97%A8/" title="JavaScipt入门">JavaScipt入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-18T15:01:06.000Z" title="发表于 2024-03-18 23:01:06">2024-03-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a></span></div><div class="content">JavaScriptJavaScript简介
+JavaScript代码需要在&lt;script&gt;标签中写入
+JavaScript代码可以在&lt;head&gt;，&lt;body&gt;以及外部文件中写入
+
+JavaScript基础四用法：
+使用 window.alert() 弹出警告框。
+使用 document.write() 方法将内容写到 HTML 文档中。
+使用 innerHTML 写入到 HTML 元素。
+使用 console.log() 写入到浏览器的控制台。
+
+1.window.alert()
+&lt;script&gt;
+	window.alert(5 + 6);
+&lt;/script&gt;
+
+2.document.write
+&lt;script&gt;
+    document.write(HELLO);
+&lt;/script&gt;
+
+3.innerHTML
+&lt;script&gt;
+    document.getElementById("pq").innerHTML = 'is a handsome!' ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/smh.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Pax</div><div class="author-info__description">最困难处最进步</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pax-pq"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer_button"><ul class="buttons"><li class="icon Email"><span class="bubble">Email</span><a href="mailto:charles_hsu@qq.com"><i class="fa-solid fa-envelope"></i></a></li><li class="icon QQ"><span class="bubble">QQ</span><a href="tencent://Message/?Uin=1191393280&amp;websiteName=q-zone.qq.com&amp;Menu=yes"><i class="fa-brands fa-qq"></i></a></li><li class="icon top"><span class="bubble">top</span><a href="#"><i class="fa-solid fa-angle-up"></i></a></li><li class="icon github"><span class="bubble">Github</span><a target="_blank" rel="noopener" href="https://github.com/charles-hsuz"><i class="fab fa-github"></i></a></li><li class="icon CSDN"><span class="bubble">CSDN</span><a target="_blank" rel="noopener" href="https://blog.csdn.net/CharlesHsuu?type=blog"><i class="fa-solid fa-copyright"></i></a></li></ul></div><div id="Hsu-foot"><div class="footer-group"><h3 class="footer-title">直达</h3><div class="footer-links"><a class="footer-item" href="/">我的主页</a><a class="footer-item" href="/archives">文章归档</a><a class="footer-item" href="/categories">文章分类</a><a class="footer-item" href="/archives">文章归档</a></div></div><div class="footer-group"><h3 class="footer-title">友链·一</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="http://blog.potatowo.top/">PotatOwO ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://we11s.github.io/">Wells ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://cina666.github.io/">Sherlock ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://xzb666-hub.github.io/">Satoru ✨</a></div></div><div class="footer-group"><h3 class="footer-title">友链·二</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://s1nec-1o.github.io/">s1nec-1o ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://starcraft2024.github.io">starcraft ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://holybeagle.github.io/">Quuiieet✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://mooseqaq.github.io/">MooSe ✨</a></div></div><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/2024">2024</a><a class="footer-item" href="/poem">诗集</a><a class="footer-item" href="/music">音乐</a><a class="footer-item" href="/about">自我</a></div></div><div class="footer-group"><h3 class="footer-title">协议</h3><div class="footer-links"><a class="footer-item" href="/privacy">隐私协议</a><a class="footer-item" href="/cookies">Cookie</a><a class="footer-item" href="/cc">版权协议</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="/js/tw_cn.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.0.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, ))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+btf.addGlobalFn('pjaxSend', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["山生雄脊，扬清镇浊。</br>水非常形，无争共润。"])
+  } else {
+    document.getElementById("subtitle").innerHTML = "山生雄脊，扬清镇浊。</br>水非常形，无争共润。"
+  }
+}
+typedJSFn.run(subtitleType)</script><script>(() => {
+  const runMermaid = (ele) => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from(ele).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+    
+    codeMermaidEle.forEach(ele => {
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.innerHTML = `<pre class="mermaid-src" hidden>${ele.textContent}</pre>`
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (false) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+  
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="" src="https://cdn.jsdelivr.net/gh/CodeByZach/pace/pace.min.js"></script><script src="/js/rain-effect.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const loadMeting = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'loadMeting')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.14.0-b3"></script></div></div></body></html>

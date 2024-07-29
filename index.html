@@ -190,7 +190,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-07-29 20:41:51'
+  postUpdate: '2024-07-29 20:44:59'
 }</script><link rel="stylesheet" href="APlayer.min.css"></head><body><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async=""></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async=""></script><link rel="stylesheet" href="/css/rain-effect.css"><script src="/js/rain-effect.js"></script><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/cursor.css"><link rel="stylesheet" href="/css/loadin.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"><link rel="stylesheet" href="/css/dhl.css"><link rel="stylesheet" href="/css/dark_read.css"><link rel="stylesheet" href="/css/rain-effect.css"><link rel="stylesheet" href="/css/font/font.css"><link rel="stylesheet" href="/css/menu.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.1.1"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="scarecrow"><div class="scarecrow__hat"><div class="scarecrow__ribbon"></div></div><div class="scarecrow__head"><div class="scarecrow__eye"></div><div class="scarecrow__eye"></div><div class="scarecrow__mouth"></div><div class="scarecrow__pipe"></div></div><div class="scarecrow__body"><div class="scarecrow__glove scarecrow__glove--l"></div><div class="scarecrow__sleeve scarecrow__sleeve--l"></div><div class="scarecrow__bow"></div><div class="scarecrow__shirt"></div><div class="scarecrow__coat"></div><div class="scarecrow__waistcoat"></div><div class="scarecrow__sleeve scarecrow__sleeve--r"></div><div class="scarecrow__glove scarecrow__glove--r"></div><div class="scarecrow__coattails"></div><div class="scarecrow__pants"></div></div><div class="scarecrow__arms"></div><div class="scarecrow__leg">  </div></div></div><script>(()=>{
   const $loadingBox = document.getElementById('loading-box')
   const $body = document.body
@@ -483,125 +483,7 @@ CVE-2023-1773
 0x01 CRLF 与 CRLF InjectionCRLF
 CRLF 指的是回车符（CR，ASCII 13，\r，%0d）和换行符（LF，ASCII 10，\n，%0a）的简称（\r\n）。HTTP报文以状态行开始，跟在后面的是HTTP首部（HTTP Header），首部由多个首部字段构成，每行一个首部字段，HTTP首部后是一个空行，然后是报文主体（HTTP Body）。状态行和首部中的每行以CRLF结束，首部与主体之间由一空行分隔。或者理解为首部中每个首部字段以一个CRLF分隔，首部和主体由两个CRLF分隔。
 
-CRLF InjectionHTTP报文的结构以CRLF划分，通过添加CRLF可以制造CRLF Injection，原理如下： ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/27/%E5%AF%B9%E4%BA%8ESQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="对于SQL注入原理的学习">对于SQL注入原理的学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-27T12:20:21.000Z" title="发表于 2024-06-27 20:20:21">2024-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></span></div><div class="content">0x00 前言
-写下本文的直接原因是拜读了庆尘大佬的文章（对SQL注入漏洞原理的思考 (qq.com)，这也是本文的参考文章。推荐大家读读大佬的文章，感受大佬浅显易懂的文笔下的深邃思想。
-0x01 信任输入信任问题安全问题的本质就是信任问题
-例如对一个网站的开发来说
-
-信任普通用户的输入——前台漏洞
-信任管理员用户的输入——后台漏洞
-信任离线升级/在线升级/自动化升级/升级包——供应链攻击
-不信任任何输入——信任代码逻辑——逻辑漏洞
-
-有时候信任是可以被提升的——越权。
-防御核心对应的安全方案有很多，但都可以简化为
-
-输入——检测是否存在风险——输出
-
-黑客往往是从输入入手。所以我们重点关心的问题也就是如何处理信任与输入的关系
-0x02 控制流和数据流
-可以将程序员的代码分割为两个部分
-
-一部分是控制代码走向的控制流代码
-另一部分是用来被展示，被存储，被流转的数据流(包括输入的数据和程序员设定的数据)
-
-
-被，是被动，说明了数据流的数据不应该具有主动性。说实在一点，外来的数据不能影响内部的控制程序。一旦数据流可以入侵到控制流，那么漏洞也随之而生。
-0x03 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/22/%E5%86%8D%E8%A7%81%EF%BC%8C%E9%83%8A%E9%87%8E%E5%B1%B1%EF%BC%81/" title="再见，郊野山！">再见，郊野山！</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-22T08:26:58.000Z" title="发表于 2024-06-22 16:26:58">2024-06-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%BC%AB%E6%BC%AB%E9%95%BF%E8%B7%AF/">漫漫长路</a></span></div><div class="content">再见，郊野山！决定​	我想与你告别，于是决定去看望你。
-​	我也怀念你，便在一路上构思着文章。写文章与看望你，慢慢地互成因果。
-​	我知道，你已然住进了我的文章。
-​	
-去途​	这是最后一次旅途了吗，我不确定。
-​	在绝望坡下，思考看望你的意义。任凭思绪飘乱，我渐渐明白了：因为想你，所以去了。
-​	其实人究其一生，都在与内心作答。顺着内心行走，或许就没有多少愧疚的事了。
-​	
-​	顺着科技园的道路直下，四周被绿意吞噬，只剩几座庞然笔直的建筑默立。
-​	建筑并不突兀，而是与绿意交融。有些建筑或许荒废了，藤蔓肆满窗台，似乎要遮盖整个楼层。很难想象有人在这里上班。注视这狂野的绿意，思绪也蔓延到千万年之后，内心浮动着一丝丝悲哀。
-​	有些建筑颇有古意。湖上有一座木廊桥，桥内有一座庙，庙里有一坐人。焚香袅袅，游绕周身，想必他是安宁的。
-
-​	可我却难以安宁······	
-​	
-上山​	到了入口。又好像回到了第一次相逢。当时亦是盛夏，却要晚一点，凉快一点。
-
-​	那时我还没见到你。之后数次我都是独行，你便一直陪伴着我。
-​	第二次之前，怕蛇而不敢来。但我到底克服了恐惧，也因此与你相遇。
-​	
-​	 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/%E5%85%A5%E9%97%A8%E5%AE%89%E5%85%A8%E5%BF%85%E7%9F%A5%E7%9A%84%E5%9F%BA%E7%A1%80%E6%9C%AF%E8%AF%AD/" title="入门安全必知的基础术语">入门安全必知的基础术语</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T13:08:02.000Z" title="发表于 2024-06-21 21:08:02">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">入门web安全必知的术语–基础篇前言诸位安好，我是pax。这是初识安全的第二篇文章，主要介绍一些信息安全新人入门必知的基础术语，方便大家跟上大佬的节奏（pax当年就是听不懂这些术语，好痛苦.jpg）。
-正文以下引用均来自Wiki百科和网络。另外，本文介绍略显粗浅，万不能当做学习，仅供了解。
-概念篇信息安全与网络安全
-信息安全，意为保护信息及信息系统免受未经授权的进入、使用、披露、破坏、修改、检视、记录及销毁。政府、军队、公司、金融机构、医院、私人企业积累大量与雇员、顾客、产品、研究、金融数据有关的机密信息，而绝大部分的信息现在被收集、产生、存储在电子计算机内，并通过网络传送到别的计算机。如果企业的顾客、财政状况、新产品线的机密信息落入竞争对手的掌握，这种安全性的丧失可能会导致经济上的损失、法律诉讼甚至该企业的破产。保护机密的信息是商业上的需求，而在许多情况中也是道德和法律上的需求。
-
-我们专业的方向叫哪个都可以。特别是web安全方向与网络密不可分，不信你可以看看web的中文意思哦。
-CTF
-夺旗（英语：Capture the flag，简称“CTF”）在计算机安全中是一种活动，当中会将 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/CSRF%E5%85%A5%E9%97%A8/" title="CSRF入门">CSRF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T13:05:52.000Z" title="发表于 2024-06-21 21:05:52">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CSRF/">CSRF</a></span></div><div class="content">CSRF入门0x01 基础学习概述Cross-site request forgery 跨站点请求伪造，是一种 Web 安全漏洞，它允许攻击者诱使用户执行他们不打算执行的操作。它允许攻击者部分规避同源策略，该策略旨在防止不同网站相互干扰。
-攻击流程Step1:使用者成功登入A 银行网站的帐户，并且代表使用者身份的cookie 在本地保存下来，所以下次再来A 银行网站时，不用重新登入
-Step2:由于使用者没有登出A 银行网站的帐户，在浏览B 恶意网站时，B 网站有个被设为透明的图片，因为是透明的，所以使用者在画面上看不到，然而该图片包含一段恶意程式码，程式码如下。
-// 備註：CSRF 攻擊手法有很多，此程式碼例子是一種最基本的攻擊方法之一
-&lt;img
-  src="http://a-bank.com/transfer.do?acct=BadGuy&amp;amount=100000 HTTP/1.1"
-  width="0"
-  height="0"
-/&gt;
-
-Step3:使用者虽然将看不到此图片， 但是，浏览器仍会 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/17/%E5%AE%89%E5%85%A8%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E7%89%B9%E8%B4%A8/" title="安全需要什么特质">安全需要什么特质</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-17T08:45:02.000Z" title="发表于 2024-06-17 16:45:02">2024-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​	前言
-​	诸位安好，我是pax。从本文章开始，我们进入了一个新的系列：初识安全。本系列旨在帮助安全小白们轻松高效地入门网络安全。那么现在，开始吧！
-​	学习安全，需要什么样的精神和特质呢？这是很难说的，但又是极为重要的。这是我提问的，却是需要你们作答的。我且抛砖引玉：
-​	兴趣终将蜕变为热爱
-​	往来千古，群星闪烁。成大事者，多始于兴趣，终于热爱。
-​	但是，除却极少数一眼安全的人，大多数童鞋或许和pax一样：初次接触安全，谈不上热爱，只有点点兴趣。
-​	但这足够了，点点兴趣亦可化作两翼热爱，长风破浪，直向南溟。
-​	或许有些聪明的童鞋想到了，这个过程是相当理想的。如何使兴趣汇成热爱，是安全一道避无可避的问题。
-对此，我粗浅地回答：亿点点的坚持和一瞬的花火！
-​	
-​	亿点点的坚持
-​	安全从来就不是简单的专业，而是一生的学习。
-·	在有限的四年，按部就班的学习可不能喂饱安全。它抢走你珍惜的闲暇、充裕的睡眠、偶尔的假期。童鞋，你会因此愤怒吗？可这就是安全。安全职位的缺口很大，但没有一个会留给半吊子。
-​	我常常回想，我或许不是一位大学生，而是一位轻松些许的高中生。可是回望这一年的学 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/16/%E4%B8%80%E4%BD%8D%E9%AA%9A%E5%B9%B4%E7%9A%84%E5%AE%89%E5%85%A8%E4%B9%8B%E8%B7%AF/" title="一位骚年的安全之路">一位骚年的安全之路</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-16T14:16:22.000Z" title="发表于 2024-06-16 22:16:22">2024-06-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​		诸位安好，我是pax。这是安全小窝的第一篇文章，亦是我人生的第一篇公众号。实不相瞒，我思考了好一会，这么一篇极具意义的文章该写点啥嘞？Web知识，安全工具，还是专业普及？我突然拍腿！为什么不写写自己的学习和心路历程呢？ 开干！等等，我好像，似乎，应该，还不会写文章······
-​	
-​		23年的暑假，高考的肃穆被完结的钟声摧碎，盛夏的蝉鸣流淌在云端间隙。一个超常发挥的骚年选择了信息安全专业，命运的齿轮无息间上了润滑油。对于这个全然陌生的专业，骚年又能知道些什么呢？只能把抖音的只言片语堵满即将退化的大脑：
-​		“信息安全是个什么样的专业呢？”
-​		“好像是黑客！等等，什么，我竟然会成为黑客！”
-​		“好像，有点酷嘞！”
-​		“嘿嘿，薪资还不错，就决定是你了”
-​	
-​		胡思乱想，思绪同未来碰撞，隐约闪烁着一位少年的懵懂与期待：你好，未来！
-​		有时候你不得不问候命运，不管是亲切的还是悲切的。信息安全属于计算机大类，而我已经好久没碰过电脑了，就连洛克王国的宠物蛋都安详地瘫了数年，合理估计永远都醒不来了。
-​		有时候你又不得不感谢命运。我遇到了一位极好极好的引路人，我称 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%85%A5%E9%97%A8/" title="文件包含入门">文件包含入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T01:30:45.000Z" title="发表于 2024-05-26 09:30:45">2024-05-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a></span></div><div class="content">文件包含入门参考文章：PHP漏洞全解————10、PHP文件包含漏洞_action=%252e%252e%255c%252e%252e%255c%252e%252e%25-CSDN博客
-0x01 基础知识相关函数必看：https://www.php.net/manual/zh/function.include.php
-
-include， require
-
-基础就不多说了，require报错会终止程序，但是include会继续执行下面代码。
-
-include_once &amp; require_once
-
-包含过的就不会继续包含
-漏洞成因
-具有相关的危险函数
-包含变量可控
-
-0x02 漏洞类型LFI(Local File Inclusion)
-本地文件包含漏洞，顾名思义，指的是能打开并包含本地文件的漏洞。大部分情况下遇到的文件包含漏洞都是LFI。
-
-RFI(Remote File Inclusion)
-远程文件包含漏洞。是指能够包含远程服务器上的文件并执行。由于远程服务器的文件是我们可控的，因此漏洞一旦存在危害性会很大。
-
-RFI对php.ini里的配置有些要求：
-
-allo ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/26/SSRF%E5%85%A5%E9%97%A8/" title="SSRF入门">SSRF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-26T01:27:10.000Z" title="发表于 2024-05-26 09:27:10">2024-05-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/SSRF/">SSRF</a></span></div><div class="content">SSRF入门0x00 概述SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。
-一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）
-
-0x01 原理SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。
-简单来说：所有目标服务器会从自身发起请求的功能点，且我们可以控制地址的参数，都可能造成SSRF漏洞
-
-0x02 SSRF危害1.内外网的端口和服务扫描
-2.攻击运行在内网或本地的应用程序
-3.对内网web应用进行指纹识别，识别企业内部的资产信息
-4.攻击内网的web应用，主要是使用GET参数就可以实现的攻击（比如Struts2漏洞利用，SQL注入等）
-5.利用file协议读取本地敏感数据文件等
-
-0x03 造成SSRF的函数SSRF涉及到的危险函数主要是网络访问，支持伪协议的网络读取。
-file_get_contents()PHP: file_get_contents ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/smh.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Pax</div><div class="author-info__description">最困难处最进步</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pax-pq"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer_button"><ul class="buttons"><li class="icon Email"><span class="bubble">Email</span><a href="mailto:charles_hsu@qq.com"><i class="fa-solid fa-envelope"></i></a></li><li class="icon QQ"><span class="bubble">QQ</span><a href="tencent://Message/?Uin=1191393280&amp;websiteName=q-zone.qq.com&amp;Menu=yes"><i class="fa-brands fa-qq"></i></a></li><li class="icon top"><span class="bubble">top</span><a href="#"><i class="fa-solid fa-angle-up"></i></a></li><li class="icon github"><span class="bubble">Github</span><a target="_blank" rel="noopener" href="https://github.com/charles-hsuz"><i class="fab fa-github"></i></a></li><li class="icon CSDN"><span class="bubble">CSDN</span><a target="_blank" rel="noopener" href="https://blog.csdn.net/CharlesHsuu?type=blog"><i class="fa-solid fa-copyright"></i></a></li></ul></div><div id="Hsu-foot"><div class="footer-group"><h3 class="footer-title">直达</h3><div class="footer-links"><a class="footer-item" href="/">我的主页</a><a class="footer-item" href="/archives">文章归档</a><a class="footer-item" href="/categories">文章分类</a><a class="footer-item" href="/archives">文章归档</a></div></div><div class="footer-group"><h3 class="footer-title">友链·一</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="http://blog.potatowo.top/">PotatOwO ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://we11s.github.io/">Wells ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://cina666.github.io/">Sherlock ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://xzb666-hub.github.io/">Satoru ✨</a></div></div><div class="footer-group"><h3 class="footer-title">友链·二</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://s1nec-1o.github.io/">s1nec-1o ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://starcraft2024.github.io">starcraft ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://holybeagle.github.io/">Quuiieet✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://mooseqaq.github.io/">MooSe ✨</a></div></div><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/2024">2024</a><a class="footer-item" href="/poem">诗集</a><a class="footer-item" href="/music">音乐</a><a class="footer-item" href="/about">自我</a></div></div><div class="footer-group"><h3 class="footer-title">协议</h3><div class="footer-links"><a class="footer-item" href="/privacy">隐私协议</a><a class="footer-item" href="/cookies">Cookie</a><a class="footer-item" href="/cc">版权协议</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="/js/tw_cn.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.0.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+CRLF InjectionHTTP报文的结构以CRLF划分，通过添加CRLF可以制造CRLF Injection，原理如下： ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">…</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/smh.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Pax</div><div class="author-info__description">最困难处最进步</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">22</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pax-pq"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer_button"><ul class="buttons"><li class="icon Email"><span class="bubble">Email</span><a href="mailto:charles_hsu@qq.com"><i class="fa-solid fa-envelope"></i></a></li><li class="icon QQ"><span class="bubble">QQ</span><a href="tencent://Message/?Uin=1191393280&amp;websiteName=q-zone.qq.com&amp;Menu=yes"><i class="fa-brands fa-qq"></i></a></li><li class="icon top"><span class="bubble">top</span><a href="#"><i class="fa-solid fa-angle-up"></i></a></li><li class="icon github"><span class="bubble">Github</span><a target="_blank" rel="noopener" href="https://github.com/charles-hsuz"><i class="fab fa-github"></i></a></li><li class="icon CSDN"><span class="bubble">CSDN</span><a target="_blank" rel="noopener" href="https://blog.csdn.net/CharlesHsuu?type=blog"><i class="fa-solid fa-copyright"></i></a></li></ul></div><div id="Hsu-foot"><div class="footer-group"><h3 class="footer-title">直达</h3><div class="footer-links"><a class="footer-item" href="/">我的主页</a><a class="footer-item" href="/archives">文章归档</a><a class="footer-item" href="/categories">文章分类</a><a class="footer-item" href="/archives">文章归档</a></div></div><div class="footer-group"><h3 class="footer-title">友链·一</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="http://blog.potatowo.top/">PotatOwO ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://we11s.github.io/">Wells ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://cina666.github.io/">Sherlock ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://xzb666-hub.github.io/">Satoru ✨</a></div></div><div class="footer-group"><h3 class="footer-title">友链·二</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://s1nec-1o.github.io/">s1nec-1o ✨</a><a class="footer-item" target="_blank" rel="noopener" href="http://starcraft2024.github.io">starcraft ✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://holybeagle.github.io/">Quuiieet✨</a><a class="footer-item" target="_blank" rel="noopener" href="https://mooseqaq.github.io/">MooSe ✨</a></div></div><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/2024">2024</a><a class="footer-item" href="/poem">诗集</a><a class="footer-item" href="/music">音乐</a><a class="footer-item" href="/about">自我</a></div></div><div class="footer-group"><h3 class="footer-title">协议</h3><div class="footer-links"><a class="footer-item" href="/privacy">隐私协议</a><a class="footer-item" href="/cookies">Cookie</a><a class="footer-item" href="/cc">版权协议</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.14.0-b3"></script><script src="/js/main.js?v=4.14.0-b3"></script><script src="/js/tw_cn.js?v=4.14.0-b3"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.35/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.0.5/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
   init: (str) => {
     window.typed = new Typed('#subtitle', Object.assign({
       strings: str,
