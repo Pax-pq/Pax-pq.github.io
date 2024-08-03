@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>一道ctfhub题引起的思考</title>
+      <link href="/2024/08/03/%E4%B8%80%E9%81%93ctfhub%E9%A2%98%E5%BC%95%E8%B5%B7%E7%9A%84%E6%80%9D%E8%80%83/"/>
+      <url>/2024/08/03/%E4%B8%80%E9%81%93ctfhub%E9%A2%98%E5%BC%95%E8%B5%B7%E7%9A%84%E6%80%9D%E8%80%83/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>大胆假设，小心求证。本篇文章会细致分析每个环节的逻辑，但是<code>CTF</code>有时不太需要逻辑，反而需要些灵感。所以，没有思路时，不妨胡乱比划一下。赛后，再好好分析灵感的逻辑。</p><h1 id="0x01-题目"><a href="#0x01-题目" class="headerlink" title="0x01 题目"></a>0x01 题目</h1><p>无源码，直接扫。存在<code>flag.php</code>，访问无果，<code>0B</code>的信息可见一斑，应该是障眼法。</p><p>看看题目：</p><p><img src="/./../images/image-20240803173149732.png" alt="image-20240803173149732"></p><p>存在<code>GET</code>参数<code>num</code>，是表单参数。</p><h1 id="0x02-分析"><a href="#0x02-分析" class="headerlink" title="0x02 分析"></a>0x02 分析</h1><p>对题目的了解差不多了，我们只能从<strong>num</strong>入手。</p><p>我对两个方向思考：</p><ul><li>参数注入，也就是不玩游戏。</li><li>利用游戏bug，也就是玩游戏。</li></ul><h2 id="参数注入"><a href="#参数注入" class="headerlink" title="参数注入"></a>参数注入</h2><p>注入的原理无非就是：<strong>输入流从数据流侵略到控制流</strong>。</p><p>想知道怎么注入，最好要知道流程代码。本题没有源码可以看，只能猜。但是这绝非<code>SQL</code>注入等，代码异常灵活，很难猜。所以先不考虑参数注入。</p><h2 id="利用游戏bug"><a href="#利用游戏bug" class="headerlink" title="利用游戏bug"></a>利用游戏bug</h2><p>看来只能玩游戏了。先思考游戏逻辑：如果我输入的数字对上了，是不是就可以得到<code>flag</code>？不妨试一试。</p><p>众所周知，<code>CTFer</code>不会好好玩游戏。em，我刚开始真想好好玩。</p><h3 id="碰撞"><a href="#碰撞" class="headerlink" title="碰撞"></a>碰撞</h3><p><em>我认为这是好好玩游戏</em></p><p>我设想，服务器处理需要时间，如果我极快地发包，能不能竞争一下，脚本如下：</p><pre><code class="highlight python"><span class="keyword">import</span> requests<span class="keyword">from</span> time <span class="keyword">import</span> sleepurl = <span class="string">&#x27;http://challenge-1919adb7a8424f20.sandbox.ctfhub.com:10800/index.php?num=&#x27;</span><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">101</span>):    r = requests.get(url+<span class="built_in">str</span>(i))    <span class="built_in">print</span>(r.text)    sleep(<span class="number">.00</span>)</code></pre><p>但是每次随机数都会变，采用多线程：</p><pre><code class="highlight python"><span class="keyword">import</span> requests<span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutorurl = <span class="string">&#x27;http://challenge-6fda29f9e3d6c76d.sandbox.ctfhub.com:10800/index.php?num=&#x27;</span><span class="keyword">def</span> <span class="title function_">fetch_random_number</span>(<span class="params">i</span>):    r = requests.get(url + <span class="built_in">str</span>(i))    <span class="keyword">return</span> r.text<span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">10</span>) <span class="keyword">as</span> executor:    futures = [executor.submit(fetch_random_number, i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">101</span>)]    <span class="keyword">for</span> future <span class="keyword">in</span> futures:        <span class="built_in">print</span>(future.result())</code></pre><p>还是一样，为什么呢？以后想想。</p><h3 id="等于"><a href="#等于" class="headerlink" title="等于"></a>等于</h3><p>如果只能玩一次成功，那么核心在于<strong>等于</strong>二字。<code>num</code>等于随机数，才能完成游戏。</p><p>不妨先想想这段代码会是什么样子，进行比较的代码会不会用一些特殊的函数，比如<code>MD5</code>？那我得先看看<code>PHP</code>特性了。</p><h4 id="PHP特性"><a href="#PHP特性" class="headerlink" title="PHP特性"></a>PHP特性</h4><p>这是我的一个弯路。我在笔记里寻找类似的题目，但是始终没有符合的<code>PHP</code>特性。</p><h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><h5 id="运气"><a href="#运气" class="headerlink" title="运气"></a>运气</h5><p>其实不需要把代码<strong>先</strong>想得那么复杂。当时我并没有思路，苦闷之际往输入框里输入一堆字符乱码，正好下一个随机数是0······flag出来了。</p><p>诚然，有运气成分，但是这点还是可以推理出来的。</p><h5 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h5><p>上面说过：</p><blockquote><p>其实不需要把代码<strong>先</strong>想得那么复杂。</p></blockquote><p>代码的逻辑也可以是简单的<strong>等于</strong>。</p><p>我们希望两个数的对比有一方是可控的，很明显随机数是不可控的，那么只能使<code>num</code>可控。要使<code>num</code>可控，不难联想到强制类型转换，不要因为这道题是数字对比就只会输入数字，<strong>CTFer不按常理出牌！</strong></p><p>以上的推理并不难，慢慢消化即可。</p><p>既然<code>num</code>可控，那么只要不断循环即可碰到0，脚本如下：</p><pre><code class="highlight python"><span class="keyword">import</span> requestsurl = <span class="string">&#x27;http://challenge-1919adb7a8424f20.sandbox.ctfhub.com:10800/index.php?num=&#x27;</span><span class="keyword">while</span> <span class="literal">True</span>:    r = requests.get(url+<span class="string">&quot;manbaout&quot;</span>)    <span class="keyword">if</span> <span class="string">&quot;ctfhub&quot;</span> <span class="keyword">in</span> r.text:        <span class="built_in">print</span>(r.text)        <span class="keyword">break</span></code></pre><p>成功得到<strong>flag</strong>：<code>ctfhub&#123;e4be0f277101db19c0512c4a&#125;</code></p><h1 id="0x03-小结"><a href="#0x03-小结" class="headerlink" title="0x03 小结"></a>0x03 小结</h1><p>整理一下逻辑树：</p><ul><li>游戏<ul><li>玩（利用bug）<ul><li><code>PHP</code>特性（无果）</li><li>类型转换（成功）</li></ul></li><li>不玩（注入）（无果）</li></ul></li></ul><p>还有一些很重要的经验：</p><ul><li><p>开局先试试几个文件，后台<code>dirsearch</code>直接扫</p></li><li><p>大胆猜代码，善于猜代码</p></li><li><p><code>CTFer</code>不走寻常路，不接受一些暗示</p></li><li><p>没思路时，不妨多胡乱试试</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> PHP语法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 思考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浅析时间碰撞脚本</title>
       <link href="/2024/08/03/%E6%B5%85%E6%9E%90%E6%97%B6%E9%97%B4%E7%A2%B0%E6%92%9E%E8%84%9A%E6%9C%AC/"/>
       <url>/2024/08/03/%E6%B5%85%E6%9E%90%E6%97%B6%E9%97%B4%E7%A2%B0%E6%92%9E%E8%84%9A%E6%9C%AC/</url>
