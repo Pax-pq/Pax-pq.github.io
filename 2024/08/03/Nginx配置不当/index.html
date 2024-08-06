@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Nginx配置不当 | 山 ·	水</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="0x00 前言这段时间做了好几道Nginx配置不当的题目，集中学习一下这方面的知识。 0x01 基础Nginx的主配置文件为nginx.conf，在任何情况下Nginx都会加载该文件。nginx.conf文件结构分明，由多个模块构成，如下：  用代码表示如下： ...              #全局块     -->main  events {         #events块">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Nginx配置不当 | 山 ·	水</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="0x00 前言这段时间做了好几道Nginx配置不当的题目，集中学习一下这方面的知识。 0x01 基础Nginx的主配置文件为nginx.conf，在任何情况下Nginx都会加载该文件。nginx.conf文件结构分明，由多个模块构成，如下：  用代码表示如下： 12345678910111213141516171819202122...              #全局块     -->ma">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx配置不当">
 <meta property="og:url" content="http://pax-pq.github.io/2024/08/03/Nginx%E9%85%8D%E7%BD%AE%E4%B8%8D%E5%BD%93/index.html">
 <meta property="og:site_name" content="山 ·	水">
-<meta property="og:description" content="0x00 前言这段时间做了好几道Nginx配置不当的题目，集中学习一下这方面的知识。 0x01 基础Nginx的主配置文件为nginx.conf，在任何情况下Nginx都会加载该文件。nginx.conf文件结构分明，由多个模块构成，如下：  用代码表示如下： ...              #全局块     -->main  events {         #events块">
+<meta property="og:description" content="0x00 前言这段时间做了好几道Nginx配置不当的题目，集中学习一下这方面的知识。 0x01 基础Nginx的主配置文件为nginx.conf，在任何情况下Nginx都会加载该文件。nginx.conf文件结构分明，由多个模块构成，如下：  用代码表示如下： 12345678910111213141516171819202122...              #全局块     -->ma">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://pax-pq.github.io/img/smh.png">
 <meta property="article:published_time" content="2024-08-03T11:43:41.000Z">
@@ -154,7 +154,7 @@
   localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -219,55 +219,27 @@
 <h1 id="0x01-基础"><a href="#0x01-基础" class="headerlink" title="0x01 基础"></a>0x01 基础</h1><p><code>Nginx</code>的主配置文件为<code>nginx.conf</code>，在任何情况下<code>Nginx</code>都会加载该文件。<code>nginx.conf</code>文件结构分明，由多个模块构成，如下：</p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/./../images/posts/Nginx%E9%85%8D%E7%BD%AE%E4%B8%8D%E5%BD%93/20190418163927-79fddd08-61b5-1.png" alt="20190418163927-79fddd08-61b5-1"></p>
 <p>用代码表示如下：</p>
-<pre><code class="highlight nginx">...              <span class="comment">#全局块     --&gt;main</span>
-
-<span class="section">events</span> {         <span class="comment">#events块</span>
-   ...
-}
-
-<span class="attribute">http</span>      <span class="comment">#http块</span>
-{
-    ...   <span class="comment">#http全局块</span>
-    <span class="attribute">server</span>        <span class="comment">#server块</span>
-    { 
-        ...       <span class="comment">#server全局块</span>
-        <span class="section">location</span> [PATTERN]   <span class="comment">#location块</span>
-        {
-            ...
-        }
-        <span class="section">location</span> [PATTERN]   <span class="comment">#另一个location块</span>
-        {
-            ...
-        }
-    }
-}</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">...              <span class="comment">#全局块     --&gt;main</span></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> {         <span class="comment">#events块</span></span><br><span class="line">   ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="attribute">http</span>      <span class="comment">#http块</span></span><br><span class="line">{</span><br><span class="line">    ...   <span class="comment">#http全局块</span></span><br><span class="line">    <span class="attribute">server</span>        <span class="comment">#server块</span></span><br><span class="line">    { </span><br><span class="line">        ...       <span class="comment">#server全局块</span></span><br><span class="line">        <span class="section">location</span> [PATTERN]   <span class="comment">#location块</span></span><br><span class="line">        {</span><br><span class="line">            ...</span><br><span class="line">        }</span><br><span class="line">        <span class="section">location</span> [PATTERN]   <span class="comment">#另一个location块</span></span><br><span class="line">        {</span><br><span class="line">            ...</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>解析</strong></p>
 <p><code>Nginx</code><strong>层级分明</strong>，每个层级都有自己的指令。子块会继承父块的配置，如果二者配置的指令不同，则子块会覆盖父块的配置。指令格式如下：</p>
-<pre><code class="highlight plaintext">指令名 参数1 参数2 参数3;</code></pre>
+<figure class="highlight abnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">指令名 参数<span class="number">1</span> 参数<span class="number">2</span> 参数<span class="number">3</span><span class="comment">;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>在<code>nginx.conf</code>还可以引入其他的配置文件，如<code>include /etc/nginx/mime.types;</code>就包含了各种支持的Content-type。另外，开发者不可能把服务都写在<code>nginx.conf</code>里，对应的<code>.conf</code>文件也会被包含。</p>
 <p>一个<strong>server</strong>块表示一个host，可以在<code>server</code>块中添加或者更改<code>nginx</code>服务监听的端口、存放网页文件的位置、以及虚拟主机配置（开反向代理）。<br>一个<strong>location</strong>块代表一个路由映射规则。</p>
 <h1 id="0x02-alias配置不当-·-目录穿越"><a href="#0x02-alias配置不当-·-目录穿越" class="headerlink" title="0x02 alias配置不当 · 目录穿越"></a>0x02 <strong>alias</strong>配置不当 · 目录穿越</h1><h2 id="条件其一"><a href="#条件其一" class="headerlink" title="条件其一"></a>条件其一</h2><p>在<code>nginx.conf</code>文件的<strong>server</strong>块中加入：<code>autoindex on;</code>，可以添加目录浏览功能，但是也会产生安全问题，如本节的<code>alias</code>配置不当引起的一系列漏洞。具体配置如下：</p>
-<pre><code class="highlight nginx"><span class="section">server</span> {
-           <span class="attribute">autoindex</span> <span class="literal">on</span>;
-            ...
-            }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> {</span><br><span class="line">           <span class="attribute">autoindex</span> <span class="literal">on</span>;</span><br><span class="line">            ...</span><br><span class="line">            }</span><br></pre></td></tr></tbody></table></figure>
 
 <p>在该代码块的基础上会导致目录遍历，可以访问设置的根目录下的文件。</p>
 <h2 id="条件其二"><a href="#条件其二" class="headerlink" title="条件其二"></a>条件其二</h2><blockquote>
 <p>在nginx做<strong>反向代理</strong>的时候，我们通常会把<em>动态</em>部分传递给后方解析的服务器，由nginx来处理<em>静态</em>文件<br>当使用<strong>alias</strong>来对文件路径进行配置时，有可能会造成目录穿越漏洞</p>
 </blockquote>
 <p><strong>正常配置</strong></p>
-<pre><code class="highlight nginx"><span class="section">location</span> /files/ {
-            <span class="attribute">alias</span>     /etc/nginx/txtpath/;
-                }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /files/ {</span><br><span class="line">            <span class="attribute">alias</span>     /etc/nginx/txtpath/;</span><br><span class="line">                }</span><br></pre></td></tr></tbody></table></figure>
 
 <p>正常访问<code>http://your_ip/files/pax.txt</code>，便会读取<code>/etc/nginx/txtpath/pax.txt</code>文件。</p>
 <p><strong>配置不当</strong></p>
-<pre><code class="highlight nginx"><span class="attribute">ocation</span> /files {
-            <span class="attribute">alias</span>     /etc/nginx/txtpath/;
-                }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ocation</span> /files {</span><br><span class="line">            <span class="attribute">alias</span>     /etc/nginx/txtpath/;</span><br><span class="line">                }</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>/files/<strong>变成了</strong>/files</strong>，第二个斜杠没有了，那么攻击者就可以读取正常文件夹之外的文件。</p>
 <p>当访问<code>http://your_ip/files../pax.txt</code>，便会读取<code>/etc/nginx/pax.txt</code>文件。</p>
@@ -279,20 +251,10 @@
 <p>Nginx经常拿来做<strong>反向代理服务器</strong>。反向代理服务器其实就是一台负责转发的代理服务器，实现了转发的作用，然后从真正的服务器获取数据并转发给客户端。</p>
 </blockquote>
 <p><strong>正常配置</strong></p>
-<pre><code class="highlight nginx"><span class="section">server</span> {
-         <span class="attribute">listen</span>       <span class="number">80</span>;
-         <span class="attribute">server_name</span> <span class="number">192.168.1.2:8080</span>;    
-
-         <span class="section">location</span> / {   
-                    <span class="attribute">proxy_pass</span> http://192.168.1.2:8080；  
-                    }  
-             <span class="comment">#......</span>
-            }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> {</span><br><span class="line">         <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">         <span class="attribute">server_name</span> <span class="number">192.168.1.2:8080</span>;    </span><br><span class="line"></span><br><span class="line">         <span class="section">location</span> / {   </span><br><span class="line">                    <span class="attribute">proxy_pass</span> http://192.168.1.2:8080；  </span><br><span class="line">                    }  </span><br><span class="line">             <span class="comment">#......</span></span><br><span class="line">            }</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>配置不当</strong></p>
-<pre><code class="highlight nginx"><span class="section">location</span> /([a-zA-Z0-<span class="number">9</span>.:%]+) {   
-                    <span class="attribute">proxy_pass</span> http://<span class="variable">$1</span>；  
-            }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /([a-zA-Z0-<span class="number">9</span>.:%]+) {   </span><br><span class="line">                    <span class="attribute">proxy_pass</span> http://<span class="variable">$1</span>；  </span><br><span class="line">            }</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>分析</strong></p>
 <p><strong>$1</strong>：正则匹配的第一个括号的内容。</p>
@@ -307,9 +269,7 @@
 <p>当一个网站使用https协议的时候，很多站点会强制用户使用<em>https</em>进行访问。当用户访问<em>http</em>的时候会<code>302</code>跳转到https页面。</p>
 </blockquote>
 <p>配置不当：</p>
-<pre><code class="highlight nginx"><span class="section">location</span> /<span class="number">302</span> {
-    <span class="attribute">return</span> <span class="number">302</span> https://<span class="variable">$host</span><span class="variable">$uri</span>;
-            }</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /<span class="number">302</span> {</span><br><span class="line">    <span class="attribute">return</span> <span class="number">302</span> https://<span class="variable">$host</span><span class="variable">$uri</span>;</span><br><span class="line">            }</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>Nginx</code>中 ，<code>$uri</code>指的是请求的文件和路径，不包含后面请求的数据（即?和#后面的数据），<code>Nginx</code>服务器会对<code>$uri</code>进行解码。当<code>$uri</code>后面添加<code>%0d%0a</code>，便可以污染<code>HTTP</code>头的数据。</p>
 <p>比如，访问<code>http://your_ip/302/pax.php</code>会<strong>302</strong>跳转到<code>https://your_ip/302/pax.php</code>，这是正常的302跳转。但是如果访问<code>http://your_ip/302/pax.php%0d%0a%0d%0aman=1</code>，<strong>302</strong>跳转会指向<code>https://your_ip/302/pax.php</code>并且<strong>POST</strong>一个参数 <code>man=1</code>，比如下图例子：</p>
@@ -319,20 +279,7 @@
 <p>在nginx配置文件中子块是可以继承父块的配置的。但是当我们在父块中设置了<code>add_header</code>头，然后再在子块中设置另一个add_header头时，子块会覆盖掉父块中的add_header头的设置。</p>
 </blockquote>
 <p>假如配置如下：</p>
-<pre><code class="highlight nginx"><span class="section">server</span> {
-    ...
-    <span class="attribute">add_header</span> X-Frame-Options DENY;
-    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">"default-src 'self'"</span>;
-
-    <span class="section">location</span> = /safe {
-        <span class="attribute">return</span> /xss.html;
-    }
-
-    <span class="section">location</span> = /dangerous {
-        <span class="attribute">add_header</span> X-Content-Type-Options nosniff;
-        <span class="attribute">return</span> /xss.html;
-    }
-}</code></pre>
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> {</span><br><span class="line">    ...</span><br><span class="line">    <span class="attribute">add_header</span> X-Frame-Options DENY;</span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">"default-src 'self'"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> = /safe {</span><br><span class="line">        <span class="attribute">return</span> /xss.html;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> = /dangerous {</span><br><span class="line">        <span class="attribute">add_header</span> X-Content-Type-Options nosniff;</span><br><span class="line">        <span class="attribute">return</span> /xss.html;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>须知：</p>
 <ul>

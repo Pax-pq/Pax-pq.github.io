@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Navicat远程连接MySQL | 山 ·	水</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="该过程比较复杂，我一点一点说 0x01 云服务器下载MySQL推荐文章：https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk 一. 安装apache/nginx和PHP 这一点无需多说，基本常识。 二. 安装MySQL  安装  sudo apt -y install mysql-server   验证">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Navicat远程连接MySQL | 山 ·	水</title><meta name="author" content="Pax"><meta name="copyright" content="Pax"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="该过程比较复杂，我一点一点说 0x01 云服务器下载MySQL推荐文章：https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk 一. 安装apache/nginx和PHP 这一点无需多说，基本常识。 二. 安装MySQL  安装  1sudo apt -y install mysql-server   验">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Navicat远程连接MySQL">
 <meta property="og:url" content="http://pax-pq.github.io/2024/07/22/Navicat%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5MySQL/index.html">
 <meta property="og:site_name" content="山 ·	水">
-<meta property="og:description" content="该过程比较复杂，我一点一点说 0x01 云服务器下载MySQL推荐文章：https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk 一. 安装apache/nginx和PHP 这一点无需多说，基本常识。 二. 安装MySQL  安装  sudo apt -y install mysql-server   验证">
+<meta property="og:description" content="该过程比较复杂，我一点一点说 0x01 云服务器下载MySQL推荐文章：https://help.aliyun.com/document_detail/464750.html#title-gt1-709-nlk 一. 安装apache/nginx和PHP 这一点无需多说，基本常识。 二. 安装MySQL  安装  1sudo apt -y install mysql-server   验">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://pax-pq.github.io/img/smh.png">
 <meta property="article:published_time" content="2024-07-22T13:50:41.000Z">
@@ -153,7 +153,7 @@
   localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -222,17 +222,17 @@
 <ol>
 <li>安装</li>
 </ol>
-<pre><code class="highlight undefined">sudo apt -y install mysql-server</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt -y install mysql-server</span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="2">
 <li>验证</li>
 </ol>
-<pre><code class="highlight undefined">sudo mysql -V</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql -V</span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="3">
 <li>启动</li>
 </ol>
-<pre><code class="highlight sql">sudo systemctl <span class="keyword">start</span> mysql</code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="keyword">start</span> mysql</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h1 id="0x02-MySQL改密码"><a href="#0x02-MySQL改密码" class="headerlink" title="0x02 MySQL改密码"></a>0x02 MySQL改密码</h1><p>推荐文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chloneda/p/12449819.html">https://www.cnblogs.com/chloneda/p/12449819.html</a></p>
@@ -245,21 +245,19 @@
 <li>退出<code>MySQL</code>后，使用新的密码重新登陆。</li>
 </ol>
 <p>选择数据库</p>
-<pre><code class="highlight mysql">mysql&gt; use mysql;</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>改密码</p>
-<pre><code class="highlight mysql">mysql&gt; ALTER USER '用户名'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER USER '用户名'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';</span><br></pre></td></tr></tbody></table></figure>
 
 <p>刷新MySQL的系统权限相关表</p>
-<pre><code class="highlight mysql">mysql&gt; flush privileges;</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h1 id="0x03-Navicat连接MySQL"><a href="#0x03-Navicat连接MySQL" class="headerlink" title="0x03 Navicat连接MySQL"></a>0x03 Navicat连接MySQL</h1><p><em>这个事情比较棘手，是我写这篇文章的重要目的。</em></p>
 <p>推荐文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chloneda/p/12449819.html">MySQL 8.0修改密码 - Chloneda - 博客园 (cnblogs.com)</a></p>
 <p>最好创建一个远程用户（我尝试root连接无果）</p>
-<pre><code class="highlight mysql">use mysql;
-grant all privileges on *.* to Pax@"xxx.xxx.xxx.xxx" identified by "密码";
-flush privileges;</code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">grant all privileges on *.* to Pax@"xxx.xxx.xxx.xxx" identified by "密码";</span><br><span class="line">flush privileges;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果还不行的话看看推荐文章。</p>
 <hr>

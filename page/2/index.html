@@ -151,7 +151,7 @@
   localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -190,7 +190,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-05 19:13:45'
+  postUpdate: '2024-08-06 10:45:25'
 }</script><link rel="stylesheet" href="APlayer.min.css"></head><body><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async=""></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async=""></script><link rel="stylesheet" href="/css/rain-effect.css"><script src="/js/rain-effect.js"></script><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/cursor.css"><link rel="stylesheet" href="/css/loadin.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"><link rel="stylesheet" href="/css/dhl.css"><link rel="stylesheet" href="/css/dark_read.css"><link rel="stylesheet" href="/css/rain-effect.css"><link rel="stylesheet" href="/css/font/font.css"><link rel="stylesheet" href="/css/menu.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.1.1"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="scarecrow"><div class="scarecrow__hat"><div class="scarecrow__ribbon"></div></div><div class="scarecrow__head"><div class="scarecrow__eye"></div><div class="scarecrow__eye"></div><div class="scarecrow__mouth"></div><div class="scarecrow__pipe"></div></div><div class="scarecrow__body"><div class="scarecrow__glove scarecrow__glove--l"></div><div class="scarecrow__sleeve scarecrow__sleeve--l"></div><div class="scarecrow__bow"></div><div class="scarecrow__shirt"></div><div class="scarecrow__coat"></div><div class="scarecrow__waistcoat"></div><div class="scarecrow__sleeve scarecrow__sleeve--r"></div><div class="scarecrow__glove scarecrow__glove--r"></div><div class="scarecrow__coattails"></div><div class="scarecrow__pants"></div></div><div class="scarecrow__arms"></div><div class="scarecrow__leg">  </div></div></div><script>(()=>{
   const $loadingBox = document.getElementById('loading-box')
   const $body = document.body
@@ -231,7 +231,7 @@ load_file () 开启 即 secure_file_priv 无限制
 网站路径有写入权限
 
 查看secure_file_priv ：
-SELECT * FROM INFORMATION_SCHEMA.GLOBAL_VARIABLES WHERE VARIABLE_NAME = 'secure_file_priv'; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/21/PHP%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%88%A9%E7%94%A8/" title="PHP原生类利用">PHP原生类利用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-21T08:05:40.000Z" title="发表于 2024-07-21 16:05:40">2024-07-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PHP%E6%BC%8F%E6%B4%9E/">PHP漏洞</a></span></div><div class="content">0x01 Error/Exception内置类进行 XSSError 内置类适用环境
+1SELECT * FROM INFORMATION_SCHEMA.GLOBAL_VARIABLES WHERE VARIABLE_NAME = 'secure_file_priv' ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/21/PHP%E5%8E%9F%E7%94%9F%E7%B1%BB%E5%88%A9%E7%94%A8/" title="PHP原生类利用">PHP原生类利用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-21T08:05:40.000Z" title="发表于 2024-07-21 16:05:40">2024-07-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/PHP%E6%BC%8F%E6%B4%9E/">PHP漏洞</a></span></div><div class="content">0x01 Error/Exception内置类进行 XSSError 内置类适用环境
 php7版本
 开启报错
 
@@ -239,16 +239,12 @@ php7版本
 Error类是php的一个内置类，用于自动自定义一个Error，在php7的环境下可能会造成一个xss漏洞，因为它内置有一个 __toString() 的方法，常用于PHP 反序列化中。如果有个POP链走到一半就走不通了，不如尝试利用这个来做一个xss，其实我看到的还是有好一些cms会选择直接使用 echo &lt;Object&gt; 的写法，当 PHP 对象被当作一个字符串输出或使用时候（如echo的时候）会触发__toString 方法，这是一种挖洞的新思路。
 
 演示测试代码
-&lt;?php
-$a = unserialize($_GET['man']);
-echo $a;
+123&lt;?php$a = unserialize($_GET['man']);echo $a;
 
 POC
-$a = new Error("&lt;script&gt;alert('xss')&lt;/script&gt;");
-$b = serialize($a);
-echo urlencode($b);
+123$a = new Error("&lt;script&gt;alert('xss')&lt;/script&gt;");$b = serialize($a);echo urlencode($b);
 
-Excepti ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/20/%E5%88%9D%E5%86%99ThinkPHP%E7%95%99%E8%A8%80%E6%9D%BF/" title="初写ThinkPHP留言板">初写ThinkPHP留言板</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-20T02:15:25.000Z" title="发表于 2024-07-20 10:15:25">2024-07-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="content">0x00 前言安全的基础是开发。本次会详细讲解该项目的过程和心路。
+Excep ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/20/%E5%88%9D%E5%86%99ThinkPHP%E7%95%99%E8%A8%80%E6%9D%BF/" title="初写ThinkPHP留言板">初写ThinkPHP留言板</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-20T02:15:25.000Z" title="发表于 2024-07-20 10:15:25">2024-07-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="content">0x00 前言安全的基础是开发。本次会详细讲解该项目的过程和心路。
 0X01 配置
 本次在windows上安装ThinkPHP8.0稳定版，附上教程：
 
@@ -414,14 +410,9 @@ CTF
 夺旗（英语：Capture the flag，简称“CTF”）在计算机安全中是一种活动，当中会将 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/21/CSRF%E5%85%A5%E9%97%A8/" title="CSRF入门">CSRF入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T13:05:52.000Z" title="发表于 2024-06-21 21:05:52">2024-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CSRF/">CSRF</a></span></div><div class="content">CSRF入门0x01 基础学习概述Cross-site request forgery 跨站点请求伪造，是一种 Web 安全漏洞，它允许攻击者诱使用户执行他们不打算执行的操作。它允许攻击者部分规避同源策略，该策略旨在防止不同网站相互干扰。
 攻击流程Step1:使用者成功登入A 银行网站的帐户，并且代表使用者身份的cookie 在本地保存下来，所以下次再来A 银行网站时，不用重新登入
 Step2:由于使用者没有登出A 银行网站的帐户，在浏览B 恶意网站时，B 网站有个被设为透明的图片，因为是透明的，所以使用者在画面上看不到，然而该图片包含一段恶意程式码，程式码如下。
-// 備註：CSRF 攻擊手法有很多，此程式碼例子是一種最基本的攻擊方法之一
-&lt;img
-  src="http://a-bank.com/transfer.do?acct=BadGuy&amp;amount=100000 HTTP/1.1"
-  width="0"
-  height="0"
-/&gt;
+123456// 備註：CSRF 攻擊手法有很多，此程式碼例子是一種最基本的攻擊方法之一&lt;img  src="http://a-bank.com/transfer.do?acct=BadGuy&amp;amount=100000 HTTP/1.1"  width="0"  height="0"/&gt;
 
-Step3:使用者虽然将看不到此图片， 但是，浏览器仍会 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/17/%E5%AE%89%E5%85%A8%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E7%89%B9%E8%B4%A8/" title="安全需要什么特质">安全需要什么特质</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-17T08:45:02.000Z" title="发表于 2024-06-17 16:45:02">2024-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​	前言
+Step3:使用者虽然将看不到此图片， 但是，浏览器仍 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/17/%E5%AE%89%E5%85%A8%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E7%89%B9%E8%B4%A8/" title="安全需要什么特质">安全需要什么特质</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-17T08:45:02.000Z" title="发表于 2024-06-17 16:45:02">2024-06-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E5%85%A8%E5%B0%8F%E7%AA%9D/">安全小窝</a></span></div><div class="content">​	前言
 ​	诸位安好，我是pax。从本文章开始，我们进入了一个新的系列：初识安全。本系列旨在帮助安全小白们轻松高效地入门网络安全。那么现在，开始吧！
 ​	学习安全，需要什么样的精神和特质呢？这是很难说的，但又是极为重要的。这是我提问的，却是需要你们作答的。我且抛砖引玉：
 ​	兴趣终将蜕变为热爱

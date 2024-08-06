@@ -154,7 +154,7 @@
   localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -240,19 +240,13 @@
 </blockquote>
 <p><strong>被</strong>，是被动，说明了数据流的数据不应该具有主动性。说实在一点，外来的数据不能影响内部的控制程序。一旦数据流可以入侵到控制流，那么漏洞也随之而生。</p>
 <h1 id="0x03-以SQL注入为例"><a href="#0x03-以SQL注入为例" class="headerlink" title="0x03 以SQL注入为例"></a>0x03 以SQL注入为例</h1><h2 id="薄弱的程序"><a href="#薄弱的程序" class="headerlink" title="薄弱的程序"></a>薄弱的程序</h2><p>先看一段简单的代码：</p>
-<pre><code class="highlight php"><span class="meta">&lt;?php</span>
-    <span class="variable">$db</span> = <span class="title function_ invoke__">init_db</span>();
-    <span class="variable">$username</span> = <span class="variable">$_GET</span>[<span class="string">'username'</span>];
-    <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">"select * from users where username = '<span class="subst">$username</span>'"</span>);
-<span class="meta">?&gt;</span></code></pre>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$db</span> = <span class="title function_ invoke__">init_db</span>();</span><br><span class="line">    <span class="variable">$username</span> = <span class="variable">$_GET</span>[<span class="string">'username'</span>];</span><br><span class="line">    <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">"select * from users where username = '<span class="subst">$username</span>'"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>这是一个最简单的SQL注入代码，再看看payload：</p>
-<pre><code class="highlight plaintext">username=admin' and 1=1 #
-
-username=' or 1=1 #</code></pre>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">username</span>=admin' <span class="keyword">and</span> <span class="attribute">1</span>=1 #</span><br><span class="line"></span><br><span class="line"><span class="attribute">username</span>=<span class="string">' or 1=1 #</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>让我们理理逻辑：</p>
-<pre><code class="highlight plaintext">输入——php字符变量——SQL语句——数据库</code></pre>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入——php字符变量——<span class="keyword">SQL</span>语句——数据库</span><br></pre></td></tr></tbody></table></figure>
 
 <p>很好，这就搭建起了输入和后端的关系。</p>
 <h2 id="背后的原理"><a href="#背后的原理" class="headerlink" title="背后的原理"></a>背后的原理</h2><p>程序员希望我们输入的是正常的数据，也就是程序员期望得到一个不能影响控制流的输入流。</p>
@@ -267,15 +261,7 @@ username=' or 1=1 #</code></pre>
 </ul>
 </blockquote>
 <h1 id="0x04-预编译"><a href="#0x04-预编译" class="headerlink" title="0x04 预编译"></a>0x04 预编译</h1><p>以PHP的预编译为例：</p>
-<pre><code class="highlight php"><span class="comment">// 创建连接 </span>
-<span class="variable">$conn</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>); 
-<span class="comment">// 获取用户输入 </span>
-<span class="variable">$user_input</span> = <span class="variable">$_GET</span>[<span class="string">'user_input'</span>];    
-<span class="comment">// 使用预编译语句和参数绑定来防止 SQL 注入 </span>
-<span class="variable">$stmt</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">"SELECT * FROM users WHERE username = ?"</span>);  
-<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">"s"</span>, <span class="variable">$user_input</span>);  
-<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();  
-<span class="variable">$result</span> = <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">get_result</span>();</code></pre>
+<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建连接 </span></span><br><span class="line"><span class="variable">$conn</span> = <span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$dbname</span>); </span><br><span class="line"><span class="comment">// 获取用户输入 </span></span><br><span class="line"><span class="variable">$user_input</span> = <span class="variable">$_GET</span>[<span class="string">'user_input'</span>];    </span><br><span class="line"><span class="comment">// 使用预编译语句和参数绑定来防止 SQL 注入 </span></span><br><span class="line"><span class="variable">$stmt</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">"SELECT * FROM users WHERE username = ?"</span>);  </span><br><span class="line"><span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">"s"</span>, <span class="variable">$user_input</span>);  </span><br><span class="line"><span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();  </span><br><span class="line"><span class="variable">$result</span> = <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">get_result</span>();</span><br></pre></td></tr></tbody></table></figure>
 
 <p>预编译为什么能防止SQL注入</p>
 <blockquote>
