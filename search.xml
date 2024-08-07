@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>第二次代码审计</title>
+      <link href="/2024/08/07/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+      <url>/2024/08/07/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="第二次代码审计"><a href="#第二次代码审计" class="headerlink" title="第二次代码审计"></a>第二次代码审计</h1><p>本次审计的提示是<strong>文件上传</strong>。</p><h2 id="工作结构"><a href="#工作结构" class="headerlink" title="工作结构"></a>工作结构</h2><p><code>ThinkPHP</code>的框架结构已经熟悉，在<code>/app</code>下的目录结构如图：<br><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807181321285.png" alt="image-20240807181321285"></p><p>常规服务的工作目录是哪个呢？不妨登录网页看看：</p><p>（<code>fofa</code>语句：<code>&quot;web/static/css/chunk-elementUI.f92cd1c5.css&quot;</code>）</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807181602133.png" alt="image-20240807181602133"></p><p>猜测是<code>web</code>目录下，对照源码证实猜想。</p><h2 id="寻找入口"><a href="#寻找入口" class="headerlink" title="寻找入口"></a>寻找入口</h2><p><code>ThinkPHP</code>自带的文件上传方法，本次就使用<code>request()-&gt;file()</code>：</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/add27ad1bcb3a00f8ecfe059d0ae2b83.png" alt="add27ad1bcb3a00f8ecfe059d0ae2b83"></p><p>我们不可能一个一个文件寻找，使用全局搜索：</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807182055916.png" alt="image-20240807182055916"></p><p>只有<code>Video.php</code>的检测不严格，可以<code>MIME</code>绕过：</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807182235297.png" alt="image-20240807182235297"></p><h2 id="实现上传"><a href="#实现上传" class="headerlink" title="实现上传"></a>实现上传</h2><p>想要上传，需要满足几点：</p><ol><li>知道启动方法的路径</li><li>是POST方法，并且可以上传文件</li><li>开启相关配置</li></ol><p>对于第一点，我猜测路径是<code>/web/video/uploadMedia</code>，但是实际上是<code>/web.php/video/uploadMedia</code>，我发现这一点是在头像上传的请求包里：</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807182918440.png" alt="image-20240807182918440"></p><p>原理是什么呢：</p><blockquote><p>在ThinkPHP中，<code>web.php</code> 是应用的入口文件。访问路径中的 <code>web.php</code> 部分实际是对入口文件的引用，这是因为服务器配置了URL重写，将所有请求导向入口文件（如 <code>web.php</code>），以便框架可以处理它们。</p></blockquote><p>在上图的基础上可以完成第二点。</p><p>至于第三点，请看下图：</p><p><img src="/./../images/posts/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/image-20240807185220805.png" alt="image-20240807185220805"></p><p>这是因为<code>Fileinfo</code> 扩展未启用，<code>finfo_open()</code> 是 <code>PHP Fileinfo</code> 扩展的一部分。如果该扩展未启用，会导致函数未定义的错误。</p><h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>本次的思路非常清晰：</p><ol><li>从入口点类型推出相应的危险方法</li><li>全局搜索使用对应危险方法的源码</li><li>找到可利用的点，实现攻击</li></ol><p>每一次审计的项目体量都不小，所以我们需要熟知对应框架有哪些危险方法等等，有根据地去寻找可利用的点。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 代码审计 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ThinkPHP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>无字母webshell学习</title>
       <link href="/2024/08/05/%E6%97%A0%E5%AD%97%E6%AF%8Dwebshell%E5%AD%A6%E4%B9%A0/"/>
       <url>/2024/08/05/%E6%97%A0%E5%AD%97%E6%AF%8Dwebshell%E5%AD%A6%E4%B9%A0/</url>
