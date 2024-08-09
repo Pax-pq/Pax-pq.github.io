@@ -1516,24 +1516,24 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 :root {
-  --hl-color: #a6accd;
+  --hl-color: $highlight-foregroundF;
   --hl-bg: #292d3e;
   --hltools-bg: #252938;
   --hltools-color: #a6accd;
-  --hlnumber-bg: #292d3e;
+  --hlnumber-bg: ;
   --hlnumber-color: rgba(166,172,205,0.5);
   --hlscrollbar-bg: #393f57;
   --hlexpand-bg: linear-gradient(180deg, rgba(41,45,62,0.6), rgba(41,45,62,0.9));
 }
 [data-theme='dark'] {
   --hl-color: rgba(255,255,255,0.7);
-  --hl-bg: #171717;
-  --hltools-bg: #1a1a1a;
-  --hltools-color: #90a4ae;
-  --hlnumber-bg: #171717;
-  --hlnumber-color: rgba(255,255,255,0.4);
-  --hlscrollbar-bg: #1f1f1f;
-  --hlexpand-bg: linear-gradient(180deg, rgba(23,23,23,0.6), rgba(23,23,23,0.9));
+  --hl-bg: rgba(23,23,23,0);
+  --hltools-bg: rgba(26,26,26,0.1);
+  --hltools-color: rgba(144,164,174,0.5);
+  --hlnumber-bg: rgba(23,23,23,0.1);
+  --hlnumber-color: rgba(255,255,255,0.1);
+  --hlscrollbar-bg: rgba(31,31,31,0.5);
+  --hlexpand-bg: linear-gradient(180deg, rgba(23,23,23,0.3), rgba(23,23,23,0.6));
 }
 figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;
@@ -7146,7 +7146,7 @@ blockquote.pullquote.right {
   --white: rgba(255,255,255,0.9);
   --text-highlight-color: rgba(255,255,255,0.9);
   --blockquote-color: rgba(255,255,255,0.7);
-  --blockquote-bg: #2c2c2c;
+  --blockquote-bg: rgba(255,255,255,0);
   --reward-pop: #2c2c2c;
   --toc-link-color: rgba(255,255,255,0.6);
   --scrollbar-color: #525252;
