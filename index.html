@@ -190,7 +190,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-18 17:46:24'
+  postUpdate: '2024-08-18 17:55:43'
 }</script><link rel="stylesheet" href="APlayer.min.css"></head><body><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/gh/radium-bit/res@master/live2d/autoload.js" async=""></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async=""></script><link rel="stylesheet" href="/css/rain-effect.css"><script src="/js/rain-effect.js"></script><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="/css/cursor.css"><link rel="stylesheet" href="/css/loadin.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"><link rel="stylesheet" href="/css/dhl.css"><link rel="stylesheet" href="/css/dark_read.css"><link rel="stylesheet" href="/css/font/font.css"><link rel="stylesheet" href="/css/menu.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/universe.css"><meta name="generator" content="Hexo 7.1.1"><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="scarecrow"><div class="scarecrow__hat"><div class="scarecrow__ribbon"></div></div><div class="scarecrow__head"><div class="scarecrow__eye"></div><div class="scarecrow__eye"></div><div class="scarecrow__mouth"></div><div class="scarecrow__pipe"></div></div><div class="scarecrow__body"><div class="scarecrow__glove scarecrow__glove--l"></div><div class="scarecrow__sleeve scarecrow__sleeve--l"></div><div class="scarecrow__bow"></div><div class="scarecrow__shirt"></div><div class="scarecrow__coat"></div><div class="scarecrow__waistcoat"></div><div class="scarecrow__sleeve scarecrow__sleeve--r"></div><div class="scarecrow__glove scarecrow__glove--r"></div><div class="scarecrow__coattails"></div><div class="scarecrow__pants"></div></div><div class="scarecrow__arms"></div><div class="scarecrow__leg">  </div></div></div><script>(()=>{
   const $loadingBox = document.getElementById('loading-box')
   const $body = document.body
@@ -225,13 +225,13 @@
 题目题目入口：
 
 只给玩家三秒的时间，笔者的手速是做不到的，同样如果只是靠手速解决这道题，那么笔者也觉得索然无味。这题并没有过多地涉及漏洞知识，我们只要了解题目机制再编写脚本即可。
-这就是写脚本的第一个要求：先明白自己要写什么的一个脚本，有什么需要注意的。
+这就是写脚本的第一个要求：先明白自己要写的脚本的工作原理、有什么需要注意的。
 我们首先要知道参数：
 
-同时本题有设置Session，这就是我们需要注意的。
-同时，我们猜想如果成功了会发生什么。因为新生赛不会很难，所以笔者猜想成功后会出现flag：moectf{，这样我们就有了停止标志。
+本题有设置Session，这就是我们需要注意的。
+我们还要猜想如果成功了会发生什么。因为新生赛不会很难，所以笔者猜想成功后会出现flag：moectf{，如此我们就有了停止标志。
 让我们理理题目机制，这样有利于我们编写脚本：
-题目会发送五次数字，我们必须爬取数字并返回对应的答案， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/16/MoeCTF2024%C2%B7pop-moe/" title="MoeCTF2024·pop_moe">MoeCTF2024·pop_moe</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-16T01:29:36.000Z" title="发表于 2024-08-16 09:29:36">2024-08-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">反序列化</a></span></div><div class="content">0x00 前言新生赛的一道题，在反序列化里算是比较简单的，有必要拿来专门写博客吗？
+题目会发送五次数字，我们必须爬取数字并返回对应的答案，五次 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/16/MoeCTF2024%C2%B7pop-moe/" title="MoeCTF2024·pop_moe">MoeCTF2024·pop_moe</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-16T01:29:36.000Z" title="发表于 2024-08-16 09:29:36">2024-08-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">反序列化</a></span></div><div class="content">0x00 前言新生赛的一道题，在反序列化里算是比较简单的，有必要拿来专门写博客吗？
 有。其一，这道题能锻炼我的逻辑，写下来更有利于我的思考和逻辑的培养；其二，反思不看重题的难度，更看重自己学到什么。
 本篇文章我会说得比较详细，请读者细细品味，多加思考。
 
